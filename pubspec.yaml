@@ -17,6 +17,8 @@ dependencies:
   # -----------------------------------------------------
   cupertino_icons: ^1.0.6
   icons_plus: ^5.0.0
+  smooth_page_indicator: ^1.2.0+3
+  shrink_sidemenu: ^2.0.0+2-null-safety
 
   # -----------------------------------------------------
   # Backend
@@ -40,7 +42,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
+    - assets/images/intropage/
     - assets/icons/
 
   # fonts:

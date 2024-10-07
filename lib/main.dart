@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_tracker/pages/intro/intro_page.dart';
+import 'package:pet_tracker/pages/intro/splash_page.dart';
 
 void main() {
   runApp(
@@ -14,17 +17,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      home: IntroPage(),
+    routes: {
+      // Intro Pages
+      '/splash': (context) => SplashPage(),
+      '/intro': (context) => IntroPage(),
+    },
     );
   }
 }
