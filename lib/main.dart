@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_tracker/pages/home/pattern_page.dart';
 import 'package:pet_tracker/pages/intro/intro_page.dart';
 import 'package:pet_tracker/pages/intro/splash_page.dart';
+
+import 'pages/home/home_page.dart';
 
 void main() {
   runApp(
@@ -21,12 +24,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: IntroPage(),
-    routes: {
-      // Intro Pages
-      '/splash': (context) => SplashPage(),
-      '/intro': (context) => IntroPage(),
-    },
+      home: PatternPage(),
+      routes: {
+        // Intro Pages
+        '/splash': (context) => SplashPage(),
+        '/intro': (context) => IntroPage(),
+
+        // Home Pages
+        '/home': (context) => HomePage(),
+        '/pattern': (context) => PatternPage(),
+      },
     );
   }
 }
