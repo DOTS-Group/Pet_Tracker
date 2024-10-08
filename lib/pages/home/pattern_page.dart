@@ -8,7 +8,9 @@ class PatternPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [],
+          children: [
+            Text('Pattern Page'),
+          ],
         ),
       ),
     );
