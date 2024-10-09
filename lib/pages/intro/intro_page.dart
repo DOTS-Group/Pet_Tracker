@@ -14,11 +14,17 @@ class IntroPage extends StatelessWidget {
 
     List<List<String>> textList = [
       [
-        "Welcome to Pet Tracker",
-        "Keep track of your pet's health and activities"
+        "Kolay Takip",
+        "Dostarınızı her zaman yanınızdaki asistan ile sağlıklı bir şekilde takip edin.",
       ],
-      ["Health and Activities", "Monitor your pet's health and activities"],
-      ["Pet Profile", "Create a profile for your pet"],
+      [
+        "Aşılarımız Tam",
+        "Aşılarınız tam zamanında bildirilir ve paylaşıma izin verdiğiniz veteriner tarafından randevu verilir.",
+      ],
+      [
+        "Karnımız Hep Tok",
+        "Hayvanlarınızı her zaman yanınızda bir asistan ile sağlıklı bir şekilde takip edin.",
+      ],
     ];
 
     return Scaffold(
@@ -37,23 +43,31 @@ class IntroPage extends StatelessWidget {
                       // Image
                       Image.asset(
                         SharedList.introPageImageList[index],
-                        height: height,
-                        width: 300,
+                        height: height * 0.4,
+                        // width: 300,
                         fit: BoxFit.cover,
                       ),
                       for (int i = 0; i < 2; i++)
-                        Text(
-                          textList[index][i],
-                          style: i == 0
-                              ? Theme.of(context).textTheme.displayMedium
-                              : Theme.of(context).textTheme.bodyMedium,
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: width * SharedConstants.generalPadding,
+                            right: width * SharedConstants.generalPadding,
+                            top: height * SharedConstants.generalPadding,
+                          ),
+                          child: Text(
+                            textList[index][i],
+                            style: i == 0
+                                ? Theme.of(context).textTheme.displayMedium
+                                : Theme.of(context).textTheme.bodyMedium,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                     ],
                   );
                 },
               ),
             ),
-            SizedBox(height: 20),
+
             // Smooth Page Indicator
             SmoothPageIndicator(
               controller: controller,
@@ -61,8 +75,8 @@ class IntroPage extends StatelessWidget {
               effect: WormEffect(
                 dotWidth: 12,
                 dotHeight: 12,
-                spacing: 16,
-                activeDotColor: Colors.blue,
+                spacing: width * SharedConstants.generalPadding,
+                activeDotColor: SharedConstants.orangeColor,
                 dotColor: Colors.grey,
               ),
               onDotClicked: (index) {
@@ -73,20 +87,44 @@ class IntroPage extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 20),
-            Container(
-              width: double.maxFinite,
-              height: height * 0.08,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(
-                  height * SharedConstants.generalPadding,
-                ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: height * SharedConstants.mediumPadding,
+                horizontal: width * SharedConstants.generalPadding,
               ),
-              child: Center(
-                child: Text(
-                  "data",
-                  style: Theme.of(context).textTheme.bodyMedium,
+              child: GestureDetector(
+                onTap: () {
+                  // if (controller.initialPage == 2) {
+                  //   Navigator.pushNamed(context, "/pattern");
+                  // } else {
+                  //   controller.nextPage(
+                  //     duration: Duration(milliseconds: 500),
+                  //     curve: Curves.easeInOut,
+                  //   );
+                  // }
+                  Navigator.pushNamed(context, "/login");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: SharedConstants.orangeColor,
+                    borderRadius: BorderRadius.circular(
+                      height * SharedConstants.generalPadding,
+                    ),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: height * SharedConstants.generalPadding,
+                      ),
+                      child: Text(
+                        controller.initialPage == 2 ? "Başla" : "Devam",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.white,
+                            ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
