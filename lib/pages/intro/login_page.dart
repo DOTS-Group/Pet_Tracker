@@ -16,13 +16,34 @@ class LoginPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: heighgt * SharedConstants.generalPadding,
-                ),
-                child: Text(
-                  "Login Page",
-                ),
+              // Header
+              Text("Pet Takip’e Hoşgeldin"),
+              Row(
+                children: [
+                  for (int i = 0; i < 3; i++)
+                    i == 1
+                        ? SizedBox(
+                            width: width * SharedConstants.generalPadding,
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(
+                                heighgt * SharedConstants.generalPadding,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.abc,
+                                ),
+                                Text(
+                                  "Google",
+                                ),
+                              ],
+                            ),
+                          ),
+                ],
               ),
             ],
           ),
