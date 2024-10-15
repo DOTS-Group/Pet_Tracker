@@ -50,9 +50,9 @@ class IntroPage extends StatelessWidget {
                       for (int i = 0; i < 2; i++)
                         Padding(
                           padding: EdgeInsets.only(
-                            left: width * SharedConstants.generalPadding,
-                            right: width * SharedConstants.generalPadding,
-                            top: height * SharedConstants.generalPadding,
+                            left: width * SharedConstants.paddingGenerall,
+                            right: width * SharedConstants.paddingGenerall,
+                            top: height * SharedConstants.paddingGenerall,
                           ),
                           child: Text(
                             textList[index][i],
@@ -75,7 +75,7 @@ class IntroPage extends StatelessWidget {
               effect: WormEffect(
                 dotWidth: 12,
                 dotHeight: 12,
-                spacing: width * SharedConstants.generalPadding,
+                spacing: width * SharedConstants.paddingGenerall,
                 activeDotColor: SharedConstants.orangeColor,
                 dotColor: Colors.grey,
               ),
@@ -90,8 +90,8 @@ class IntroPage extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.symmetric(
-                vertical: height * SharedConstants.mediumPadding,
-                horizontal: width * SharedConstants.generalPadding,
+                vertical: height * SharedConstants.paddingMedium,
+                horizontal: width * SharedConstants.paddingGenerall,
               ),
               child: GestureDetector(
                 onTap: () {
@@ -109,13 +109,13 @@ class IntroPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: SharedConstants.orangeColor,
                     borderRadius: BorderRadius.circular(
-                      height * SharedConstants.generalPadding,
+                      height * SharedConstants.paddingGenerall,
                     ),
                   ),
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: height * SharedConstants.generalPadding,
+                        vertical: height * SharedConstants.paddingGenerall,
                       ),
                       child: Text(
                         controller.initialPage == 2 ? "Başla" : "Devam",

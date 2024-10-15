@@ -12,6 +12,7 @@ import 'package:pet_tracker/pages/intro/login_page.dart';
 import 'package:pet_tracker/pages/intro/splash_page.dart';
 
 import 'pages/home/home_page.dart';
+import 'shared/theme_shared.dart';
 
 void main() {
   runApp(
@@ -27,9 +28,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    SharedTheme.height = height;
+    SharedTheme.width = width;
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
+      // theme: SharedTheme.lightTheme,
+      // darkTheme: SharedTheme.darkTheme,
+      // themeMode: ThemeMode.system,
       home: SplashPage(),
       routes: {
         // Intro Pages

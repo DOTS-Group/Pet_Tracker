@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: width * SharedConstants.generalPadding,
+            horizontal: width * SharedConstants.paddingGenerall,
           ),
           child: Column(
             children: [
@@ -23,13 +23,13 @@ class LoginPage extends StatelessWidget {
                   for (int i = 0; i < 3; i++)
                     i == 1
                         ? SizedBox(
-                            width: width * SharedConstants.generalPadding,
+                            width: width * SharedConstants.paddingGenerall,
                           )
                         : Container(
                             decoration: BoxDecoration(
                               color: Colors.amber,
                               borderRadius: BorderRadius.circular(
-                                heighgt * SharedConstants.generalPadding,
+                                heighgt * SharedConstants.paddingGenerall,
                               ),
                             ),
                             child: Row(

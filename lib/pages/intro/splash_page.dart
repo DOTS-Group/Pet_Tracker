@@ -53,7 +53,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               // width: width,
             ),
             Positioned(
-              top: height * SharedConstants.extraLargePadding * 2,
+              top: height * SharedConstants.paddingLarge * 2,
               left: width * 0.3,
               child: Column(
                 children: [
@@ -70,7 +70,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               ),
             ),
             Positioned(
-              bottom: height * SharedConstants.mediumPadding,
+              bottom: height * SharedConstants.paddingMedium,
               left: width * 0.4,
               child: Text(
                 "Version 1.0",
@@ -81,7 +81,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               ),
             ),
             Positioned(
-              bottom: height * SharedConstants.largePadding * 1.5,
+              bottom: height * SharedConstants.paddingLarge * 1.5,
               left: width * 0.1,
               child: AnimatedBuilder(
                 animation: _controller,
