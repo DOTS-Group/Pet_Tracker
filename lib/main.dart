@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:pet_tracker/l10n/l10n.dart';
 import 'package:pet_tracker/pages/home/pattern_page.dart';
+import 'package:pet_tracker/pages/home/petadd_page.dart';
 import 'package:pet_tracker/pages/intro/intro_page.dart';
 import 'package:pet_tracker/pages/intro/login_page.dart';
 import 'package:pet_tracker/pages/intro/splash_page.dart';
@@ -46,8 +47,9 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
 
         // Home Pages
-        '/home': (context) => HomePage(),
         '/pattern': (context) => PatternPage(),
+        '/home': (context) => HomePage(),
+        '/petadd': (context) => PetaddPage(),
       },
       // supportedLocales: L10n.all,
       // locale: Locale("en"),
