@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_tracker/controllers/language_controller.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/shared/list_shared.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../shared/provider_shared.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -14,23 +19,65 @@ class IntroPage extends StatelessWidget {
 
     List<List<String>> textList = [
       [
-        "Kolay Takip",
-        "Dostarınızı her zaman yanınızdaki asistan ile sağlıklı bir şekilde takip edin.",
+        AppLocalizations.of(context)!.introPageTitle1,
+        AppLocalizations.of(context)!.introPageSubTitle1
       ],
       [
-        "Aşılarımız Tam",
-        "Aşılarınız tam zamanında bildirilir ve paylaşıma izin verdiğiniz veteriner tarafından randevu verilir.",
+        AppLocalizations.of(context)!.introPageTitle2,
+        AppLocalizations.of(context)!.introPageSubTitle2
       ],
       [
-        "Karnımız Hep Tok",
-        "Hayvanlarınızı her zaman yanınızda bir asistan ile sağlıklı bir şekilde takip edin.",
+        AppLocalizations.of(context)!.introPageTitle3,
+        AppLocalizations.of(context)!.introPageSubTitle3
       ],
     ];
-
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: height * SharedConstants.paddingGenerall,
+                horizontal: width * SharedConstants.paddingGenerall,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Language Change
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.language,
+                        color: SharedConstants.blackColor,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: width * SharedConstants.paddingGenerall,
+                        ),
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            final language = ref.watch(languageProvider);
+                            return DropdownButton(
+                              value: language,
+                              items: SharedList.langugeSettingList,
+                              onChanged: (value) {
+                                LanguageController().changeLanguage(ref, value);
+                              },
+                              underline: SizedBox(),
+                              iconEnabledColor: SharedConstants.orangeColor,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.skip,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               flex: 5,
               child: PageView.builder(

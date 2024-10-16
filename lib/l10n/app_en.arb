@@ -1,3 +1,12 @@
 {
-  "language": "English"
+  "@@language": "English",
+  "skip": "Skip",
+  "intro_page_title": "Titles",
+  "introPageTitle1": "Easy Tracking",
+  "introPageTitle2": "Our Vaccines Are Complete",
+  "introPageTitle3": "Our Stomach Is Always Full",
+  "intro_page_description": "Subtitles",
+  "introPageSubTitle1": "Follow your friends with your assistant by your side in a healthy way.",
+  "introPageSubTitle2": "Your vaccines are notified on time and an appointment is given by the veterinarian you allow to share.",
+  "introPageSubTitle3": "Follow your animals with an assistant by your side in a healthy way."
 }

@@ -10,6 +10,17 @@ class SharedList {
     'assets/images/intropage/intropage_image3.png',
   ];
 
+  static List<DropdownMenuItem> langugeSettingList = [
+    DropdownMenuItem(
+      child: Text("Türkçe"),
+      value: "tr",
+    ),
+    DropdownMenuItem(
+      child: Text("English"),
+      value: "en",
+    ),
+  ];
+
   // Login Page
   static List<LoginOtherLoginButton> loginOtherLoginButtonList = [
     LoginOtherLoginButton(
