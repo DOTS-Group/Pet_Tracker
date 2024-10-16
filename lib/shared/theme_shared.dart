@@ -58,13 +58,13 @@ class SharedTheme {
   static ThemeData lightTheme = ThemeData(
     primaryColor: SharedConstants.primaryColorLight,
     scaffoldBackgroundColor: SharedConstants.primaryColorLight,
-    colorScheme: const ColorScheme.light(
+    colorScheme: ColorScheme.light(
       primary: SharedConstants.primaryColorLight,
       secondary: SharedConstants.secondaryColorLight,
       tertiary: SharedConstants.tertiaryColorLight,
       // Container color
       primaryContainer: SharedConstants.secondaryColorLight,
-      secondaryContainer: SharedConstants.primaryColorLight,
+      secondaryContainer: SharedConstants.tertiaryColorLight,
       tertiaryContainer: SharedConstants.tertiaryColorLight,
     ),
     textTheme: textTheme(false),

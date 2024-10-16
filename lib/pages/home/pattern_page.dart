@@ -46,11 +46,16 @@ class _PatternPageState extends State<PatternPage> {
             _selectedIndex = 4;
           });
         },
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            shape: BoxShape.circle,
+        child: Card(
+          elevation: 2,
+          color: SharedConstants.orangeColor,
+          // Shape circle
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              height * 0.1,
+            ),
           ),
+          shadowColor: Theme.of(context).scaffoldBackgroundColor,
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: height * SharedConstants.paddingGenerall,
@@ -58,6 +63,7 @@ class _PatternPageState extends State<PatternPage> {
             ),
             child: Icon(
               Icons.pets_rounded,
+              color: Colors.white,
             ),
           ),
         ),
@@ -65,7 +71,26 @@ class _PatternPageState extends State<PatternPage> {
       bottomNavigationBar: Container(
         height: height * 0.075,
         width: width,
-        color: Colors.green,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(
+              height * SharedConstants.paddingGenerall,
+            ),
+            topRight: Radius.circular(
+              height * SharedConstants.paddingGenerall,
+            ),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              blurRadius: 1,
+              // spreadRadius: 0.1,
+              offset: Offset(-1, -1),
+              blurStyle: BlurStyle.outer,
+            ),
+          ],
+        ),
         child: Row(
           children: [
             for (int i = 0; i < 5; i++)

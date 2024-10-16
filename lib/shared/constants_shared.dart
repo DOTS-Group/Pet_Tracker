@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class SharedConstants {
   // Color
   // -> Light Theme
-  static const Color primaryColorLight = whiteColor;
-  static const Color secondaryColorLight = Color(0xFFFFFFFF);
-  static const Color tertiaryColorLight = Color(0xFFD9D9D9);
+  static  Color primaryColorLight = Colors.white.withOpacity(0.95);
+  static const Color secondaryColorLight = whiteColor;
+  static const Color tertiaryColorLight = blackColor;
   static const Color primaryTextColorLight = blackColor;
   static const Color secondaryTextColorLight = whiteColor;
 
