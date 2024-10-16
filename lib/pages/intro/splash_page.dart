@@ -54,19 +54,46 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             ),
             Positioned(
               top: height * SharedConstants.paddingLarge * 2,
-              left: width * 0.3,
-              child: Column(
-                children: [
-                  for (int i = 0; i < 2; i++)
-                    Text(
-                      i == 0 ? "Pet Takip" : "Kolay, paylaşılabilir takip",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                ],
+              // left: width * 0.25,
+              child: SizedBox(
+                width: width,
+                child: Center(
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < 2; i++)
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: i == 0
+                                ? 0
+                                : height * SharedConstants.paddingGenerall,
+                          ),
+                          child: Text(
+                            i == 0
+                                ? "Pet Takip"
+                                : "Kolay, paylaşılabilir takip",
+                            style: i == 0
+                                ? Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      color: SharedConstants.whiteColor,
+                                      fontSize: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge!
+                                              .fontSize! *
+                                          1.5,
+                                    )
+                                : Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
             ),
             Positioned(
@@ -74,10 +101,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               left: width * 0.4,
               child: Text(
                 "Version 1.0",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.white.withOpacity(0.4),
+                    ),
               ),
             ),
             Positioned(

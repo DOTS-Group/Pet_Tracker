@@ -12,46 +12,91 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Header (Welcome Text and Search Icon)
         Padding(
           padding: EdgeInsets.symmetric(
-            vertical: height * SharedConstants.paddingGenerall,
             horizontal: width * SharedConstants.paddingGenerall,
+            vertical: height * SharedConstants.paddingGenerall,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Text("Merhaba İsmail",),
-              RichText(
-                text: TextSpan(
-                  text: "Merhaba ",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  children: [
-                    TextSpan(
-                      text: "İsmail",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    TextSpan(
-                      text: "\nNe Yapmak İstiyorsun?",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    )
-                  ],
-                ),
-              ),
-              Icon(
-                Icons.search,
-              ),
-            ],
-          ),
-        ),
-        // Categories Activity
-        Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: width * SharedConstants.paddingGenerall),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.amber,
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(
+                height * SharedConstants.paddingGenerall,
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: height * SharedConstants.paddingGenerall,
+                horizontal: width * SharedConstants.paddingGenerall,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // User Image
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(
+                            height * SharedConstants.paddingGenerall,
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            height * SharedConstants.paddingGenerall,
+                          ),
+                          child: Placeholder(
+                            fallbackHeight: height * 0.12,
+                            fallbackWidth: height * 0.12,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: width * SharedConstants.paddingGenerall,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (int i = 0; i < 3; i++)
+                              Text(
+                                "Hoşgeldin, Kullanıcı Adı",
+                              ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.amber,
+                                ),
+                                Text(
+                                  "Konum",
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Icon(Icons.qr_code),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: width * SharedConstants.paddingGenerall,
+          ),
+          child: Container(
+            width: width,
+            decoration: BoxDecoration(
+              color: Colors.grey,
               borderRadius: BorderRadius.circular(
                 height * SharedConstants.paddingGenerall,
               ),
@@ -62,92 +107,71 @@ class HomePage extends StatelessWidget {
                 horizontal: width * SharedConstants.paddingGenerall,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: height * SharedConstants.paddingGenerall,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Pet Image
-                        SizedBox(
-                          width: width * 0.2,
-                        ),
-                        // Pet name and type
-                        RichText(
-                          text: TextSpan(
-                            text: "Poyraz",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            children: [
-                              TextSpan(
-                                text: "\nRottweiler",
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          "8 Yıl 6 Ay",
-                        ),
-                      ],
-                    ),
+                  Text(
+                    "Dostlar",
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width * SharedConstants.paddingGenerall,
-                    ),
-                    child: GridView.builder(
-                      shrinkWrap: true, // Yüksekliği içerikle sınırla
-                      physics:
-                          NeverScrollableScrollPhysics(), // Ana sayfanın kaydırma özelliği ile çakışmasın
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4, // Her satırda 4 öğe
-                        crossAxisSpacing: 8, // Yatay boşluk
-                        mainAxisSpacing: 8, // Dikey boşluk
+                  Container(
+                    width: width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(
+                        height * SharedConstants.paddingGenerall,
                       ),
-                      itemCount: 8, // Toplam 8 öğe
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: width * 0.25,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(
-                              height * SharedConstants.paddingGenerall,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical:
-                                  height * SharedConstants.paddingGenerall,
-                              horizontal:
-                                  width * SharedConstants.paddingGenerall,
-                            ),
-                            child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.center, // Dikey merkezleme
-                              children: [
-                                Icon(Icons.abc),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: height * SharedConstants.paddingSmall,
-                                  ),
-                                  child: Text("Mama"),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width * SharedConstants.paddingGenerall,
+                        vertical: height * SharedConstants.paddingGenerall,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Placeholder(
+                                fallbackHeight: height * 0.08,
+                                fallbackWidth: height * 0.08,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: width * SharedConstants.paddingGenerall,
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for (int i = 0; i < 2; i++)
+                                      Text(
+                                        i == 0 ? "Poyraz" : "Rottweiler",
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              // SizedBox(
+                              //   // width: width * 0.8,
+                              //   // height: height * 0.1,
+                              //   child: GridView.builder(
+                              //     gridDelegate:
+                              //         const SliverGridDelegateWithFixedCrossAxisCount(
+                              //       crossAxisCount: 2,
+                              //     ),
+                              //     itemCount: 2,
+                              //     itemBuilder:
+                              //         (BuildContext context, int index) {
+                              //       return Container(
+                              //         child: Text(
+                              //           "data",
+                              //         ),
+                              //       );
+                              //     },
+                              //   ),
+                              // ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.35),
-                    child: Divider(
-                      color: Colors.black,
-                      thickness: 2,
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),

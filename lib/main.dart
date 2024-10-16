@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     SharedTheme.height = height;
@@ -41,9 +41,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: "Pet Tracker",
           debugShowCheckedModeBanner: false,
-          // theme: SharedTheme.lightTheme,
-          // darkTheme: SharedTheme.darkTheme,
-          // themeMode: ThemeMode.system,
+          theme: SharedTheme.lightTheme,
+          darkTheme: SharedTheme.lightTheme,
+          themeMode: ThemeMode.system,
           home: SplashPage(),
           routes: {
             // Intro Pages

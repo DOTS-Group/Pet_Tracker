@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_tracker/widgets/generalbutton_widget.dart';
+// import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 
 import '../../shared/constants_shared.dart';
 
@@ -109,12 +111,12 @@ class MapPage extends StatelessWidget {
             },
           ),
         ),
-
         Padding(
           padding:
               EdgeInsets.only(top: height * SharedConstants.paddingGenerall),
           child: SizedBox(
-            height: height * 0.2,
+            height: height * 0.25, // Yüksekliği belirledik
+            width: width,
             child: ListView.builder(
               scrollDirection: Axis.horizontal, // Yatay kaydırma
               itemCount: 8, // Toplam öğe sayısı
@@ -122,11 +124,11 @@ class MapPage extends StatelessWidget {
                 return Padding(
                   padding: EdgeInsets.only(
                     left: width *
-                        SharedConstants
-                            .paddingGenerall, // Öğeler arasında boşluk
+                        SharedConstants.paddingGenerall, // Öğeler arası boşluk
                   ),
                   child: Container(
-                    width: width * 0.8,
+                    width: width * 0.8, // Her bir öğenin genişliği
+                    height: height * 0.25, // Her bir öğenin yüksekliği
                     decoration: BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(
@@ -138,54 +140,70 @@ class MapPage extends StatelessWidget {
                         vertical: height * SharedConstants.paddingSmall,
                         horizontal: width * SharedConstants.paddingGenerall,
                       ),
-                      child: Row(
+                      child: Column(
                         children: [
-                          // Clinic Photo
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              child: Placeholder(),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: width * SharedConstants.paddingGenerall,
+                          Row(
+                            children: [
+                              // Klinik Fotoğrafı Alanı
+                              Container(
+                                height: height * 0.2,
+                                width: width * 0.3,
+                                child:
+                                    Placeholder(), // Fotoğraf alanı için Placeholder
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for (int i = 0; i < 2; i++)
-                                    Text(
-                                      "data",
-                                    ),
-                                  Spacer(),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.pets,
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left:
+                                      width * SharedConstants.paddingGenerall,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    for (int i = 0; i < 2; i++)
+                                      Text(
+                                        "data", // Örnek veri
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
                                       ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                            left: width *
-                                                SharedConstants.paddingSmall,
-                                          ),
-                                          child: Text(
-                                            "Yogyakarta, Indonesia",
-                                            overflow: TextOverflow.ellipsis,
+                                    const Spacer(), // Boşluk bırakmak için
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.pets,
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              left: width *
+                                                  SharedConstants
+                                                      .paddingSmall,
+                                            ),
+                                            child: Text(
+                                              "Yogyakarta, Indonesia",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
+                            ],
+                          ),
+                          // Buton Alanı
+                          GeneralButtonWidget(
+                            text: "Button",
+                            backgroundColor: Colors.amber,
+                            textColor: Colors.white,
+                          ),
                         ],
-                      ), // İçeriğe index ekledim
+                      ),
                     ),
                   ),
                 );

@@ -11,21 +11,21 @@ class SharedTheme {
       // Header
       displayLarge: TextStyle(
         fontSize: height * SharedConstants.displayLargeFontSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w900,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,
       ),
       displayMedium: TextStyle(
         fontSize: height * SharedConstants.displayMediumFontSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,
       ),
       displaySmall: TextStyle(
         fontSize: height * SharedConstants.displaySmallFontSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,
@@ -33,21 +33,21 @@ class SharedTheme {
       // Body
       bodyLarge: TextStyle(
         fontSize: height * SharedConstants.bodyLargeFontSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,
       ),
       bodyMedium: TextStyle(
         fontSize: height * SharedConstants.bodyMediumFontSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,
       ),
       bodySmall: TextStyle(
         fontSize: height * SharedConstants.bodySmallFontSize,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w300,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,

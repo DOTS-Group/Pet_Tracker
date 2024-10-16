@@ -3,27 +3,27 @@ import 'package:flutter/material.dart';
 class SharedConstants {
   // Color
   // -> Light Theme
-  static const Color primaryColorLight = Color(0xFF5E17EB);
+  static const Color primaryColorLight = whiteColor;
   static const Color secondaryColorLight = Color(0xFFFFFFFF);
   static const Color tertiaryColorLight = Color(0xFFD9D9D9);
-  static const Color primaryTextColorLight = Color(0xFF000000);
-  static const Color secondaryTextColorLight = Color(0xFF5E17EB);
+  static const Color primaryTextColorLight = blackColor;
+  static const Color secondaryTextColorLight = whiteColor;
 
   // -> Dark Theme
   static const Color primaryColorDark = Color(0xFF5E17EB);
   static const Color secondaryColorDark = Color(0xFFFFFFFF);
   static const Color tertiaryColorDark = Color(0xFFD9D9D9);
-  static const Color primaryTextColorDark = Color(0xFF000000);
+  static const Color primaryTextColorDark = Color(0xFF222222);
   static const Color secondaryTextColorDark = Color(0xFF5E17EB);
 
   // -> Other Color Palette
   static const Color whiteColor = Color(0xFFFFFFFF);
-  static const Color blackColor = Color(0xFF000000);
+  static const Color blackColor = Color(0xFF222222);
   static const Color purpleColor = Color(0xFF5E17EB);
   static const Color redColor = Color(0xFFFF3131);
   static const Color blueColor = Color(0xFF63B4FF);
   static const Color yellowColor = Color(0xFFFAAB4E);
-  static const Color orangeColor = Color(0xFFFFA500);
+  static const Color orangeColor = Color(0xFFEB7A17);
   static const Color greenColor = Color(0xFF00BF63);
 
   // Size
@@ -51,6 +51,7 @@ class SharedConstants {
   static const double bodySmallFontSize = 0.015;
 
   // Image Route
+  static const String logoImageRoute = "assets/images/logo.png";
   static const String splashPageBackground =
       'assets/images/splashpage/splaspagebackground_image.png';
 }

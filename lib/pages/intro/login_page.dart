@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double heighgt = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
@@ -19,93 +19,168 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             // Header
-            Text(
-              "Pet Takip’e Hoşgeldin",
-              style: Theme.of(context).textTheme.displayLarge,
-              textAlign: TextAlign.center,
+            Image.asset(
+              SharedConstants.logoImageRoute,
+              height: height * 0.25,
+            ),
+            Column(
+              children: [
+                for (int i = 0; i < 2; i++)
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: i == 0
+                            ? 0
+                            : height * SharedConstants.paddingGenerall),
+                    child: Text(
+                      i == 0 ? "Pet Takip'e" : "Hoşgeldiniz",
+                      style: i == 0
+                          ? Theme.of(context).textTheme.displayLarge
+                          : Theme.of(context).textTheme.displayMedium,
+                    ),
+                  )
+              ],
             ),
             // Other Login Buttons
-            Row(
-              children: [
-                for (int i = 0; i < 3; i++)
-                  i == 1
-                      ? SizedBox(
-                          width: width * SharedConstants.paddingGenerall,
-                        )
-                      : Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: i == 0
-                                  ? SharedList.loginOtherLoginButtonList[0]
-                                      .backgroundColor
-                                  : SharedList.loginOtherLoginButtonList[1]
-                                      .backgroundColor,
-                              borderRadius: BorderRadius.circular(
-                                heighgt * SharedConstants.paddingGenerall,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: height * SharedConstants.paddingGenerall,
+              ),
+              child: Row(
+                children: [
+                  for (int i = 0; i < 3; i++)
+                    i == 1
+                        ? SizedBox(
+                            width: width * SharedConstants.paddingGenerall,
+                          )
+                        : Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: i == 0
+                                    ? SharedList.loginOtherLoginButtonList[0]
+                                        .backgroundColor
+                                    : SharedList.loginOtherLoginButtonList[1]
+                                        .backgroundColor,
+                                borderRadius: BorderRadius.circular(
+                                  height * SharedConstants.paddingGenerall,
+                                ),
                               ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical:
-                                    heighgt * SharedConstants.paddingSmall,
-                                horizontal:
-                                    width * SharedConstants.paddingGenerall,
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    i == 0
-                                        ? SharedList
-                                            .loginOtherLoginButtonList[0].icon
-                                        : SharedList
-                                            .loginOtherLoginButtonList[1].icon,
-                                    color: i == 0
-                                        ? SharedList
-                                            .loginOtherLoginButtonList[0]
-                                            .iconColor
-                                        : SharedList
-                                            .loginOtherLoginButtonList[1]
-                                            .iconColor,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: width *
-                                          SharedConstants.paddingGenerall,
-                                    ),
-                                    child: Text(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      height * SharedConstants.paddingGenerall,
+                                  horizontal:
+                                      width * SharedConstants.paddingMedium,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
                                       i == 0
                                           ? SharedList
-                                              .loginOtherLoginButtonList[0].text
+                                              .loginOtherLoginButtonList[0].icon
                                           : SharedList
                                               .loginOtherLoginButtonList[1]
-                                              .text,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: i == 0
-                                                ? SharedList
-                                                    .loginOtherLoginButtonList[
-                                                        0]
-                                                    .textColor
-                                                : SharedList
-                                                    .loginOtherLoginButtonList[
-                                                        1]
-                                                    .textColor,
-                                          ),
+                                              .icon,
+                                      color: i == 0
+                                          ? SharedList
+                                              .loginOtherLoginButtonList[0]
+                                              .iconColor
+                                          : SharedList
+                                              .loginOtherLoginButtonList[1]
+                                              .iconColor,
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: width *
+                                            SharedConstants.paddingMedium,
+                                      ),
+                                      child: Text(
+                                        i == 0
+                                            ? SharedList
+                                                .loginOtherLoginButtonList[0]
+                                                .text
+                                            : SharedList
+                                                .loginOtherLoginButtonList[1]
+                                                .text,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: i == 0
+                                                  ? SharedList
+                                                      .loginOtherLoginButtonList[
+                                                          0]
+                                                      .textColor
+                                                  : SharedList
+                                                      .loginOtherLoginButtonList[
+                                                          1]
+                                                      .textColor,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-              ],
+                ],
+              ),
             ),
             // Or Text
             Text(
               "veya e posta ile giriş",
               style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            // Email and Password
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: height * SharedConstants.paddingGenerall,
+                horizontal: width * SharedConstants.paddingGenerall,
+              ),
+              child: Column(
+                children: [
+                  for (int i = 0; i < 2; i++)
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: i == 0
+                            ? 0
+                            : height * SharedConstants.paddingGenerall,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            i == 0 ? Icons.mail : Icons.lock,
+                            color: SharedConstants.orangeColor,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: width * SharedConstants.paddingMedium,
+                                right:
+                                    width * SharedConstants.paddingExtraLarge,
+                              ),
+                              child: TextField(
+                                obscureText: i == 1, // Şifre alanı için gizleme
+                                decoration: InputDecoration(
+                                  hintText:
+                                      i == 0 ? "eposta@mail.com" : "********",
+                                  hintStyle:
+                                      Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
+                            ),
+                          ),
+                          i == 0
+                              ? SizedBox(
+                                  width: Theme.of(context).iconTheme.size,
+                                )
+                              : Icon(
+                                  Icons.remove_red_eye,
+                                ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
 
             // Remember Me and Forgot Password
@@ -130,7 +205,7 @@ class LoginPage extends StatelessWidget {
             // Login Button
             Padding(
               padding: EdgeInsets.symmetric(
-                vertical: heighgt * SharedConstants.paddingGenerall,
+                vertical: height * SharedConstants.paddingGenerall,
               ),
               child: GeneralButtonWidget(
                 text: "🐾 Başla",
@@ -157,7 +232,7 @@ class LoginPage extends StatelessWidget {
             // Privacy Policy
             Padding(
               padding: EdgeInsets.only(
-                top: heighgt * SharedConstants.paddingGenerall,
+                top: height * SharedConstants.paddingGenerall,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
