@@ -64,10 +64,10 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             for (int i = 0; i < 3; i++)
-                              Text(
+                              const Text(
                                 "Hoşgeldin, Kullanıcı Adı",
                               ),
-                            Row(
+                            const Row(
                               children: [
                                 Icon(
                                   Icons.location_on,
@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Icon(Icons.qr_code),
+                  const Icon(Icons.qr_code),
                 ],
               ),
             ),
@@ -109,7 +109,7 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Dostlar",
                   ),
                   Container(

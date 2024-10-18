@@ -31,11 +31,11 @@ class PetaddPage extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back_ios,
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Dost Ekle",
                   ),
                   SizedBox(
@@ -70,7 +70,7 @@ class PetaddPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Renk",
                   ),
                   Padding(
@@ -88,7 +88,7 @@ class PetaddPage extends StatelessWidget {
                         padding: EdgeInsets.all(
                           height * SharedConstants.paddingGenerall,
                         ),
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Renk giriniz",
@@ -113,7 +113,7 @@ class PetaddPage extends StatelessWidget {
                     padding: EdgeInsets.only(
                       bottom: height * SharedConstants.paddingSmall,
                     ),
-                    child: Text("Cinsiyet"),
+                    child: const Text("Cinsiyet"),
                   ),
                   Row(
                     children: [
@@ -139,13 +139,13 @@ class PetaddPage extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Text("Erkek"),
+                                  const Text("Erkek"),
                                   Padding(
                                     padding: EdgeInsets.only(
                                       left: width *
                                           SharedConstants.paddingGenerall,
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.abc,
                                     ),
                                   ),
@@ -167,7 +167,7 @@ class PetaddPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Doğum Tarihi",
                   ),
                   Padding(
@@ -185,7 +185,7 @@ class PetaddPage extends StatelessWidget {
                         padding: EdgeInsets.all(
                           height * SharedConstants.paddingGenerall,
                         ),
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Doğum tarihi seçiniz",
@@ -205,7 +205,7 @@ class PetaddPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Ağırlık",
                   ),
                   Padding(
@@ -225,7 +225,7 @@ class PetaddPage extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Expanded(
+                            const Expanded(
                               child: TextField(
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -237,7 +237,7 @@ class PetaddPage extends StatelessWidget {
                               padding: EdgeInsets.only(
                                 left: width * SharedConstants.paddingGenerall,
                               ),
-                              child: Text("kg"),
+                              child: const Text("kg"),
                             ),
                           ],
                         ),
@@ -259,7 +259,7 @@ class PetaddPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Yiyecek Türü",
                     ),
                     Padding(
@@ -292,7 +292,7 @@ class PetaddPage extends StatelessWidget {
                                       horizontal: height *
                                           SharedConstants.paddingGenerall,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       "data",
                                     ),
                                   ),
@@ -312,7 +312,7 @@ class PetaddPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Mikroçip Numarası",
                   ),
                   Padding(
@@ -330,7 +330,7 @@ class PetaddPage extends StatelessWidget {
                         padding: EdgeInsets.all(
                           height * SharedConstants.paddingGenerall,
                         ),
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Mikroçip numarası giriniz",
@@ -348,7 +348,7 @@ class PetaddPage extends StatelessWidget {
                 vertical: height * SharedConstants.paddingGenerall,
                 horizontal: width * SharedConstants.paddingGenerall,
               ),
-              child: GeneralButtonWidget(
+              child: const GeneralButtonWidget(
                 text: "Kaydet",
                 backgroundColor: Colors.amber,
                 textColor: Colors.white,

@@ -173,7 +173,7 @@ class LoginPage extends StatelessWidget {
                               ? SizedBox(
                                   width: Theme.of(context).iconTheme.size,
                                 )
-                              : Icon(
+                              : const Icon(
                                   Icons.remove_red_eye,
                                 ),
                         ],
@@ -207,7 +207,7 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 vertical: height * SharedConstants.paddingGenerall,
               ),
-              child: GeneralButtonWidget(
+              child: const GeneralButtonWidget(
                 text: "🐾 Başla",
                 textColor: Colors.white,
                 backgroundColor: Colors.amber,

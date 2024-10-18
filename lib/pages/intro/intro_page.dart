@@ -46,7 +46,7 @@ class IntroPage extends StatelessWidget {
                   // Language Change
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.language,
                         color: SharedConstants.blackColor,
                       ),
@@ -56,14 +56,14 @@ class IntroPage extends StatelessWidget {
                         ),
                         child: Consumer(
                           builder: (context, ref, child) {
-                            final language = ref.watch(languageProvider);
+                            final language = ref.read(languageProvider);
                             return DropdownButton(
                               value: language,
                               items: SharedList.langugeSettingList,
                               onChanged: (value) {
                                 LanguageController().changeLanguage(ref, value);
                               },
-                              underline: SizedBox(),
+                              underline: const SizedBox(),
                               iconEnabledColor: SharedConstants.orangeColor,
                             );
                           },
@@ -129,7 +129,7 @@ class IntroPage extends StatelessWidget {
               onDotClicked: (index) {
                 controller.animateToPage(
                   index,
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
                 );
               },
@@ -142,14 +142,6 @@ class IntroPage extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: () {
-                  // if (controller.initialPage == 2) {
-                  //   Navigator.pushNamed(context, "/pattern");
-                  // } else {
-                  //   controller.nextPage(
-                  //     duration: Duration(milliseconds: 500),
-                  //     curve: Curves.easeInOut,
-                  //   );
-                  // }
                   Navigator.pushNamed(context, "/login");
                 },
                 child: Container(

@@ -11,13 +11,13 @@ class SharedList {
   ];
 
   static List<DropdownMenuItem> langugeSettingList = [
-    DropdownMenuItem(
-      child: Text("Türkçe"),
+    const DropdownMenuItem(
       value: "tr",
+      child: Text("Türkçe"),
     ),
-    DropdownMenuItem(
-      child: Text("English"),
+    const DropdownMenuItem(
       value: "en",
+      child: Text("English"),
     ),
   ];
 

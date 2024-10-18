@@ -55,14 +55,14 @@ class PetAddSelectPetTypeWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Image.asset(petTypeModelList[index].petTypeImage),
-                          Expanded(child: Placeholder()),
+                          const Expanded(child: Placeholder()),
                           Padding(
                             padding: EdgeInsets.only(
                               top: height * SharedConstants.paddingSmall,
                             ),
                             child: Text(
                               petTypeModelList[index].petType,
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ],

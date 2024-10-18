@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Localization Libs
 import 'package:pet_tracker/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pet_tracker/pages/home/calendar_page.dart';
+import 'package:pet_tracker/pages/home/map_page.dart';
 
 // Pages
 import 'package:pet_tracker/pages/home/pattern_page.dart';
 import 'package:pet_tracker/pages/home/petadd_page.dart';
+import 'package:pet_tracker/pages/home/profile_page.dart';
 import 'package:pet_tracker/pages/intro/intro_page.dart';
 import 'package:pet_tracker/pages/intro/login_page.dart';
 import 'package:pet_tracker/pages/intro/splash_page.dart';
 
 import 'pages/home/home_page.dart';
+import 'pages/other/notification_page.dart';
+import 'pages/other/settings_page.dart';
 import 'shared/provider_shared.dart';
 import 'shared/theme_shared.dart';
 
@@ -44,17 +48,24 @@ class MyApp extends StatelessWidget {
           theme: SharedTheme.lightTheme,
           darkTheme: SharedTheme.lightTheme,
           themeMode: ThemeMode.system,
-          home: SplashPage(),
+          home: const SplashPage(),
           routes: {
             // Intro Pages
-            '/splash': (context) => SplashPage(),
-            '/intro': (context) => IntroPage(),
-            '/login': (context) => LoginPage(),
+            '/splash': (context) => const SplashPage(),
+            '/intro': (context) => const IntroPage(),
+            '/login': (context) => const LoginPage(),
 
             // Home Pages
-            '/pattern': (context) => PatternPage(),
-            '/home': (context) => HomePage(),
-            '/petadd': (context) => PetaddPage(),
+            '/pattern': (context) => const PatternPage(),
+            '/home': (context) => const HomePage(),
+            '/map': (context) => const MapPage(),
+            '/petadd': (context) => const PetaddPage(),
+            '/calendar': (context) => const CalendarPage(),
+            '/profile': (context) => const ProfilePage(),
+
+            // Other Pages
+            '/settings': (context) => const SettingsPage(),
+            '/notifications': (context) => const NotificationPage(),
           },
           supportedLocales: L10n.all,
           locale: Locale(language),

@@ -1,12 +1,87 @@
 {
-  "@@language": "Türkçe",
+  "@@locale": "tr",
   "skip": "Atla",
+  "@skip": {
+    "description": "Tanıtım sayfası için atla butonu."
+  },
   "intro_page_title": "Başlıklar",
+  "@intro_page_title": {
+    "description": "Tanıtım sayfasının ana başlığı."
+  },
   "introPageTitle1": "Kolay Takip",
-  "introPageTitle2": "Aşılarımız Tam",
+  "@introPageTitle1": {
+    "description": "Birinci tanıtım sayfası başlığı."
+  },
+  "introPageTitle2": "Aşılarımız Tamam",
+  "@introPageTitle2": {
+    "description": "İkinci tanıtım sayfası başlığı."
+  },
   "introPageTitle3": "Karnımız Hep Tok",
-  "intro_page_description": "Alt metinler",
-  "introPageSubTitle1": "Dostarınızı her zaman yanınızdaki asistan ile sağlıklı bir şekilde takip edin.",
-  "introPageSubTitle2": "Aşılarınız tam zamanında bildirilir ve paylaşıma izin verdiğiniz veteriner tarafından randevu verilir.",
-  "introPageSubTitle3": "Hayvanlarınızı her zaman yanınızda bir asistan ile sağlıklı bir şekilde takip edin."
+  "@introPageTitle3": {
+    "description": "Üçüncü tanıtım sayfası başlığı."
+  },
+  "intro_page_description": "Alt Başlıklar",
+  "@intro_page_description": {
+    "description": "Tanıtım sayfasının ana alt başlığı."
+  },
+  "introPageSubTitle1": "Yanınızdaki asistanla arkadaşlarınızı sağlıklı bir şekilde takip edin.",
+  "@introPageSubTitle1": {
+    "description": "Birinci tanıtım sayfası alt başlığı."
+  },
+  "introPageSubTitle2": "Aşılarınız zamanında bildirilir ve izin verdiğiniz veterinerden randevu alınır.",
+  "@introPageSubTitle2": {
+    "description": "İkinci tanıtım sayfası alt başlığı."
+  },
+  "introPageSubTitle3": "Hayvanlarınızı sağlıklı bir şekilde asistanınızla takip edin.",
+  "@introPageSubTitle3": {
+    "description": "Üçüncü tanıtım sayfası alt başlığı."
+  },
+  "settings": "Ayarlar",
+  "@settings": {
+    "description": "Ayarlar sayfası başlığı."
+  },
+  "settingsPageTitle1": "Hesap",
+  "@settingsPageTitle1": {
+    "description": "Ayarlar sayfasında hesap bölümü başlığı."
+  },
+  "settingsPageSubtitle1": "Kullanıcı Bilgileri",
+  "@settingsPageSubtitle1": {
+    "description": "Kullanıcı bilgileri bölümü."
+  },
+  "settingsPageSubtitle2": "Paylaşım Ayarları",
+  "@settingsPageSubtitle2": {
+    "description": "Paylaşım ayarları bölümü."
+  },
+  "settingsPageSubtitle3": "Gizlilik Ayarları",
+  "@settingsPageSubtitle3": {
+    "description": "Gizlilik ayarları bölümü."
+  },
+  "settingsPageSubtitle4": "Bildirimler",
+  "@settingsPageSubtitle4": {
+    "description": "Bildirim ayarları bölümü."
+  },
+  "settingsPageSubtitle5": "Destek Alın",
+  "@settingsPageSubtitle5": {
+    "description": "Destek bölümü."
+  },
+  "settingsPageTitle2": "Diğer Ayarlar",
+  "@settingsPageTitle2": {
+    "description": "Diğer ayarlar bölümü başlığı."
+  },
+  "settingsPageSubtitle6": "Dil Ayarları",
+  "@settingsPageSubtitle6": {
+    "description": "Dil ayarları bölümü."
+  },
+  "settingsPageSubtitle7": "Tema Ayarları",
+  "@settingsPageSubtitle7": {
+    "description": "Tema ayarları bölümü."
+  },
+  "settingsPageSubtitle8": "Gizlilik Politikası",
+  "@settingsPageSubtitle8": {
+    "description": "Gizlilik politikası bölümü."
+  },
+  "settingsPageSubtitle9": "Hakkında",
+  "@settingsPageSubtitle9": {
+    "description": "Hakkında bölümü."
+  }
 }
