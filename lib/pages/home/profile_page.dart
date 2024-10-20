@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
             },
           ),
           // Avatar and User Information
-          CircleAvatar(radius: height * 0.08),
+          CircleAvatar(radius: height * 0.05),
           for (int i = 0; i < 2; i++)
             Padding(
               padding: EdgeInsets.symmetric(
@@ -94,18 +94,22 @@ class ProfilePageContentWidget extends StatelessWidget {
                                   titleKeyList[i],
                                 ),
                               ),
-                              profilePageIndex == i
-                                  ? Container(
-                                      height: 2,
-                                      width: width * 0.05,
-                                      decoration: BoxDecoration(
-                                        color: SharedConstants.orangeColor,
-                                        borderRadius: BorderRadius.circular(1),
+                              Padding(
+                                padding: EdgeInsets.only(top: height * 0.01),
+                                child: profilePageIndex == i
+                                    ? Container(
+                                        height: 2,
+                                        width: width * 0.1,
+                                        decoration: BoxDecoration(
+                                          color: SharedConstants.orangeColor,
+                                          borderRadius:
+                                              BorderRadius.circular(1),
+                                        ),
+                                      )
+                                    : const SizedBox(
+                                        height: 2,
                                       ),
-                                    )
-                                  : const SizedBox(
-                                      height: 2,
-                                    )
+                              ),
                             ],
                           ),
                         ),
@@ -116,10 +120,7 @@ class ProfilePageContentWidget extends StatelessWidget {
             ),
             // Page
             Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: profilepageController.getContent(profilePageIndex),
-              ),
+              child: profilepageController.getContent(profilePageIndex),
             ),
           ],
         );
