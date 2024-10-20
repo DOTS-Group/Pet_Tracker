@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tracker/models/settings/settingspage_model.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../widgets/appbar_widget.dart';
 import '../../widgets/settings/settingsListtile_widget.dart';
@@ -15,10 +15,10 @@ class SettingsPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     List<List<dynamic>> settingsList = [
       [
-        AppLocalizations.of(context)!.settingsPageTitle1,
+        context.tr('settingsPageTitle1'),
         SettingspageModel(
           leadingIcon: Icons.person,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle1,
+          title: context.tr('settingsPageSubtitle1'),
           leadingIconColor: SharedConstants.orangeColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/account_settings");
@@ -26,7 +26,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.notifications,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle2,
+          title: context.tr('settingsPageSubtitle2'),
           leadingIconColor: SharedConstants.blueColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/notifications");
@@ -34,7 +34,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.lock,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle3,
+          title: context.tr('settingsPageSubtitle3'),
           leadingIconColor: SharedConstants.greenColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/security_settings");
@@ -42,7 +42,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.language,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle4,
+          title: context.tr('settingsPageSubtitle4'),
           leadingIconColor: SharedConstants.purpleColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/language_settings");
@@ -50,7 +50,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.info,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle5,
+          title: context.tr('settingsPageSubtitle5'),
           leadingIconColor: SharedConstants.redColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/about_settings");
@@ -58,10 +58,10 @@ class SettingsPage extends StatelessWidget {
         ),
       ],
       [
-        AppLocalizations.of(context)!.settingsPageTitle2,
+        context.tr('settingsPageTitle2'),
         SettingspageModel(
           leadingIcon: Icons.person,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle6,
+          title: context.tr('settingsPageSubtitle6'),
           leadingIconColor: SharedConstants.orangeColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/account_settings");
@@ -69,7 +69,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.notifications,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle7,
+          title: context.tr('settingsPageSubtitle7'),
           leadingIconColor: SharedConstants.blueColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/notifications");
@@ -77,7 +77,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.lock,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle8,
+          title: context.tr('settingsPageSubtitle8'),
           leadingIconColor: SharedConstants.greenColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/security_settings");
@@ -85,7 +85,7 @@ class SettingsPage extends StatelessWidget {
         ),
         SettingspageModel(
           leadingIcon: Icons.language,
-          title: AppLocalizations.of(context)!.settingsPageSubtitle9,
+          title: context.tr('settingsPageSubtitle9'),
           leadingIconColor: SharedConstants.purpleColor,
           trailingIconPressed: () {
             Navigator.pushNamed(context, "/language_settings");
@@ -101,7 +101,7 @@ class SettingsPage extends StatelessWidget {
             AppBarWidget(
               leadingIcon: Icons.arrow_back,
               trailingIcon: Icons.notifications_none,
-              title: AppLocalizations.of(context)!.settings,
+              title: context.tr('settings'),
               leadingIconPressed: () {
                 Navigator.pop(context);
               },

@@ -11,8 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
   intl: ^0.19.0
   # -----------------------------------------------------
   # UI
@@ -32,6 +30,8 @@ dependencies:
   hooks_riverpod: ^2.5.2
   # -> Api
   http: ^1.2.2
+  # Language
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +40,6 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
-  generate: true
   uses-material-design: true
 
   assets:
@@ -48,6 +47,7 @@ flutter:
     - assets/images/splashpage/
     - assets/images/intropage/
     - assets/icons/
+    - assets/translations/
 
   # fonts:
   #   - family: Schyler

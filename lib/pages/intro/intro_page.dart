@@ -1,37 +1,40 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_tracker/controllers/language_controller.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/shared/list_shared.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../shared/provider_shared.dart';
+import '../../controllers/intro/intropage_controller.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    IntroPageController introPageController = IntroPageController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final controller = PageController(); // PageView controller
 
     List<List<String>> textList = [
       [
-        AppLocalizations.of(context)!.introPageTitle1,
-        AppLocalizations.of(context)!.introPageSubTitle1
+        context.tr('introPageTitle1'),
+        context.tr('introPageSubTitle1'),
       ],
       [
-        AppLocalizations.of(context)!.introPageTitle2,
-        AppLocalizations.of(context)!.introPageSubTitle2
+        context.tr('introPageTitle2'),
+        context.tr('introPageSubTitle2'),
       ],
       [
-        AppLocalizations.of(context)!.introPageTitle3,
-        AppLocalizations.of(context)!.introPageSubTitle3
+        context.tr('introPageTitle3'),
+        context.tr('introPageSubTitle3'),
       ],
     ];
     return Scaffold(
+      key: const ValueKey("introPage"),
       body: SafeArea(
         child: Column(
           children: [
@@ -54,26 +57,23 @@ class IntroPage extends StatelessWidget {
                         padding: EdgeInsets.only(
                           left: width * SharedConstants.paddingGenerall,
                         ),
-                        child: Consumer(
-                          builder: (context, ref, child) {
-                            final language = ref.read(languageProvider);
-                            return DropdownButton(
-                              value: language,
-                              items: SharedList.langugeSettingList,
-                              onChanged: (value) {
-                                LanguageController().changeLanguage(ref, value);
-                              },
-                              underline: const SizedBox(),
-                              iconEnabledColor: SharedConstants.orangeColor,
-                            );
-                          },
-                        ),
+                        child: const LanguageWidget(),
                       ),
                     ],
                   ),
-                  Text(
-                    AppLocalizations.of(context)!.skip,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  GestureDetector(
+                    onTap: () {
+                      // 2. sayfaya animasyonlu olarak geçsin
+                      controller.animateToPage(
+                        2,
+                        duration: const Duration(milliseconds: 700),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: Text(
+                      context.tr('skip'),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                 ],
               ),
@@ -140,36 +140,70 @@ class IntroPage extends StatelessWidget {
                 vertical: height * SharedConstants.paddingMedium,
                 horizontal: width * SharedConstants.paddingGenerall,
               ),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "/login");
+              child: Consumer(
+                builder: (context, ref, child) {
+                  return GestureDetector(
+                    onTap: () {
+                      introPageController.buttonFunction(
+                          context, controller, ref, controller.initialPage);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: SharedConstants.orangeColor,
+                        borderRadius: BorderRadius.circular(
+                          height * SharedConstants.paddingGenerall,
+                        ),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: height * SharedConstants.paddingGenerall,
+                          ),
+                          child: Consumer(
+                            builder: (context, ref, child) {
+                              return Text(
+                                controller.initialPage == 2
+                                    ? context.tr('startButton')
+                                    : context.tr('nextButton'),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      color: Colors.white,
+                                    ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: SharedConstants.orangeColor,
-                    borderRadius: BorderRadius.circular(
-                      height * SharedConstants.paddingGenerall,
-                    ),
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: height * SharedConstants.paddingGenerall,
-                      ),
-                      child: Text(
-                        controller.initialPage == 2 ? "Başla" : "Devam",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: Colors.white,
-                            ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class LanguageWidget extends StatelessWidget {
+  const LanguageWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    LanguageController languageController = LanguageController();
+    final languageCode = languageController.getLanguageCode(context);
+    return DropdownButton(
+      value: languageCode,
+      items: SharedList.langugeSettingList,
+      onChanged: (value) {
+        if (value != languageCode) {
+          languageController.changeLanguage(value, context, const IntroPage());
+        }
+      },
+      underline: const SizedBox(),
+      iconEnabledColor: SharedConstants.orangeColor,
     );
   }
 }

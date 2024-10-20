@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/shared/list_shared.dart';
@@ -11,6 +12,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    List<String> titleList = [
+      context.tr('welcomeMessage1'),
+      context.tr('welcomeMessage2')
+    ];
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -32,7 +37,7 @@ class LoginPage extends StatelessWidget {
                             ? 0
                             : height * SharedConstants.paddingGenerall),
                     child: Text(
-                      i == 0 ? "Pet Takip'e" : "Hoşgeldiniz",
+                      titleList[i],
                       style: i == 0
                           ? Theme.of(context).textTheme.displayLarge
                           : Theme.of(context).textTheme.displayMedium,
@@ -127,7 +132,7 @@ class LoginPage extends StatelessWidget {
             ),
             // Or Text
             Text(
-              "veya e posta ile giriş",
+              context.tr('orMailLoginMethod'),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             // Email and Password
@@ -161,8 +166,9 @@ class LoginPage extends StatelessWidget {
                               child: TextField(
                                 obscureText: i == 1, // Şifre alanı için gizleme
                                 decoration: InputDecoration(
-                                  hintText:
-                                      i == 0 ? "eposta@mail.com" : "********",
+                                  hintText: i == 0
+                                      ? context.tr('emailExample')
+                                      : "********",
                                   hintStyle:
                                       Theme.of(context).textTheme.bodyMedium,
                                 ),
@@ -191,13 +197,13 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Checkbox(value: false, onChanged: (value) {}),
                     Text(
-                      "Beni Hatırla",
+                      context.tr('rememberMe'),
                       style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
                 Text(
-                  "Şifremi Unuttum",
+                  context.tr('forgotPassword'),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -207,8 +213,8 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 vertical: height * SharedConstants.paddingGenerall,
               ),
-              child: const GeneralButtonWidget(
-                text: "🐾 Başla",
+              child: GeneralButtonWidget(
+                text: context.tr('loginButton'),
                 textColor: Colors.white,
                 backgroundColor: Colors.amber,
                 route: "/pattern",
@@ -217,11 +223,11 @@ class LoginPage extends StatelessWidget {
             // Register
             RichText(
               text: TextSpan(
-                text: "Hesabın yok mu? ",
+                text: context.tr('dontHaveAccount'),
                 style: Theme.of(context).textTheme.bodyMedium,
                 children: [
                   TextSpan(
-                    text: "Kayıt Ol",
+                    text: context.tr('register'),
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Colors.amber,
                         ),
@@ -239,7 +245,7 @@ class LoginPage extends StatelessWidget {
                 children: [
                   for (int i = 0; i < 2; i++)
                     Text(
-                      i == 0 ? "S.S.S" : "K.V.K.K",
+                      i == 0 ? context.tr("faq") : context.tr("gdpr"),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                 ],
