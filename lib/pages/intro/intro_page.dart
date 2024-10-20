@@ -9,15 +9,34 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../controllers/intro/intropage_controller.dart';
 
-class IntroPage extends StatelessWidget {
+class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
 
   @override
+  State<IntroPage> createState() => _IntroPageState();
+}
+
+class _IntroPageState extends State<IntroPage> {
+  final PageController _controller = PageController(); // PageView controller
+  IntroPageController introPageController = IntroPageController();
+  int currentPage = 0; // Track the current page
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Listen for page changes and update state
+    _controller.addListener(() {
+      setState(() {
+        currentPage = _controller.page!.round();
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    IntroPageController introPageController = IntroPageController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final controller = PageController(); // PageView controller
 
     List<List<String>> textList = [
       [
@@ -33,6 +52,7 @@ class IntroPage extends StatelessWidget {
         context.tr('introPageSubTitle3'),
       ],
     ];
+
     return Scaffold(
       key: const ValueKey("introPage"),
       body: SafeArea(
@@ -64,7 +84,7 @@ class IntroPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       // 2. sayfaya animasyonlu olarak geçsin
-                      controller.animateToPage(
+                      _controller.animateToPage(
                         2,
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeInOut,
@@ -81,7 +101,7 @@ class IntroPage extends StatelessWidget {
             Expanded(
               flex: 5,
               child: PageView.builder(
-                controller: controller,
+                controller: _controller,
                 itemCount: SharedList.introPageImageList.length,
                 itemBuilder: (context, index) {
                   return Column(
@@ -91,7 +111,6 @@ class IntroPage extends StatelessWidget {
                       Image.asset(
                         SharedList.introPageImageList[index],
                         height: height * 0.4,
-                        // width: 300,
                         fit: BoxFit.cover,
                       ),
                       for (int i = 0; i < 2; i++)
@@ -114,10 +133,9 @@ class IntroPage extends StatelessWidget {
                 },
               ),
             ),
-
             // Smooth Page Indicator
             SmoothPageIndicator(
-              controller: controller,
+              controller: _controller,
               count: SharedList.introPageImageList.length,
               effect: WormEffect(
                 dotWidth: 12,
@@ -127,14 +145,13 @@ class IntroPage extends StatelessWidget {
                 dotColor: Colors.grey,
               ),
               onDotClicked: (index) {
-                controller.animateToPage(
+                _controller.animateToPage(
                   index,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
                 );
               },
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(
                 vertical: height * SharedConstants.paddingMedium,
@@ -145,7 +162,7 @@ class IntroPage extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       introPageController.buttonFunction(
-                          context, controller, ref, controller.initialPage);
+                          context, _controller, ref, currentPage);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -159,20 +176,16 @@ class IntroPage extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                             vertical: height * SharedConstants.paddingGenerall,
                           ),
-                          child: Consumer(
-                            builder: (context, ref, child) {
-                              return Text(
-                                controller.initialPage == 2
-                                    ? context.tr('startButton')
-                                    : context.tr('nextButton'),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              );
-                            },
+                          child: Text(
+                            currentPage == 2
+                                ? context.tr('startButton')
+                                : context.tr('nextButton'),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                         ),
                       ),
