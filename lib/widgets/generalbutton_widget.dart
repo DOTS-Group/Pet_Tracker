@@ -7,12 +7,14 @@ class GeneralButtonWidget extends StatelessWidget {
   final Color backgroundColor, textColor;
   final String? route;
   final VoidCallback? voidCallback;
+  final bool? isSmall;
   const GeneralButtonWidget({
     required this.text,
     required this.backgroundColor,
     required this.textColor,
     this.route,
     this.voidCallback,
+    this.isSmall,
     super.key,
   });
 
@@ -37,7 +39,9 @@ class GeneralButtonWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: heighgt * SharedConstants.paddingGenerall,
+            vertical: isSmall == true
+                ? heighgt * SharedConstants.paddingSmall
+                : heighgt * SharedConstants.paddingGenerall,
           ),
           child: Text(
             text,

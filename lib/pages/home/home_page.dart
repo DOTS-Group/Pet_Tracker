@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pet_tracker/shared/constants_shared.dart';
+import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 
-import '../../shared/constants_shared.dart';
+import '../../widgets/progessbar_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -12,108 +14,121 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Header (Welcome Text and Search Icon)
+        // Header
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: width * SharedConstants.paddingGenerall,
-            vertical: height * SharedConstants.paddingGenerall,
+            vertical: height * SharedConstants.paddingSmall,
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(
-                height * SharedConstants.paddingGenerall,
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: height * SharedConstants.paddingGenerall,
-                horizontal: width * SharedConstants.paddingGenerall,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // User Image
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(
-                            height * SharedConstants.paddingGenerall,
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            height * SharedConstants.paddingGenerall,
-                          ),
-                          child: Placeholder(
-                            fallbackHeight: height * 0.12,
-                            fallbackWidth: height * 0.12,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: width * SharedConstants.paddingGenerall,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Pet Selected Dropdown
+              Container(
+                // width: width * 0.4,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(
+                    height * SharedConstants.paddingLarge,
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: height * SharedConstants.paddingSmall / 2,
+                    horizontal: width * SharedConstants.paddingGenerall,
+                  ),
+                  child: DropdownButton(
+                    padding: EdgeInsets.zero,
+                    underline: const SizedBox(),
+                    value: "Poyraz",
+                    items: [
+                      DropdownMenuItem(
+                        value: "Poyraz",
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            for (int i = 0; i < 3; i++)
-                              const Text(
-                                "Hoşgeldin, Kullanıcı Adı",
+                            CircleAvatar(
+                              radius: height * SharedConstants.paddingGenerall,
+                              backgroundColor: Colors.amber,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: width * SharedConstants.paddingGenerall,
                               ),
-                            const Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on,
-                                  color: Colors.amber,
-                                ),
-                                Text(
-                                  "Konum",
-                                ),
-                              ],
-                            )
+                              child: Text(
+                                "Poyraz",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
+                    onChanged: (value) {},
                   ),
-                  const Icon(Icons.qr_code),
-                ],
+                ),
               ),
-            ),
+              Icon(
+                Icons.notifications_none_outlined,
+              ),
+            ],
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: width * SharedConstants.paddingGenerall,
-          ),
-          child: Container(
-            width: width,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(
-                height * SharedConstants.paddingGenerall,
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: height * SharedConstants.paddingGenerall,
-                horizontal: width * SharedConstants.paddingGenerall,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Dostlar",
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Pet Traning Strories List
+                SizedBox(
+                  height: height * 0.2,
+                  width: width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: width * SharedConstants.paddingGenerall,
+                        ),
+                        child: Column(
+                          children: [
+                            // Image
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                height * SharedConstants.paddingGenerall,
+                              ),
+                              child: Placeholder(
+                                fallbackHeight: height * 0.15,
+                                fallbackWidth: width * 0.3,
+                              ),
+                            ),
+                            // Title
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: height * SharedConstants.paddingSmall,
+                              ),
+                              child: Text(
+                                "Yürüyüş Asistanı",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                  Container(
-                    width: width * 0.8,
+                ),
+                // Activity Add
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * SharedConstants.paddingGenerall,
+                    vertical: height * SharedConstants.paddingSmall,
+                  ),
+                  child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(
@@ -123,60 +138,362 @@ class HomePage extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: width * SharedConstants.paddingGenerall,
-                        vertical: height * SharedConstants.paddingGenerall,
+                        vertical: height * SharedConstants.paddingSmall,
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // Title
+                          Text(
+                            "Aktiviteler",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: height * SharedConstants.paddingSmall,
+                            ),
+                            child: SizedBox(
+                              height: height * 0.08,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      left: width *
+                                          SharedConstants.paddingGenerall,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.amber,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(
+                                              height *
+                                                  SharedConstants.paddingSmall /
+                                                  2,
+                                            ),
+                                            child: Icon(
+                                              index == 4
+                                                  ? Icons.add
+                                                  : Icons.abc,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              top: height *
+                                                  SharedConstants.paddingSmall),
+                                          child: Text(
+                                            index == 4 ? "Ekle" : "Yürüyüş",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                itemCount: 5,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // Weight and money spent
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * SharedConstants.paddingGenerall,
+                  ),
+                  child: Row(
+                    children: [
+                      for (int i = 0; i < 3; i++)
+                        i == 1
+                            ? SizedBox(
+                                width: width * SharedConstants.paddingGenerall,
+                              )
+                            : Expanded(
+                                child: Container(
+                                  height: height * 0.2,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                      height * SharedConstants.paddingGenerall,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical:
+                                          height * SharedConstants.paddingSmall,
+                                      horizontal: width *
+                                          SharedConstants.paddingGenerall,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // Title and value
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            for (int i = 0; i < 2; i++)
+                                              Text(
+                                                "Ağırlık",
+                                                style: i == 0
+                                                    ? Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium
+                                                    : Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall,
+                                              ),
+                                          ],
+                                        ),
+                                        // Value
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: "5",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displayLarge,
+                                              ),
+                                              TextSpan(
+                                                text: " kg",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                    ],
+                  ),
+                ),
+                // Feed Tracking
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: height * SharedConstants.paddingSmall,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(
+                        height * SharedConstants.paddingGenerall,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: height * SharedConstants.paddingSmall,
+                        horizontal: width * SharedConstants.paddingGenerall,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Title
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Placeholder(
-                                fallbackHeight: height * 0.08,
-                                fallbackWidth: height * 0.08,
-                              ),
+                              for (int i = 0; i < 2; i++)
+                                Text(
+                                  i == 0 ? "Mama Stoğu" : "17.11.2024",
+                                  style: i == 0
+                                      ? Theme.of(context).textTheme.bodyMedium
+                                      : Theme.of(context).textTheme.bodySmall,
+                                ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (int i = 0; i < 2; i++)
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    top: height *
+                                        SharedConstants.paddingSmall /
+                                        2,
+                                  ),
+                                  child: Text(
+                                    i == 0 ? "Mama Markası" : "İçerik bilgisi",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                              // Progress Bar
                               Padding(
-                                padding: EdgeInsets.only(
-                                  left: width * SharedConstants.paddingGenerall,
+                                padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      height * SharedConstants.paddingSmall,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    for (int i = 0; i < 2; i++)
-                                      Text(
-                                        i == 0 ? "Poyraz" : "Rottweiler",
-                                      ),
-                                  ],
-                                ),
+                                child: const ProgressBarWidget(value: 0.2),
                               ),
-                              // SizedBox(
-                              //   // width: width * 0.8,
-                              //   // height: height * 0.1,
-                              //   child: GridView.builder(
-                              //     gridDelegate:
-                              //         const SliverGridDelegateWithFixedCrossAxisCount(
-                              //       crossAxisCount: 2,
-                              //     ),
-                              //     itemCount: 2,
-                              //     itemBuilder:
-                              //         (BuildContext context, int index) {
-                              //       return Container(
-                              //         child: Text(
-                              //           "data",
-                              //         ),
-                              //       );
-                              //     },
-                              //   ),
-                              // ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  for (int i = 0; i < 2; i++)
+                                    Text(
+                                      i == 0 ? "4.5 Kg" : "15 Kg",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                ],
+                              ),
                             ],
                           )
                         ],
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: width * SharedConstants.paddingGenerall,
+                    right: width * SharedConstants.paddingGenerall,
+                    bottom: height * SharedConstants.paddingGenerall,
+                  ),
+                  child: Row(
+                    children: [
+                      for (int j = 0; j < 3; j++)
+                        j == 1
+                            ? SizedBox(
+                                width: width * SharedConstants.paddingGenerall,
+                              )
+                            : Expanded(
+                                child: Container(
+                                  height: height * 0.225,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                      height * SharedConstants.paddingGenerall,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical:
+                                          height * SharedConstants.paddingSmall,
+                                      horizontal: width *
+                                          SharedConstants.paddingGenerall,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        // Header
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            for (int i = 0; i < 2; i++)
+                                              Text(
+                                                i == 0 ? "Aşı Takip" : "4 Gün",
+                                                style: i == 0
+                                                    ? Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium
+                                                    : Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall,
+                                              ),
+                                          ],
+                                        ),
+                                        // Content
+                                        j == 0
+                                            ? Row(
+                                                children: [
+                                                  Placeholder(
+                                                    fallbackHeight:
+                                                        height * 0.06,
+                                                    fallbackWidth:
+                                                        height * 0.06,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: width *
+                                                          SharedConstants
+                                                              .paddingGenerall,
+                                                    ),
+                                                    child: Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          for (int i = 0;
+                                                              i < 2;
+                                                              i++)
+                                                            Text(
+                                                              "Aşı Adı",
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodySmall,
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : Text("00:00",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displayLarge),
+                                        // Progress Bar
+                                        Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                for (int i = 0; i < 2; i++)
+                                                  Text(
+                                                    "4 gün",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall,
+                                                  ),
+                                              ],
+                                            ),
+                                            ProgressBarWidget(
+                                              value: 0.2,
+                                            ),
+                                          ],
+                                        ),
+                                        GeneralButtonWidget(
+                                          text: "Başla",
+                                          backgroundColor: Colors.amber,
+                                          textColor: Colors.white,
+                                          isSmall: true,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

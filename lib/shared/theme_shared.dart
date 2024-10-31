@@ -64,7 +64,7 @@ class SharedTheme {
       tertiary: SharedConstants.tertiaryColorLight,
       // Container color
       primaryContainer: SharedConstants.secondaryColorLight,
-      secondaryContainer: SharedConstants.tertiaryColorLight,
+      secondaryContainer: SharedConstants.primaryColorLight,
       tertiaryContainer: SharedConstants.tertiaryColorLight,
     ),
     textTheme: textTheme(false),
