@@ -14,7 +14,19 @@ class ProfilepageController {
   Widget getContent(int pageIndex) {
     switch (pageIndex) {
       case 0:
-        return const Text("Pet List");
+        return Column(
+          children: [
+            Expanded(
+              child: ListView.builder(itemBuilder: (context, index) {
+                return Container(
+                  child: Column(
+                    children: [],
+                  ),
+                );
+              }),
+            ),
+          ],
+        );
       case 1:
         return const Text("Vaccine Tracking");
       case 2:

@@ -15,6 +15,7 @@ import 'package:pet_tracker/pages/intro/splash_page.dart';
 
 import 'pages/home/home_page.dart';
 import 'pages/other/notification_page.dart';
+import 'pages/other/reminder_page.dart';
 import 'pages/other/settings_page.dart';
 import 'shared/theme_shared.dart';
 
@@ -65,14 +66,15 @@ class MyApp extends StatelessWidget {
         '/pattern': (context) => const PatternPage(),
         '/home': (context) => const HomePage(),
         '/map': (context) => const MapPage(),
-        '/petadd': (context) => const PetaddPage(),
         '/calendar': (context) => const CalendarPage(),
         '/profile': (context) => const ProfilePage(),
 
         // Other Pages
+        '/petadd': (context) => const PetaddPage(),
         '/settings': (context) => const SettingsPage(),
         '/notifications': (context) => const NotificationPage(),
         '/qrcode': (context) => const NotificationPage(),
+        '/reminder': (context) => const ReminderPage(),
       },
     );
   }

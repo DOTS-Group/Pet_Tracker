@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 
+import '../../widgets/other/petselected_widget.dart';
 import '../../widgets/progessbar_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,54 +22,11 @@ class HomePage extends StatelessWidget {
             horizontal: width * SharedConstants.paddingGenerall,
             vertical: height * SharedConstants.paddingSmall,
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Pet Selected Dropdown
-              Container(
-                // width: width * 0.4,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(
-                    height * SharedConstants.paddingLarge,
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: height * SharedConstants.paddingSmall / 2,
-                    horizontal: width * SharedConstants.paddingGenerall,
-                  ),
-                  child: DropdownButton(
-                    padding: EdgeInsets.zero,
-                    underline: const SizedBox(),
-                    value: "Poyraz",
-                    items: [
-                      DropdownMenuItem(
-                        value: "Poyraz",
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CircleAvatar(
-                              radius: height * SharedConstants.paddingGenerall,
-                              backgroundColor: Colors.amber,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: width * SharedConstants.paddingGenerall,
-                              ),
-                              child: Text(
-                                "Poyraz",
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                    onChanged: (value) {},
-                  ),
-                ),
-              ),
+              PetSelectedDropdownButtonWidget(),
               Icon(
                 Icons.notifications_none_outlined,
               ),
@@ -165,7 +123,7 @@ class HomePage extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Container(
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Colors.amber,
                                             shape: BoxShape.circle,
                                           ),
@@ -428,24 +386,22 @@ class HomePage extends StatelessWidget {
                                                           SharedConstants
                                                               .paddingGenerall,
                                                     ),
-                                                    child: Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          for (int i = 0;
-                                                              i < 2;
-                                                              i++)
-                                                            Text(
-                                                              "Aşı Adı",
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .bodySmall,
-                                                            ),
-                                                        ],
-                                                      ),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        for (int i = 0;
+                                                            i < 2;
+                                                            i++)
+                                                          Text(
+                                                            "Aşı Adı",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodySmall,
+                                                          ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
@@ -471,12 +427,12 @@ class HomePage extends StatelessWidget {
                                                   ),
                                               ],
                                             ),
-                                            ProgressBarWidget(
+                                            const ProgressBarWidget(
                                               value: 0.2,
                                             ),
                                           ],
                                         ),
-                                        GeneralButtonWidget(
+                                        const GeneralButtonWidget(
                                           text: "Başla",
                                           backgroundColor: Colors.amber,
                                           textColor: Colors.white,
