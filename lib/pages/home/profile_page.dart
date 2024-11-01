@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
+import 'package:pet_tracker/widgets/other/petselected_widget.dart';
+
+import '../../shared/generaladdbutton_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -85,27 +88,33 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      for (int i = 0; i < 2; i++)
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: width * SharedConstants.paddingGenerall,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: width * SharedConstants.paddingMedium,
+                    ),
+                    child: Row(
+                      children: [
+                        for (int i = 0; i < 2; i++)
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: width * SharedConstants.paddingGenerall,
+                            ),
+                            child: GestureDetector(
+                              onTap: i == 0
+                                  ? () =>
+                                      Navigator.pushNamed(context, '/qrcode')
+                                  : () =>
+                                      Navigator.pushNamed(context, '/settings'),
+                              child: Icon(
+                                i == 0
+                                    ? Icons.qr_code_rounded
+                                    : Icons.drive_file_rename_outline_sharp,
+                                color: SharedConstants.orangeColor,
+                              ),
+                            ),
                           ),
-                          child: IconButton(
-                            icon: i == 0
-                                ? Icon(Icons.qr_code_rounded)
-                                : Icon(Icons.drive_file_rename_outline_sharp),
-                            onPressed: i == 0
-                                ? () {
-                                    Navigator.pushNamed(context, '/qrcode');
-                                  }
-                                : () {
-                                    Navigator.pushNamed(context, '/settings');
-                                  },
-                          ),
-                        ),
-                    ],
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -165,11 +174,235 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: width * SharedConstants.paddingGenerall,
                 ),
-                child: tabbarIndex == 0 ? MyPetsWidget() : Text("data"),
+                child: tabbarIndex == 0
+                    ? MyPetsWidget()
+                    : tabbarIndex == 1
+                        ? PetVaccineWidget()
+                        : FoodTrackingWidget(),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class FoodTrackingWidget extends StatelessWidget {
+  const FoodTrackingWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: height * SharedConstants.paddingSmall,
+          ),
+          child: ListtileCardWidget(
+            icon: Icons.food_bank,
+            iconInfoText: "K. Mama",
+            title: "Mama Markası",
+            subtitle: "Mama detay bilgisi",
+            informationdata: "id: 123456789",
+            
+            isShowShoppingButton: true,
+          ),
+        ),
+        GeneralAddButton(route: '/foodadd'),
+      ],
+    );
+  }
+}
+
+class PetVaccineWidget extends StatelessWidget {
+  const PetVaccineWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const PetSelectedDropdownButtonWidget(),
+        Expanded(
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  top: height * SharedConstants.paddingSmall,
+                ),
+                child: index == 1
+                    ? GeneralAddButton(
+                        route: '/vaccineadd',
+                      )
+                    : ListtileCardWidget(
+                        icon: Icons.vaccines,
+                        iconInfoText: "Aşı",
+                        title: "İşlem adı",
+                        subtitle: "Klinik Adı",
+                        informationdata: "id: 123456789",
+                        date: "24.10.2025 - 12:30",
+                        isShowShoppingButton: false,
+                      ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ListtileCardWidget extends StatelessWidget {
+  final IconData icon;
+  final String iconInfoText, title, subtitle, informationdata;
+  final String? date;
+  final bool? isShowShoppingButton;
+  const ListtileCardWidget({
+    required this.icon,
+    required this.iconInfoText,
+    required this.title,
+    required this.subtitle,
+    required this.informationdata,
+    this.date,
+    this.isShowShoppingButton,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Container(
+      decoration: BoxDecoration(
+        color: SharedConstants.orangeColor,
+        borderRadius: BorderRadius.circular(
+          height * SharedConstants.paddingGenerall,
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: height * SharedConstants.paddingGenerall,
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Leading Icon and Info
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: SharedConstants.whiteColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(
+                      height * SharedConstants.paddingSmall,
+                    ),
+                    child: Icon(
+                      icon,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: height * SharedConstants.paddingSmall,
+                  ),
+                  child: Text(
+                    iconInfoText,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: SharedConstants.whiteColor,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: width * SharedConstants.paddingGenerall),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (int i = 0; i < 2; i++)
+                    Text(
+                      i == 0 ? title : subtitle,
+                      style: i == 0
+                          ? Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: SharedConstants.whiteColor,
+                              )
+                          : Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: SharedConstants.whiteColor,
+                              ),
+                    ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                for (int i = 0; i < 2; i++)
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: i == 0 ? 0 : height * SharedConstants.paddingSmall,
+                    ),
+                    child: isShowShoppingButton == true
+                        ? i == 0
+                            ? Text(
+                                informationdata,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                              )
+                            : GestureDetector(
+                                onTap: () =>
+                                    Navigator.pushNamed(context, '/market'),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: SharedConstants.whiteColor,
+                                    borderRadius: BorderRadius.circular(
+                                      height * SharedConstants.paddingGenerall,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical:
+                                          height * SharedConstants.paddingSmall,
+                                      horizontal:
+                                          width * SharedConstants.paddingMedium,
+                                    ),
+                                    child: Text(
+                                      "Satın Al",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ),
+                                ),
+                            )
+                        : Text(
+                            i == 0 ? informationdata : "24.10.2025 - 12:30",
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                          ),
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -197,30 +430,8 @@ class MyPetsWidget extends StatelessWidget {
           padding: EdgeInsets.only(
             top: height * SharedConstants.paddingSmall,
           ),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/petadd');
-            },
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: SharedConstants.whiteColor,
-                borderRadius: BorderRadius.circular(
-                  height * SharedConstants.paddingGenerall,
-                ),
-                border: Border.all(
-                  color: SharedConstants.orangeColor,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: height * SharedConstants.paddingGenerall,
-                ),
-                child: Icon(
-                  Icons.add,
-                ),
-              ),
-            ),
+          child: GeneralAddButton(
+            route: '/petadd',
           ),
         ),
       ],

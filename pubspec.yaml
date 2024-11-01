@@ -34,6 +34,8 @@ dependencies:
   http: ^1.2.2
   # Language
   easy_localization: ^3.0.7
+  # -> Qr Code Generator
+  pretty_qr_code: ^3.3.0
 
 dev_dependencies:
   flutter_test:

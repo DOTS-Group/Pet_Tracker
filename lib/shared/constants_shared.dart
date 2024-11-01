@@ -55,4 +55,5 @@ class SharedConstants {
   static const String logoImageRoute = "assets/images/logo.png";
   static const String splashPageBackground =
       'assets/images/splashpage/splaspagebackground_image.png';
+  static const String qrCodeFrameIcon = 'assets/icons/qrcodeframe_icon.png';
 }

@@ -12,11 +12,15 @@ import 'package:pet_tracker/pages/home/profile_page.dart';
 import 'package:pet_tracker/pages/intro/intro_page.dart';
 import 'package:pet_tracker/pages/intro/login_page.dart';
 import 'package:pet_tracker/pages/intro/splash_page.dart';
+import 'package:pet_tracker/pages/other/qrcode_page.dart';
 
 import 'pages/home/home_page.dart';
+import 'pages/other/foodadd_page.dart';
+import 'pages/other/market_page.dart';
 import 'pages/other/notification_page.dart';
 import 'pages/other/reminder_page.dart';
 import 'pages/other/settings_page.dart';
+import 'pages/other/vaccineadd_page.dart';
 import 'shared/theme_shared.dart';
 
 void main() async {
@@ -55,7 +59,7 @@ class MyApp extends StatelessWidget {
       theme: SharedTheme.lightTheme,
       darkTheme: SharedTheme.lightTheme,
       themeMode: ThemeMode.system,
-      home: const SplashPage(),
+      home: const PatternPage(),
       routes: {
         // Intro Pages
         '/splash': (context) => const SplashPage(),
@@ -73,8 +77,11 @@ class MyApp extends StatelessWidget {
         '/petadd': (context) => const PetaddPage(),
         '/settings': (context) => const SettingsPage(),
         '/notifications': (context) => const NotificationPage(),
-        '/qrcode': (context) => const NotificationPage(),
+        '/qrcode': (context) => const QrCodePage(),
         '/reminder': (context) => const ReminderPage(),
+        "/vaccineadd": (context) => const VaccineAddPage(),
+        "/market": (context) => const MarketPage(),
+        "/foodadd": (context) => const FoodAddPage(),
       },
     );
   }
