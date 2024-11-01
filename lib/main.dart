@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       theme: SharedTheme.lightTheme,
       darkTheme: SharedTheme.lightTheme,
       themeMode: ThemeMode.system,
-      home: const PatternPage(),
+      home: const SplashPage(),
       routes: {
         // Intro Pages
         '/splash': (context) => const SplashPage(),
