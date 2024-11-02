@@ -50,6 +50,7 @@ flutter:
     - assets/images/
     - assets/images/splashpage/
     - assets/images/intropage/
+    - assets/images/home/
     - assets/icons/
     - assets/translations/
 

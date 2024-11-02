@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constants_shared.dart';
+import '../shared/constants_shared.dart';
 
 class GeneralAddButton extends StatelessWidget {
   final String route;

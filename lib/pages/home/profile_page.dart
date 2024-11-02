@@ -3,7 +3,7 @@ import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 import 'package:pet_tracker/widgets/other/petselected_widget.dart';
 
-import '../../shared/generaladdbutton_widget.dart';
+import '../../widgets/generaladdbutton_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

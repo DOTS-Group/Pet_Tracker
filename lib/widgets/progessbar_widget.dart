@@ -4,9 +4,12 @@ import '../shared/constants_shared.dart';
 
 class ProgressBarWidget extends StatelessWidget {
   final double value;
-  final Color? backgroundColor,progressColor;
+  final double widthValue;
+
+  final Color? backgroundColor, progressColor;
   const ProgressBarWidget({
     required this.value,
+    required this.widthValue,
     this.backgroundColor,
     this.progressColor,
     super.key,
@@ -15,14 +18,14 @@ class ProgressBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Container(
           height: height * 0.01,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: backgroundColor ?? Theme.of(context).colorScheme.secondaryContainer,
+            color: backgroundColor ??
+                Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(
               height * SharedConstants.paddingGenerall,
             ),
@@ -32,7 +35,7 @@ class ProgressBarWidget extends StatelessWidget {
           top: 0,
           left: 0,
           child: Container(
-            width: (width - (width * SharedConstants.paddingMedium)) * value,
+            width: widthValue * value,
             height: height * 0.01,
             decoration: BoxDecoration(
               color: progressColor ?? SharedConstants.greenColor,

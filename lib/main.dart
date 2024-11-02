@@ -18,6 +18,7 @@ import 'pages/home/home_page.dart';
 import 'pages/other/foodadd_page.dart';
 import 'pages/other/market_page.dart';
 import 'pages/other/notification_page.dart';
+import 'pages/other/petdetails_page.dart';
 import 'pages/other/reminder_page.dart';
 import 'pages/other/settings_page.dart';
 import 'pages/other/vaccineadd_page.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
         "/vaccineadd": (context) => const VaccineAddPage(),
         "/market": (context) => const MarketPage(),
         "/foodadd": (context) => const FoodAddPage(),
+        "/petdetails": (context) => const PetDetailsPage(),
       },
     );
   }

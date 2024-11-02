@@ -52,8 +52,11 @@ class SharedConstants {
   static const double bodySmallFontSize = 0.015;
 
   // Image Route
+  // -> Imagies
   static const String logoImageRoute = "assets/images/logo.png";
   static const String splashPageBackground =
       'assets/images/splashpage/splaspagebackground_image.png';
+  static const String petAddImage = 'assets/images/home/petadd_image.png';
+  // -> Icons
   static const String qrCodeFrameIcon = 'assets/icons/qrcodeframe_icon.png';
 }
