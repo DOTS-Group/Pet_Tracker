@@ -1,5 +1,8 @@
 {
   "locale": "en",
+  "splashPage": "Splash Page",
+  "splashPageTitle": "Pet Tracking",
+  "splashPageSubtitle": "Easy, shareable tracking",
   "skip": "Skip",
   "introPage": "Intro Page",
   "intro_page_title": "Titles",

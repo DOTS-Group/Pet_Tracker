@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SharedConstants {
+  // Variables
+  static String appVersion = "1.0";
+
   // Color
   // -> Light Theme
   static  Color primaryColorLight = Colors.white.withOpacity(0.95);
@@ -55,7 +58,7 @@ class SharedConstants {
   // -> Imagies
   static const String logoImageRoute = "assets/images/logo.png";
   static const String splashPageBackground =
-      'assets/images/splashpage/splaspagebackground_image.png';
+      'assets/images/splashpage/splashpagebackground_image.png';
   static const String petAddImage = 'assets/images/home/petadd_image.png';
   // -> Icons
   static const String qrCodeFrameIcon = 'assets/icons/qrcodeframe_icon.png';

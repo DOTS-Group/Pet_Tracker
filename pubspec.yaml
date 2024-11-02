@@ -20,6 +20,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   google_maps_flutter: ^2.9.0
   calendar_date_picker2: ^1.1.7
+  google_fonts: ^6.2.1
 
   # -----------------------------------------------------
   # Backend

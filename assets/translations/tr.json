@@ -1,5 +1,8 @@
 {
   "locale": "tr",
+  "splashPage": "Splash Page",
+  "splashPageTitle": "Pet Takip",
+  "splashPageSubtitle": "Kolay, paylaşılaibilir takip",
   "skip": "Atla",
   "introPage": "Intro Page",
   "intro_page_title": "Başlıklar",

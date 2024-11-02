@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
+
+import '../../widgets/intro/loaderbar_widget.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -20,19 +25,28 @@ class SplashPage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _navigateAfterDelay(context);
     });
+    List<String> textList = [
+      context.tr('splashPageTitle'),
+      context.tr('splashPageSubtitle')
+    ];
+    List<String> titleText = textList[0].split(" ");
+    String firstLetter = titleText[0][0];
+    String remainingFirstWord = titleText[0].substring(1);
+    String secondLetter = titleText.length > 1 ? titleText[1][0] : '';
+    String remainingSecondWord =
+        titleText.length > 1 ? titleText[1].substring(1) : '';
 
     return Scaffold(
       backgroundColor: SharedConstants.orangeColor,
       body: SafeArea(
         child: Stack(
           children: [
-            // Arkaplan resmi
+            // Background Image
             Image.asset(
-              fit: BoxFit.cover,
               SharedConstants.splashPageBackground,
               height: height,
             ),
-            // Üstteki yazılar
+            // Title and Subtitle
             Positioned(
               top: height * SharedConstants.paddingLarge * 2,
               child: SizedBox(
@@ -40,79 +54,136 @@ class SplashPage extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      _buildTitle(context, "Pet Takip", true),
-                      SizedBox(
-                          height: height * SharedConstants.paddingGenerall),
-                      _buildTitle(
-                          context, "Kolay, paylaşılabilir takip", false),
+                      // Title
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            // First letter
+                            TextSpan(
+                              text: firstLetter,
+                              style: GoogleFonts.dynaPuff(
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      fontSize: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge!
+                                              .fontSize! *
+                                          2,
+                                      fontWeight: FontWeight.w900,
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                              ),
+                            ),
+                            // First word (remaining)
+                            TextSpan(
+                              text: "$remainingFirstWord ",
+                              style: GoogleFonts.dynaPuff(
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      fontSize: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge!
+                                              .fontSize! *
+                                          1.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                              ),
+                            ),
+
+                            // Second letter
+
+                            TextSpan(
+                              text: secondLetter,
+                              style: GoogleFonts.dynaPuff(
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      fontSize: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge!
+                                              .fontSize! *
+                                          2,
+                                      fontWeight: FontWeight.w900,
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                              ),
+                            ),
+                            // Second word (remaining)
+                            TextSpan(
+                              text: remainingSecondWord,
+                              style: GoogleFonts.dynaPuff(
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      fontSize: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge!
+                                              .fontSize! *
+                                          1.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: SharedConstants.whiteColor,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Subtitle
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: height * SharedConstants.paddingGenerall,
+                          left: width * 0.25,
+                          right: width * 0.25,
+                        ),
+                        child: Text(
+                          "\" ${textList[1]} \"",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.sansitaSwashed(
+                            textStyle: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: SharedConstants.whiteColor,
+                                ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            // Versiyon bilgisi
+
+            // Loader Bar
+            Positioned(
+              bottom: height * SharedConstants.paddingLarge * 1.2,
+              left: width * 0.1,
+              child: const LoaderBarWidget(),
+            ),
+
+            // App Version
             Positioned(
               bottom: height * SharedConstants.paddingMedium,
-              left: width * 0.4,
+              left: width * 0.34,
               child: Text(
-                "Version 1.0",
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.white.withOpacity(0.4),
-                    ),
+                "- Version ${SharedConstants.appVersion} -",
+                style: GoogleFonts.silkscreen(
+                  textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Colors.white.withOpacity(0.5),
+                      ),
+                ),
               ),
-            ),
-            // Yükleme animasyonu
-            Positioned(
-              bottom: height * SharedConstants.paddingLarge * 1.5,
-              left: width * 0.1,
-              child: _buildLoadingBar(width),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildTitle(BuildContext context, String text, bool isMain) {
-    return Text(
-      text,
-      style: isMain
-          ? Theme.of(context).textTheme.displayLarge!.copyWith(
-                color: SharedConstants.whiteColor,
-                fontSize:
-                    Theme.of(context).textTheme.displayLarge!.fontSize! * 1.5,
-              )
-          : Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: SharedConstants.whiteColor,
-              ),
-    );
-  }
-
-  Widget _buildLoadingBar(double width) {
-    return TweenAnimationBuilder(
-      duration: const Duration(seconds: 3),
-      tween: Tween<double>(begin: 0, end: 1),
-      builder: (context, value, child) {
-        return Container(
-          height: 4,
-          width: width * 0.8,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(2),
-          ),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              width: width * 0.8 * value,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
