@@ -139,8 +139,8 @@ class SplashPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                           top: height * SharedConstants.paddingGenerall,
-                          left: width * 0.25,
-                          right: width * 0.25,
+                          left: width * 0.2,
+                          right: width * 0.2,
                         ),
                         child: Text(
                           "\" ${textList[1]} \"",
