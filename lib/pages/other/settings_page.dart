@@ -4,7 +4,9 @@ import 'package:pet_tracker/models/settings/settingspage_model.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 import '../../widgets/appbar_widget.dart';
-import '../../widgets/settings/settingsListtile_widget.dart';
+// import '../../widgets/settings/settingsListtile_widget.dart';
+import '../../widgets/settings/settingslisttile_widget.dart';
+
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
