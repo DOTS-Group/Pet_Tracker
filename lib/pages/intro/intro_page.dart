@@ -84,16 +84,20 @@ class _IntroPageState extends State<IntroPage> {
                   GestureDetector(
                     onTap: () {
                       // 2. sayfaya animasyonlu olarak geçsin
-                      _controller.animateToPage(
-                        2,
-                        duration: const Duration(milliseconds: 700),
-                        curve: Curves.easeInOut,
-                      );
+                      if (currentPage != 2) {
+                        _controller.animateToPage(
+                          2,
+                          duration: const Duration(milliseconds: 700),
+                          curve: Curves.easeInOut,
+                        );
+                      }
                     },
-                    child: Text(
-                      context.tr('skip'),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                    child: currentPage == 2
+                        ? const SizedBox()
+                        : Text(
+                            context.tr('skip'),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                   ),
                 ],
               ),

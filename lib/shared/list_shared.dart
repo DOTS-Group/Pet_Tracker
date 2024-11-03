@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:pet_tracker/models/splash%20intro%20login/loginotherbutton_model.dart';
+import 'package:pet_tracker/shared/constants_shared.dart';
 
 class SharedList {
   // Intro Page
@@ -24,17 +25,19 @@ class SharedList {
   // Login Page
   static List<LoginOtherLoginButton> loginOtherLoginButtonList = [
     LoginOtherLoginButton(
-        text: "Google",
-        icon: FontAwesome.google_brand,
-        backgroundColor: Colors.amber,
-        iconColor: Colors.white,
-        textColor: Colors.black),
+      text: "Google",
+      icon: FontAwesome.google_brand,
+      backgroundColor: SharedConstants.whiteColor,
+      iconColor: SharedConstants.blackColor,
+      textColor: Colors.black,
+    ),
     LoginOtherLoginButton(
-        text: "Instagram",
-        icon: FontAwesome.instagram_brand,
-        backgroundColor: Colors.pink,
-        iconColor: Colors.white,
-        textColor: Colors.white),
+      text: "Instagram",
+      icon: FontAwesome.instagram_brand,
+      backgroundColor: SharedConstants.orangeColor,
+      iconColor: Colors.white,
+      textColor: Colors.white,
+    ),
   ];
 
   // Pattern Page

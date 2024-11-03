@@ -11,7 +11,7 @@ class SharedTheme {
       // Header
       displayLarge: TextStyle(
         fontSize: height * SharedConstants.displayLargeFontSize,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.bold,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,
@@ -47,7 +47,7 @@ class SharedTheme {
       ),
       bodySmall: TextStyle(
         fontSize: height * SharedConstants.bodySmallFontSize,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w400,
         color: isDarkTheme == true
             ? SharedConstants.primaryTextColorDark
             : SharedConstants.primaryTextColorLight,

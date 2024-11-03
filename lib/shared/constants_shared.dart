@@ -6,7 +6,7 @@ class SharedConstants {
 
   // Color
   // -> Light Theme
-  static  Color primaryColorLight = Colors.white.withOpacity(0.95);
+  static Color primaryColorLight = Colors.white.withOpacity(0.95);
   static const Color secondaryColorLight = whiteColor;
   static const Color tertiaryColorLight = blackColor;
   static const Color primaryTextColorLight = blackColor;
@@ -52,7 +52,7 @@ class SharedConstants {
   // -> Body
   static const double bodyLargeFontSize = 0.025;
   static const double bodyMediumFontSize = 0.02;
-  static const double bodySmallFontSize = 0.015;
+  static const double bodySmallFontSize = 0.0175;
 
   // Image Route
   // -> Imagies

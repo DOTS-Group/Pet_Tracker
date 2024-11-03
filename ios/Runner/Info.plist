@@ -50,5 +50,7 @@
 		<string>en</string>
 		<string>tr</string>
 	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>

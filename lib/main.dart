@@ -15,6 +15,8 @@ import 'package:pet_tracker/pages/intro/splash_page.dart';
 import 'package:pet_tracker/pages/other/qrcode_page.dart';
 
 import 'pages/home/home_page.dart';
+import 'pages/intro/register_page.dart';
+import 'pages/intro/renewpassword_page.dart';
 import 'pages/other/foodadd_page.dart';
 import 'pages/other/market_page.dart';
 import 'pages/other/notification_page.dart';
@@ -60,12 +62,14 @@ class MyApp extends StatelessWidget {
       theme: SharedTheme.lightTheme,
       darkTheme: SharedTheme.lightTheme,
       themeMode: ThemeMode.system,
-      home: const SplashPage(),
+      home: const LoginPage(),
       routes: {
         // Intro Pages
         '/splash': (context) => const SplashPage(),
         '/intro': (context) => const IntroPage(),
         '/login': (context) => const LoginPage(),
+        "/register": (context) => const RegisterPage(),
+        "/renewpassword": (context) => const RenewPassword(),
 
         // Home Pages
         '/pattern': (context) => const PatternPage(),
