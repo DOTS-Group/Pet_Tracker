@@ -1,0 +1,21 @@
+Frequently Asked Questions
+1- How do I create an account?
+To create an account, click on the "Sign Up" button on the main page. You can sign up using your email or social media accounts. Follow the instructions to complete the registration process.
+2- How do I reset my password?
+If you forgot your password, click on "Forgot Password" at the login screen. Enter your email address, and we will send you a link to reset your password.
+3- How can I track my pet's health?
+Navigate to the "Pet Health" section, where you can record vaccinations, set reminders, and monitor your pet's health statistics over time.
+4- How do I use the reminder feature?
+To set a reminder, go to the "Reminders" section, click "Add Reminder," choose the date and time, and enter the reminder details. You will receive notifications based on your settings.
+5- How do I report a lost pet?
+Go to the "Report Lost Pet" section, provide your pet’s details and the last known location. Our community members will be notified and can assist in searching.
+6- What is the "Community" feature?
+The "Community" feature allows you to connect with other pet owners, share experiences, and seek advice or recommendations.
+7- Can I use the app without an internet connection?
+Some features of the app may work offline, such as viewing saved information. However, features like maps and social sharing require an internet connection.
+8- How do I update my pet's information?
+Go to the "My Pets" section, select your pet, and click "Edit" to update the details, such as age, weight, or vaccination status.
+9- What should I do if I encounter a technical issue?
+If you experience any problems, please contact our support team through the "Help & Support" section in the app. We’ll be happy to assist you.
+10- How do I delete my account?
+If you wish to delete your account, please go to "Settings," select "Account," and click on "Delete Account." Note that this action is irreversible.

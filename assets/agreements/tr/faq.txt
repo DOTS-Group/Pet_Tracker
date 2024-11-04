@@ -1,0 +1,21 @@
+Sık Sorulan Sorular
+1- Nasıl hesap oluşturabilirim?
+Hesap oluşturmak için ana sayfada "Kayıt Ol" butonuna tıklayın. E-posta veya sosyal medya hesaplarınızı kullanarak kaydolabilirsiniz. Kaydı tamamlamak için adımları izleyin.
+2- Şifremi nasıl sıfırlayabilirim?
+Şifrenizi unuttuysanız, giriş ekranında "Şifremi Unuttum" seçeneğine tıklayın. E-posta adresinizi girin; size şifrenizi sıfırlamak için bir bağlantı göndereceğiz.
+3- Evcil hayvanımın sağlığını nasıl takip edebilirim?
+"Evcil Hayvan Sağlığı" bölümüne giderek aşıları kaydedebilir, hatırlatıcılar oluşturabilir ve sağlık istatistiklerini zaman içinde izleyebilirsiniz.
+4- Hatırlatıcı özelliğini nasıl kullanabilirim?
+Hatırlatıcı eklemek için "Hatırlatıcılar" bölümüne gidin, "Hatırlatıcı Ekle"ye tıklayın, tarih ve saat seçin ve hatırlatıcı detaylarını girin. Ayarlarınıza göre bildirimler alırsınız.
+5- Kayıp evcil hayvan bildirimini nasıl yapabilirim?
+"Kayıp Evcil Hayvan Bildir" bölümüne giderek evcil hayvanınızın bilgilerini ve son görüldüğü yeri paylaşın. Topluluğumuzdaki üyeler bilgilendirilecek ve arama konusunda yardımcı olabilirler.
+6- "Topluluk" özelliği nedir?
+"Topluluk" özelliği, diğer evcil hayvan sahipleriyle bağlantı kurmanızı, deneyimlerinizi paylaşmanızı ve tavsiye ya da öneri almanızı sağlar.
+7- Uygulamayı internet bağlantısı olmadan kullanabilir miyim?
+Uygulamanın bazı özellikleri çevrimdışı çalışabilir, örneğin kaydedilmiş bilgileri görüntülemek. Ancak harita ve sosyal paylaşım gibi özellikler internet bağlantısı gerektirir.
+8- Evcil hayvanımın bilgilerini nasıl güncelleyebilirim?
+"Evcil Hayvanlarım" bölümüne gidin, evcil hayvanınızı seçin ve yaş, kilo veya aşı durumu gibi bilgileri güncellemek için "Düzenle"ye tıklayın.
+9- Bir teknik sorunla karşılaşırsam ne yapmalıyım?
+Bir sorunla karşılaşırsanız, uygulamadaki "Yardım & Destek" bölümünden destek ekibimizle iletişime geçin. Size yardımcı olmaktan memnuniyet duyarız.
+10- Hesabımı nasıl silebilirim?
+Hesabınızı silmek isterseniz, "Ayarlar" bölümüne gidin, "Hesap" seçeneğine tıklayın ve "Hesabı Sil"e tıklayın. Bu işlemin geri alınamayacağını unutmayın.

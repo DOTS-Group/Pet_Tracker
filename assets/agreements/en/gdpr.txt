@@ -1,0 +1,29 @@
+PERSONAL DATA PROTECTION POLICY
+At [Company Name], we take the privacy and protection of our users' personal data seriously. This policy aims to inform you about how we collect, process, and protect your personal information.
+1. Personal Data Collected
+While using our application, the following personal data may be collected and processed:
+Your name and surname
+Your email address
+Your phone number
+User activity and preferences
+In-app interactions
+2. Purposes of Processing Personal Data
+Your personal data may be processed for the following purposes:
+Providing and improving our services
+Personalizing user experience
+Facilitating communication and user support
+Complying with legal obligations
+3. Data Sharing
+Your personal data will not be shared with third parties, except where legally required. However, data may be shared with business partners or legal authorities to provide our services.
+4. Data Security
+We implement the necessary technical and administrative measures to ensure the security of your personal data. Our security measures are continuously updated to prevent unauthorized access, data loss, or misuse.
+5. Data Retention Period
+Your personal data will be stored for as long as necessary to fulfill the purposes of processing. Once the retention period expires or the purpose of processing ends, your data will be deleted or anonymized.
+6. User Rights
+As a user, you have the following rights under data protection laws:
+To know whether your personal data is being processed
+To request the correction or deletion of your data
+To object to data processing
+To request the transfer of your data
+7. Contact
+For questions or requests related to the protection of your personal data, please contact us at [Email Address or Contact Information].

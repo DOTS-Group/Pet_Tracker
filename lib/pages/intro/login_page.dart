@@ -292,6 +292,8 @@ class LoginPage extends StatelessWidget {
                                         padding: EdgeInsets.symmetric(
                                           horizontal: width *
                                               SharedConstants.paddingGenerall,
+                                          vertical: height *
+                                              SharedConstants.paddingGenerall,
                                         ),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -320,18 +322,44 @@ class LoginPage extends StatelessWidget {
                                                 //       .textTheme
                                                 //       .bodyMedium,
                                                 // ),
-                                                // child: Consumer(builder: (context, ref, child) {
-                                                //   final String language = ref.watch(languageProvider);
-                                                //   final String mainFilePath= 'assets/aggrements/$language}';
-                                                //   final String filePath = i == 0 ? 'faq.txt' : 'gdpr.txt';
-                                                //   String content = await rootBundle.loadString(filePath);
-                                                //   return Text(
-                                                //    content,
-                                                //     style: Theme.of(context)
-                                                //         .textTheme
-                                                //         .bodyMedium,
-                                                //   );
-                                                // },),
+                                                child: Consumer(
+                                                  builder:
+                                                      (context, ref, child) {
+                                                    final String language =
+                                                        ref.watch(
+                                                            languageProvider);
+                                                    String filePath = i == 0
+                                                        ? "assets/agreements/$language/faq.txt"
+                                                        : "assets/agreements/$language/gdpr.txt";
+
+                                                    // FutureBuilder to handle the async loading of file content
+                                                    return FutureBuilder(
+                                                      future: rootBundle
+                                                          .loadString(filePath),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        if (snapshot.hasData) {
+                                                          return Text(
+                                                            snapshot.data
+                                                                .toString(),
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyMedium!
+                                                                .copyWith(
+                                                                    color: Colors
+                                                                        .black),
+                                                          );
+                                                        } else {
+                                                          return const Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          );
+                                                        }
+                                                      },
+                                                    );
+                                                  },
+                                                ),
                                               ),
                                             ),
                                           ],

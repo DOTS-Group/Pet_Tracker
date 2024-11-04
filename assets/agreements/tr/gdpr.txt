@@ -1,0 +1,29 @@
+KİŞİSEL VERİLERİN KORUNMASI POLİTİKASI
+Biz, [Şirket Adı], kullanıcılarımızın gizliliğine ve kişisel verilerinin korunmasına büyük önem veriyoruz. Kişisel verilerinizin toplanması, işlenmesi ve korunması konusundaki uygulamalarımız hakkında sizi bilgilendirmek amacıyla bu politikayı oluşturduk.
+1. Toplanan Kişisel Veriler
+Uygulamamızı kullanırken aşağıdaki kişisel veriler toplanabilir ve işlenebilir:
+Adınız ve soyadınız
+E-posta adresiniz
+Telefon numaranız
+Kullanıcı hareketleri ve tercihleriniz
+Uygulama içi etkileşimler
+2. Kişisel Verilerin İşlenme Amaçları
+Kişisel verileriniz şu amaçlarla işlenebilir:
+Hizmetlerin sunulması ve iyileştirilmesi
+Kullanıcı deneyiminin kişiselleştirilmesi
+İletişim sağlanması ve kullanıcı desteği
+Yasal yükümlülüklerin yerine getirilmesi
+3. Verilerin Paylaşımı
+Kişisel verileriniz, yasal zorunluluklar dışında üçüncü taraflarla paylaşılmayacaktır. Ancak, hizmet sağlamak amacıyla iş ortakları veya yasal otoritelerle paylaşım yapılabilir.
+4. Veri Güvenliği
+Kişisel verilerinizin güvenliğini sağlamak için gerekli teknik ve idari tedbirler alınmaktadır. Yetkisiz erişim, veri kaybı veya kötüye kullanımı önlemek için sürekli olarak güvenlik önlemlerimizi güncelliyoruz.
+5. Veri Saklama Süresi
+Kişisel verileriniz, işlenme amacının gerektirdiği süre boyunca saklanır. Yasal saklama süreleri sona erdiğinde, verileriniz silinir veya anonim hale getirilir.
+6. Kullanıcı Hakları
+Kullanıcılar olarak, KVKK kapsamında aşağıdaki haklara sahipsiniz:
+Kişisel verilerinizin işlenip işlenmediğini öğrenme
+Verilerinizin düzeltilmesini veya silinmesini talep etme
+İşlemeye itiraz etme
+Veri aktarımını talep etme
+7. İletişim
+Kişisel verilerinizin korunması ile ilgili sorularınız veya talepleriniz için bizimle [E-posta Adresi veya İletişim Bilgileri] üzerinden iletişime geçebilirsiniz.
