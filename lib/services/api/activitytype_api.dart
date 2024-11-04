@@ -1,5 +1,5 @@
-import '../../models/api/activitytype_model.dart';
-import '../../models/api/token_model.dart';
+import '../../api/activitytype_model.dart';
+import '../../api/token_model.dart';
 
 class ActivitytypeApi {
   // ? ----------------------------------------------------------------------------------------------------------

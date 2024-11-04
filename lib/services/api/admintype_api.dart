@@ -1,5 +1,5 @@
-import '../../models/api/admintype_model.dart';
-import '../../models/api/token_model.dart';
+import '../../api/admintype_model.dart';
+import '../../api/token_model.dart';
 
 class AdmintypeApi {
   // ! ----------------------------------------------------------------------------------------------------------

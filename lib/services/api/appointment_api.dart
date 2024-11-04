@@ -1,5 +1,5 @@
-import '../../models/api/appointment_model.dart';
-import '../../models/api/token_model.dart';
+import '../../api/appointment_model.dart';
+import '../../api/token_model.dart';
 
 class AppointmentApi {
   // ? ----------------------------------------------------------------------------------------------------------

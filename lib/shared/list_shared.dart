@@ -39,6 +39,10 @@ class SharedList {
       textColor: Colors.white,
     ),
   ];
+  static List<IconData> loginPageTextFormIconList = [
+    Icons.email,
+    Icons.lock,
+  ];
 
   // Pattern Page
   static List<IconData> patternPageIconList = [

@@ -1,6 +1,6 @@
-import 'package:pet_tracker/models/api/token_model.dart';
+import 'package:pet_tracker/api/token_model.dart';
 
-import '../../models/api/user_model.dart';
+import '../../api/user_model.dart';
 
 class UserApi {
   // ? ----------------------------------------------------------------------------------------------------------
