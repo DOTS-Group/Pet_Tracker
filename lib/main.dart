@@ -17,13 +17,19 @@ import 'package:pet_tracker/pages/other/qrcode_page.dart';
 import 'pages/home/home_page.dart';
 import 'pages/intro/register_page.dart';
 import 'pages/intro/renewpassword_page.dart';
+import 'pages/other/activityadd_page.dart';
 import 'pages/other/foodadd_page.dart';
 import 'pages/other/market_page.dart';
 import 'pages/other/notification_page.dart';
 import 'pages/other/petdetails_page.dart';
+import 'pages/other/pettrackingpremium_page.dart';
 import 'pages/other/reminder_page.dart';
 import 'pages/other/settings_page.dart';
+import 'pages/other/socializationassitants_page.dart';
+import 'pages/other/traningasssistants_page.dart';
 import 'pages/other/vaccineadd_page.dart';
+import 'pages/other/walkingassistants_page.dart';
+import 'pages/other/wallet_page.dart';
 import 'shared/theme_shared.dart';
 
 void main() async {
@@ -86,8 +92,15 @@ class MyApp extends StatelessWidget {
         '/reminder': (context) => const ReminderPage(),
         "/vaccineadd": (context) => const VaccineAddPage(),
         "/market": (context) => const MarketPage(),
-        "/foodadd": (context) => const FoodAddPage(),
+        "/foodTracking": (context) => const FoodTrackingPage(),
         "/petdetails": (context) => const PetDetailsPage(),
+        "/wallet": (context) => const WalletPage(),
+        "/walkingassistants": (context) => const WalkingAssistantsPage(),
+        "/traningAssistants": (context) => const TraningAssistantsPage(),
+        "/socializationAssistants": (context) =>
+            const SocializationAssistantsPage(),
+        "/pettrackingPremium": (context) => const PetTrackingPremiumPage(),
+        "/activityadd": (context) => const ActicityAddPage(),
       },
     );
   }

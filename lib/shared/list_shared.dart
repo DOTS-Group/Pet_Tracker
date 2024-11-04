@@ -52,4 +52,13 @@ class SharedList {
     Icons.calendar_month,
     Icons.account_circle_rounded,
   ];
+
+  // Home Page
+  static List<String> homepageStoriesImageRouteList = [
+    "assets/images/home/homepage/stories1.png",
+    "assets/images/home/homepage/stories2.png",
+    "assets/images/home/homepage/stories3.png",
+    "assets/images/home/homepage/stories4.png",
+  ];
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PetDetailsPage extends StatelessWidget {
-  const PetDetailsPage({super.key});
+class TraningAssistantsPage extends StatelessWidget {
+  const TraningAssistantsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class PetDetailsPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Text("Pet Details Page"),
+            Text("Traning Assistants Page"),
           ],
         ),
       ),

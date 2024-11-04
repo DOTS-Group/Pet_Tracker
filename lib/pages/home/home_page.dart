@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 import '../../controllers/home/homepage_controller.dart';
+import '../../models/homepage/minicard_model.dart';
 import '../../shared/provider_shared.dart';
 import '../../widgets/home/home_page/acticityaddcard_widget.dart';
 import '../../widgets/home/home_page/appbar_widget.dart';
@@ -23,12 +25,30 @@ class HomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     bool isPet = true;
     List<List<String>> miniCardTitleList = [
-      ["Aşı Takip", "3 Gün"],
-      ["Yürüyüş", "00.00"],
+      [context.tr("vaccineTracking"), "3 ${context.tr("dayUnit")}"],
+      [context.tr("walking"), "00.00"],
     ];
     List<List<String>> buttonText = [
-      ["Daha Fazla"],
-      ["Başlat", "Bitir"]
+      [context.tr("more")],
+      [context.tr("start"), context.tr("stop")],
+    ];
+    List<MiniCardModel> miniCardList = [
+      MiniCardModel(
+        title: context.tr("kilogram"),
+        subtitle: "5 ${context.tr("kilogramUnit")}",
+        unit: context.tr("kilogramUnit"),
+        route: "/petdetails",
+        value: 10,
+        icon: Icons.scale,
+      ),
+      MiniCardModel(
+        title: context.tr("spendMoney"),
+        subtitle: "100 ${context.tr("turkishLiraUnit")}",
+        unit: context.tr("turkishLiraUnit"),
+        route: "/wallet",
+        value: 100,
+        icon: Icons.savings_rounded,
+      ),
     ];
     return isPet == false
         ? Padding(
@@ -70,8 +90,12 @@ class HomePage extends StatelessWidget {
                                       width: width *
                                           SharedConstants.paddingGenerall,
                                     )
-                                  : const Expanded(
-                                      child: HomePageMiniCardWidget(),
+                                  : Expanded(
+                                      child: HomePageMiniCardWidget(
+                                        model: i == 0
+                                            ? miniCardList[0]
+                                            : miniCardList[1],
+                                      ),
                                     ),
                           ],
                         ),
@@ -80,6 +104,7 @@ class HomePage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: height * SharedConstants.paddingSmall,
+                          horizontal: width * SharedConstants.paddingGenerall,
                         ),
                         child: const FoodTracakingCardWidget(),
                       ),

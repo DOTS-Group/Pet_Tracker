@@ -22,7 +22,7 @@ class SharedConstants {
   // -> Other Color Palette
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color blackColor = Color(0xFF222222);
-  static const Color greyColor = Color(0xFFD9D9D9);
+  static const Color greyColor = Color(0xFFece9e9);
   static const Color purpleColor = Color(0xFF5E17EB);
   static const Color redColor = Color(0xFFFF3131);
   static const Color blueColor = Color(0xFF63B4FF);

@@ -52,7 +52,9 @@ flutter:
     - assets/images/splashpage/
     - assets/images/intropage/
     - assets/images/home/
+    - assets/images/home/homepage/
     - assets/icons/
+    - assets/icons/home/homepage/
     - assets/translations/
     - assets/agreements/en/
     - assets/agreements/tr/
