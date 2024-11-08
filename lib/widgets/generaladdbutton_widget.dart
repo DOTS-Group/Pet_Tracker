@@ -32,7 +32,7 @@ class GeneralAddButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             vertical: height * SharedConstants.paddingGenerall,
           ),
-          child: Icon(
+          child: const Icon(
             Icons.add,
           ),
         ),

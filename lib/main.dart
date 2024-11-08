@@ -18,6 +18,7 @@ import 'pages/home/home_page.dart';
 import 'pages/intro/register_page.dart';
 import 'pages/intro/renewpassword_page.dart';
 import 'pages/other/activityadd_page.dart';
+import 'pages/other/categoriesdetail_page.dart';
 import 'pages/other/foodadd_page.dart';
 import 'pages/other/market_page.dart';
 import 'pages/other/notification_page.dart';
@@ -95,12 +96,13 @@ class MyApp extends StatelessWidget {
         "/foodTracking": (context) => const FoodTrackingPage(),
         "/petdetails": (context) => const PetDetailsPage(),
         "/wallet": (context) => const WalletPage(),
-        "/walkingassistants": (context) => const WalkingAssistantsPage(),
+        "/walkingAssistants": (context) => const WalkingAssistantsPage(),
         "/traningAssistants": (context) => const TraningAssistantsPage(),
         "/socializationAssistants": (context) =>
             const SocializationAssistantsPage(),
         "/pettrackingPremium": (context) => const PetTrackingPremiumPage(),
         "/activityadd": (context) => const ActicityAddPage(),
+        "/categoiresDetail": (context) => const CategoriesDetailPage(),
       },
     );
   }

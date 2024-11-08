@@ -34,6 +34,10 @@ class HomepageController {
     }
   }
 
+  void getPetDetails(){
+    // Get pet details from the database
+  }
+
 }
 
 // A StateNotifier to handle the timer logic

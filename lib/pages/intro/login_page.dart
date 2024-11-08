@@ -1,11 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_tracker/models/splash%20intro%20login/form_model.dart';
+
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/shared/list_shared.dart';
 
-import '../../shared/provider_shared.dart';
 import '../../widgets/generalbutton_widget.dart';
 import '../../widgets/intro/login/faqgdprbuttons_widget.dart';
 import '../../widgets/intro/login/loginormethodbutton_widget.dart';
@@ -20,6 +19,20 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    List<LoginFormModel> modelList = [
+      LoginFormModel(
+        leadingIcon: SharedList.loginPageTextFormIconList[0],
+        hintText: context.tr('emailExample'),
+        isPasswordForm: false,
+        controller: TextEditingController(),
+      ),
+      LoginFormModel(
+        leadingIcon: SharedList.loginPageTextFormIconList[1],
+        hintText: context.tr('passwordExample'),
+        isPasswordForm: true,
+        controller: TextEditingController(),
+      ),
+    ];
 
     return Scaffold(
       body: SafeArea(
@@ -102,11 +115,7 @@ class LoginPage extends StatelessWidget {
                               : height * SharedConstants.paddingGenerall,
                         ),
                         child: TextFormWidget(
-                          leadingIcon: SharedList.loginPageTextFormIconList[i],
-                          hintText: i == 0
-                              ? context.tr('emailExample')
-                              : context.tr('passwordExample'),
-                          isPasswordForm: i == 0 ? false : true,
+                          model: modelList[i],
                         ),
                       ),
                   ],
@@ -127,18 +136,23 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               // Register
-              RichText(
-                text: TextSpan(
-                  text: context.tr('dontHaveAccount'),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  children: [
-                    TextSpan(
-                      text: " ${context.tr('register')}",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: SharedConstants.orangeColor,
-                          ),
-                    ),
-                  ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, "/register");
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: context.tr('dontHaveAccount'),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    children: [
+                      TextSpan(
+                        text: " ${context.tr('register')}",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: SharedConstants.orangeColor,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               // Privacy Policy

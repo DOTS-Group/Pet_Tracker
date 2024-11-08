@@ -10,4 +10,6 @@ final introPageIndexProvider =
 final profilePageIndexProvider =
     StateProvider<int>((ref) => 0); // Page İndex Provider
 final activityProvider = StateProvider<String>((ref) => ""); // Activity Provider
-final isCounterStarted = StateProvider<bool>((ref) => false);
+final isCounterStarted = StateProvider<bool>((ref) => false); // Home Page Counter Provider
+final marketSelectedPetCategoryIndexProvider= StateProvider<int>((ref) => 0); // Market Page Selected Category Provider
+final marketSelectedProductCategoryIndexProvider= StateProvider<int>((ref) => 0); // Market Page Selected Category Provider

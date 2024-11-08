@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../models/splash intro login/form_model.dart';
 import '../../../shared/constants_shared.dart';
 import '../../../shared/provider_shared.dart';
 
 class TextFormWidget extends StatelessWidget {
-  final IconData? leadingIcon, trailingIcon;
-  final String hintText;
-  final bool isPasswordForm;
+  final LoginFormModel model;
   const TextFormWidget({
-    required this.leadingIcon,
-    required this.hintText,
-    required this.isPasswordForm,
-    this.trailingIcon,
+    required this.model,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Row(
       children: [
         Icon(
-          leadingIcon,
+          model.leadingIcon,
           color: SharedConstants.orangeColor,
         ),
         Expanded(
@@ -36,9 +32,9 @@ class TextFormWidget extends StatelessWidget {
               final bool isPasswordVisible = ref.watch(isPasswordVisibile);
               return TextField(
                 cursorColor: SharedConstants.orangeColor,
-                obscureText: isPasswordForm == true ? isPasswordVisible : false,
+                obscureText: model.isPasswordForm == true ? isPasswordVisible : false,
                 decoration: InputDecoration(
-                  hintText: hintText,
+                  hintText: model.hintText,
                   hintStyle: Theme.of(context).textTheme.bodyMedium,
                   enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -52,7 +48,7 @@ class TextFormWidget extends StatelessWidget {
             }),
           ),
         ),
-        isPasswordForm == false
+        model.isPasswordForm == false
             ? SizedBox(
                 width: Theme.of(context).iconTheme.size,
               )

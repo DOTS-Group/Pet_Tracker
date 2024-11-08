@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_tracker/main.dart';
 
 import '../../../models/homepage/assistans_model.dart';
 import '../../../shared/constants_shared.dart';
@@ -17,7 +16,7 @@ class HomePageStroriesWidget extends StatelessWidget {
       AssistansModel(
         imageRoute: SharedList.homepageStoriesImageRouteList[0],
         title: context.tr("homePageTitle1"),
-        route: "/walkingassistants",
+        route: "/walkingAssistants",
       ),
       AssistansModel(
         imageRoute: SharedList.homepageStoriesImageRouteList[1],

@@ -43,6 +43,13 @@ class SharedList {
     Icons.email,
     Icons.lock,
   ];
+  static List<IconData> registerPageTextFormIconList = [
+    Icons.person_pin,
+    Icons.assignment_ind,
+    Icons.email,
+    Icons.lock,
+    Icons.lock_reset_rounded,
+  ];
 
   // Pattern Page
   static List<IconData> patternPageIconList = [
@@ -59,6 +66,18 @@ class SharedList {
     "assets/images/home/homepage/stories2.png",
     "assets/images/home/homepage/stories3.png",
     "assets/images/home/homepage/stories4.png",
+  ];
+
+  // Market Page
+  static List<String> marketPageCategoryImageList = [
+    "assets/images/other/market/dog.png",
+    "assets/images/other/market/cat.png",
+    "assets/images/other/market/bird.png",
+    "assets/images/other/market/fish.png",
+    "assets/images/other/market/hamster.png",
+    "assets/images/other/market/rabbit.png",
+    "assets/images/other/market/turtle.png",
+
   ];
 
 }
