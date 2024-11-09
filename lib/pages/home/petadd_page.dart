@@ -1,9 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
+import 'package:pet_tracker/widgets/other/petadd/appbar_widget.dart';
+import 'package:pet_tracker/widgets/textinputcontainer_widget.dart';
 
-import '../../models/petaddpage/pettype_model.dart';
-import '../../widgets/petadd/petaddselectpettype_widget.dart';
+import '../../widgets/other/petadd/colorselect_widget.dart';
+import '../../widgets/other/petadd/dateofbirth_widget.dart';
+import '../../widgets/other/petadd/foodtypeselect_widget.dart';
+import '../../widgets/other/petadd/selectedsex_widget.dart';
+import '../../widgets/other/petadd/weightinput_widget.dart';
+import '../../widgets/other/petcategories_widget.dart';
 
 class PetaddPage extends StatelessWidget {
   const PetaddPage({super.key});
@@ -12,297 +20,88 @@ class PetaddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    List<String> petCateoiesList = [
+      context.tr("dog"),
+      context.tr("cat"),
+      context.tr("bird"),
+      context.tr("fish"),
+      context.tr("hamster"),
+      context.tr("rabbit"),
+      context.tr("turtle"),
+    ];
+
+    List<TextEditingController> controllers = [
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+    ];
 
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // App Bar
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: width * SharedConstants.paddingGenerall,
                 vertical: height * SharedConstants.paddingGenerall,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                    ),
-                  ),
-                  const Text(
-                    "Dost Ekle",
-                  ),
-                  SizedBox(
-                    width: Theme.of(context).iconTheme.size,
-                  )
-                ],
-              ),
+              child: const AppBarWidget(),
             ),
-            for (int i = 0; i < 2; i++)
-              Padding(
-                padding: EdgeInsets.only(
-                  top: i == 0 ? 0 : height * SharedConstants.paddingGenerall,
-                ),
-                child: PetAddSelectPetTypeWidget(
-                  title: "Tür Seçiniz",
-                  petTypeModelList: [
-                    PetTypeAddModel(
-                        petType: "Kedi", petTypeImage: "assets/images/cat.png"),
-                    PetTypeAddModel(
-                        petType: "Köpek",
-                        petTypeImage: "assets/images/dog.png"),
-                    PetTypeAddModel(
-                        petType: "Kuş", petTypeImage: "assets/images/bird.png"),
-                  ],
-                ),
-              ),
-            // Color Input
+            // Pet Categories
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
+              padding: EdgeInsets.only(
+                left: width * SharedConstants.paddingGenerall,
+                bottom: height * SharedConstants.paddingSmall,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Renk",
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: height * SharedConstants.paddingSmall,
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: height * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          height * SharedConstants.paddingGenerall,
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Renk giriniz",
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              child: Text(
+                "${context.tr("selectPetCategory")} :",
               ),
             ),
+            PetCategoriesWidget(petCateoiesList: petCateoiesList),
+            // Color Input
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: width * SharedConstants.paddingGenerall,
                 vertical: height * SharedConstants.paddingSmall,
               ),
-              // Selected sex
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: height * SharedConstants.paddingSmall,
-                    ),
-                    child: const Text("Cinsiyet"),
-                  ),
-                  Row(
-                    children: [
-                      for (int i = 0; i < 2; i++)
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: i == 0
-                                ? 0
-                                : width * SharedConstants.paddingGenerall,
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(
-                                height * SharedConstants.paddingGenerall,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: height * SharedConstants.paddingSmall,
-                                horizontal:
-                                    height * SharedConstants.paddingGenerall,
-                              ),
-                              child: Row(
-                                children: [
-                                  const Text("Erkek"),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: width *
-                                          SharedConstants.paddingGenerall,
-                                    ),
-                                    child: const Icon(
-                                      Icons.abc,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                    ],
-                  )
-                ],
+              child: ColorSelectWidget(controller: controllers[0]),
+            ),
+            // Selected sex
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: width * SharedConstants.paddingGenerall,
               ),
+              child: const SelectedSexWidget(),
             ),
             // Date of birth with date picker
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: width * SharedConstants.paddingGenerall,
+                vertical: height * SharedConstants.paddingSmall,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Doğum Tarihi",
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: height * SharedConstants.paddingSmall,
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: height * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          height * SharedConstants.paddingGenerall,
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Doğum tarihi seçiniz",
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: DateofBirthWidtget(controllers: controllers[1]),
             ),
             // Weight Input with unit
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: width * SharedConstants.paddingGenerall,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Ağırlık",
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: height * SharedConstants.paddingSmall,
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: height * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          height * SharedConstants.paddingGenerall,
-                        ),
-                        child: Row(
-                          children: [
-                            const Expanded(
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Ağırlık giriniz",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: width * SharedConstants.paddingGenerall,
-                              ),
-                              child: const Text("kg"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: const WeightInputWidget(),
             ),
             // Food type
             Padding(
               padding: EdgeInsets.symmetric(
                 vertical: height * SharedConstants.paddingGenerall,
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: width * SharedConstants.paddingGenerall,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Yiyecek Türü",
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(
-                          top: height * SharedConstants.paddingSmall,
-                        ),
-                        child: Row(
-                          children: [
-                            for (int i = 0; i < 3; i++)
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: i == 0
-                                        ? 0
-                                        : width *
-                                            SharedConstants.paddingGenerall),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber,
-                                    borderRadius: BorderRadius.circular(
-                                      height * SharedConstants.paddingGenerall,
-                                    ),
-                                    border: Border.all(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical:
-                                          height * SharedConstants.paddingSmall,
-                                      horizontal: height *
-                                          SharedConstants.paddingGenerall,
-                                    ),
-                                    child: const Text(
-                                      "data",
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+              child: const FoodTypeSelectWidget(),
             ),
             // Microchip Number
             Padding(
@@ -360,3 +159,4 @@ class PetaddPage extends StatelessWidget {
     );
   }
 }
+

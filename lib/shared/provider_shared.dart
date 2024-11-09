@@ -13,3 +13,8 @@ final activityProvider = StateProvider<String>((ref) => ""); // Activity Provide
 final isCounterStarted = StateProvider<bool>((ref) => false); // Home Page Counter Provider
 final marketSelectedPetCategoryIndexProvider= StateProvider<int>((ref) => 0); // Market Page Selected Category Provider
 final marketSelectedProductCategoryIndexProvider= StateProvider<int>((ref) => 0); // Market Page Selected Category Provider
+
+// Pet Add Page Providers
+final petSexSelectedProvider = StateProvider<int>((ref) => 0); // Pet sex Provider
+final petWeightUnitProvider = StateProvider<String>((ref) => "kg"); // Pet weight unit Provider
+final petFoodTypeIndexProvider = StateProvider<int>((ref) => 0); // Pet food type Provider
