@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 import '../../controllers/home/homepage_controller.dart';
-import '../../models/homepage/minicard_model.dart';
+import '../../models/home/homepage/minicard_model.dart';
 import '../../shared/provider_shared.dart';
 import '../../widgets/home/home_page/acticityaddcard_widget.dart';
 import '../../widgets/home/home_page/appbar_widget.dart';

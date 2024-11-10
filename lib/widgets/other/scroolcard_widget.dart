@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../models/scroolcard_model.dart';
 import '../../shared/constants_shared.dart';
-import '../../shared/list_shared.dart';
 import '../../shared/provider_shared.dart';
 
-class PetCategoriesWidget extends StatelessWidget {
-  final List<String> petCateoiesList;
-
-  const PetCategoriesWidget({
+class ScroolCardWidget extends StatelessWidget {
+  final List<ScroolCardModel> scroollList;
+  const ScroolCardWidget({
+    required this.scroollList,
     super.key,
-    required this.petCateoiesList,
+
   });
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +22,19 @@ class PetCategoriesWidget extends StatelessWidget {
       width: width,
       child: Consumer(
         builder: (context, ref, child) {
-          int selectedIndex =
-              ref.watch(marketSelectedPetCategoryIndexProvider);
+          int selectedIndex = ref.watch(scroolCardWidgetSelectedItem);
           return ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount:
-                SharedList.marketPageCategoryImageList.length,
+            itemCount: scroollList.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal:
-                      width * SharedConstants.paddingGenerall,
+                  horizontal: width * SharedConstants.paddingGenerall,
                 ),
                 child: GestureDetector(
                   onTap: () {
                     ref
-                        .read(marketSelectedPetCategoryIndexProvider
-                            .notifier)
+                        .read(scroolCardWidgetSelectedItem.notifier)
                         .update((value) => index);
                   },
                   child: Container(
@@ -55,29 +49,23 @@ class PetCategoriesWidget extends StatelessWidget {
                       ),
                     ),
                     child: Column(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Image.asset(
-                          SharedList
-                              .marketPageCategoryImageList[index],
+                          scroollList[index].imageRoute,
                           height: height * 0.08,
                           color: selectedIndex == index
                               ? SharedConstants.whiteColor
                               : SharedConstants.blackColor,
                         ),
                         Text(
-                          petCateoiesList[index],
+                          scroollList[index].text,
                           style: selectedIndex == index
                               ? Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
-                                  .copyWith(
-                                      color: SharedConstants
-                                          .whiteColor)
-                              : Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium,
+                                  .copyWith(color: SharedConstants.whiteColor)
+                              : Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),

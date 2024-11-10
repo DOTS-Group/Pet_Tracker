@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_tracker/models/settings/settingspage_model.dart';
+import 'package:pet_tracker/models/home/settings/settingspage_model.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 import '../../widgets/appbar_widget.dart';

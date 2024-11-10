@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/homepage/minicard_model.dart';
+import '../../../models/home/homepage/minicard_model.dart';
 import '../../../shared/constants_shared.dart';
 
 class HomePageMiniCardWidget extends StatelessWidget {

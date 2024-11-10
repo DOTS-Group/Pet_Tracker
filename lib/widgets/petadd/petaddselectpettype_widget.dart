@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/petaddpage/pettype_model.dart';
+import '../../models/home/petaddpage/pettype_model.dart';
 import '../../shared/constants_shared.dart';
 
 class PetAddSelectPetTypeWidget extends StatelessWidget {

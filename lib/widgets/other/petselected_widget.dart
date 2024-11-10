@@ -11,6 +11,15 @@ class PetSelectedDropdownButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    List<DropdownMenuItem<String>> petList = [
+      const DropdownMenuItem(
+        value: "Poyraz",
+        child: PetSelectedRowWidget(
+          petName: "Poyraz",
+          petImageRoute: "https://picsum.photos/200/300",
+        ),
+      ),
+    ];
     return Container(
       // width: width * 0.4,
       decoration: BoxDecoration(
@@ -28,32 +37,52 @@ class PetSelectedDropdownButtonWidget extends StatelessWidget {
           padding: EdgeInsets.zero,
           underline: const SizedBox(),
           value: "Poyraz",
-          items: [
-            DropdownMenuItem(
-              value: "Poyraz",
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircleAvatar(
-                    radius: height * SharedConstants.paddingGenerall,
-                    backgroundColor: Colors.amber,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: width * SharedConstants.paddingGenerall,
-                    ),
-                    child: Text(
-                      "Poyraz",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          items: petList,
           onChanged: (value) {},
         ),
       ),
+    );
+  }
+}
+
+class PetSelectedRowWidget extends StatelessWidget {
+  final String petName, petImageRoute;
+  const PetSelectedRowWidget({
+    required this.petName,
+    required this.petImageRoute,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: height * 0.05,
+          width: height * 0.05,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(
+              height * SharedConstants.paddingLarge,
+            ),
+            child: Image.network(
+              petImageRoute,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: width * SharedConstants.paddingGenerall,
+          ),
+          child: Text(
+            petName,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+      ],
     );
   }
 }

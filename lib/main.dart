@@ -84,6 +84,7 @@ class MyApp extends StatelessWidget {
         '/map': (context) => const MapPage(),
         '/calendar': (context) => const CalendarPage(),
         '/profile': (context) => const ProfilePage(),
+        "/activityadd": (context) => const ActicityAddPage(),
 
         // Other Pages
         '/petadd': (context) => const PetaddPage(),
@@ -101,7 +102,6 @@ class MyApp extends StatelessWidget {
         "/socializationAssistants": (context) =>
             const SocializationAssistantsPage(),
         "/pettrackingPremium": (context) => const PetTrackingPremiumPage(),
-        "/activityadd": (context) => const ActicityAddPage(),
         "/categoiresDetail": (context) => const CategoriesDetailPage(),
       },
     );

@@ -18,3 +18,6 @@ final marketSelectedProductCategoryIndexProvider= StateProvider<int>((ref) => 0)
 final petSexSelectedProvider = StateProvider<int>((ref) => 0); // Pet sex Provider
 final petWeightUnitProvider = StateProvider<String>((ref) => "kg"); // Pet weight unit Provider
 final petFoodTypeIndexProvider = StateProvider<int>((ref) => 0); // Pet food type Provider
+
+// Other
+final scroolCardWidgetSelectedItem = StateProvider<int>((ref) => 0); // Pet Add Page Provider

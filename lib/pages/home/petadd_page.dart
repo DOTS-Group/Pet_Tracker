@@ -1,16 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
 import 'package:pet_tracker/shared/constants_shared.dart';
+import 'package:pet_tracker/shared/list_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 import 'package:pet_tracker/widgets/other/petadd/appbar_widget.dart';
 
+import '../../models/scroolcard_model.dart';
 import '../../widgets/other/petadd/colorselect_widget.dart';
 import '../../widgets/other/petadd/dateofbirth_widget.dart';
 import '../../widgets/other/petadd/foodtypeselect_widget.dart';
 import '../../widgets/other/petadd/microchipinpu_widget.dart';
 import '../../widgets/other/petadd/selectedsex_widget.dart';
 import '../../widgets/other/petadd/weightinput_widget.dart';
-import '../../widgets/other/petcategories_widget.dart';
+import '../../widgets/other/scroolcard_widget.dart';
 
 class PetaddPage extends StatelessWidget {
   const PetaddPage({super.key});
@@ -19,7 +22,7 @@ class PetaddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    List<String> petCateoiesList = [
+    List<String> petList = [
       context.tr("dog"),
       context.tr("cat"),
       context.tr("bird"),
@@ -28,6 +31,14 @@ class PetaddPage extends StatelessWidget {
       context.tr("rabbit"),
       context.tr("turtle"),
     ];
+    List<ScroolCardModel> petCategoriesList = [
+      for(int i=0;i<petList.length;i++)
+      ScroolCardModel(
+        text: petList[i],
+        imageRoute: SharedList.petList[i],
+      ),
+    ];
+
 
     List<TextEditingController> controllers = [
       TextEditingController(),
@@ -50,7 +61,9 @@ class PetaddPage extends StatelessWidget {
           Padding(
             padding:
                 EdgeInsets.only(top: height * SharedConstants.paddingSmall),
-            child: PetCategoriesWidget(petCateoiesList: petCateoiesList),
+            child: ScroolCardWidget(
+              scroollList: petCategoriesList,
+            ),
           ),
         ],
       ),

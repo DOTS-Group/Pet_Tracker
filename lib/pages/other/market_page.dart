@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
+import 'package:pet_tracker/widgets/other/scroolcard_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../models/scroolcard_model.dart';
+import '../../shared/list_shared.dart';
 import '../../shared/provider_shared.dart';
-import '../../widgets/other/petcategories_widget.dart';
 
 class MarketPage extends StatelessWidget {
   const MarketPage({super.key});
@@ -14,7 +16,7 @@ class MarketPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    List<String> petCateoiesList = [
+        List<String> petList = [
       context.tr("dog"),
       context.tr("cat"),
       context.tr("bird"),
@@ -22,6 +24,13 @@ class MarketPage extends StatelessWidget {
       context.tr("hamster"),
       context.tr("rabbit"),
       context.tr("turtle"),
+    ];
+    List<ScroolCardModel> petCategoriesList = [
+      for(int i=0;i<petList.length;i++)
+      ScroolCardModel(
+        text: petList[i],
+        imageRoute: SharedList.petList[i],
+      ),
     ];
     List<String> categoriesTitleList = [
       context.tr("petCategories"),
@@ -139,7 +148,7 @@ class MarketPage extends StatelessWidget {
                   ),
                 ),
                 // Pet Categories
-                PetCategoriesWidget( petCateoiesList: petCateoiesList),
+                ScroolCardWidget(scroollList: petCategoriesList),
                 // Products Categories
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -229,8 +238,6 @@ class MarketPage extends StatelessWidget {
     );
   }
 }
-
-
 
 class MarketAppbarWidget extends StatelessWidget {
   const MarketAppbarWidget({

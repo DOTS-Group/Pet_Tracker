@@ -68,15 +68,36 @@ class SharedList {
     "assets/images/home/homepage/stories4.png",
   ];
 
+  // Activity Add Page
+  static List<String> activityAddPageImageRouteList = [
+    "assets/images/home/activity/food.png",
+    "assets/images/home/activity/drink.png",
+    "assets/images/home/activity/toilet.png",
+    "assets/images/home/activity/game.png",
+    "assets/images/home/activity/sleep.png",
+    "assets/images/home/activity/personal_care.png",
+    "assets/images/home/activity/care_check.png",
+    "assets/images/home/activity/training.png",
+    "assets/images/home/activity/pet_socialization.png",
+    "assets/images/home/activity/feather_care.png",
+    "assets/images/home/activity/nail_cutting.png",
+    "assets/images/home/activity/bathe.png",
+    "assets/images/home/activity/walk.png",
+    "assets/images/home/activity/vet_visit.png",
+    "assets/images/home/activity/vaccine.png",
+    "assets/images/home/activity/pet_medicine.png",
+    "assets/images/home/activity/parasitic_control.png",
+  ];
+
   // Market Page
-  static List<String> marketPageCategoryImageList = [
-    "assets/images/other/market/dog.png",
-    "assets/images/other/market/cat.png",
-    "assets/images/other/market/bird.png",
-    "assets/images/other/market/fish.png",
-    "assets/images/other/market/hamster.png",
-    "assets/images/other/market/rabbit.png",
-    "assets/images/other/market/turtle.png",
+  static List<String> petList = [
+    "assets/images/other/pets/dog.png",
+    "assets/images/other/pets/cat.png",
+    "assets/images/other/pets/bird.png",
+    "assets/images/other/pets/fish.png",
+    "assets/images/other/pets/hamster.png",
+    "assets/images/other/pets/rabbit.png",
+    "assets/images/other/pets/turtle.png",
 
   ];
 
