@@ -6,7 +6,9 @@ import '../../../shared/constants_shared.dart';
 import '../../../shared/provider_shared.dart';
 
 class WeightInputWidget extends StatelessWidget {
+  final TextEditingController controller;
   const WeightInputWidget({
+    required this.controller,
     super.key,
   });
 
@@ -44,6 +46,7 @@ class WeightInputWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: controller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: context.tr("weight"),

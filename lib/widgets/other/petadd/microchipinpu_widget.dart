@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import '../../../shared/constants_shared.dart';
 import '../../textinputcontainer_widget.dart';
 
-class DateofBirthWidtget extends StatelessWidget {
+class MicroChipInputWidget extends StatelessWidget {
   final TextEditingController controller;
-
-  const DateofBirthWidtget({
-    super.key,
+  const MicroChipInputWidget({
     required this.controller,
+    super.key,
   });
 
   @override
@@ -18,15 +17,15 @@ class DateofBirthWidtget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
-          context.tr("dateOfBirth"),
-          style: Theme.of(context).textTheme.bodyMedium,
+        Text(
+          context.tr("microchipNumber"),
         ),
         Padding(
           padding: EdgeInsets.only(
             top: height * SharedConstants.paddingSmall,
           ),
-          child: TextInputWidget(controller: controller, hintTextTranslate: "dateOfBirth"),
+          child: TextInputWidget(
+              controller: controller, hintTextTranslate: "microchipNumber"),
         ),
       ],
     );

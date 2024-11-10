@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 import 'package:pet_tracker/widgets/other/petadd/appbar_widget.dart';
-import 'package:pet_tracker/widgets/textinputcontainer_widget.dart';
 
 import '../../widgets/other/petadd/colorselect_widget.dart';
 import '../../widgets/other/petadd/dateofbirth_widget.dart';
 import '../../widgets/other/petadd/foodtypeselect_widget.dart';
+import '../../widgets/other/petadd/microchipinpu_widget.dart';
 import '../../widgets/other/petadd/selectedsex_widget.dart';
 import '../../widgets/other/petadd/weightinput_widget.dart';
 import '../../widgets/other/petcategories_widget.dart';
@@ -35,128 +34,119 @@ class PetaddPage extends StatelessWidget {
       TextEditingController(),
       TextEditingController(),
       TextEditingController(),
-      TextEditingController(),
-      TextEditingController(),
-      TextEditingController(),
+    ];
+    List<Widget> listWidget = [
+      // Pet Type Select
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding:
+                EdgeInsets.only(left: width * SharedConstants.paddingGenerall),
+            child: Text(
+              "${context.tr("selectPetCategory")} :",
+            ),
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(top: height * SharedConstants.paddingSmall),
+            child: PetCategoriesWidget(petCateoiesList: petCateoiesList),
+          ),
+        ],
+      ),
+      // Color Input
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: ColorSelectWidget(controller: controllers[0]),
+      ),
+      // Selected sex
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: const SelectedSexWidget(),
+      ),
+      // Date of birth with date picker
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: DateofBirthWidtget(controller: controllers[1]),
+      ),
+      // Weight Input with unit
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: WeightInputWidget(controller: controllers[2]),
+      ),
+      // Food type
+      const FoodTypeSelectWidget(),
+      // Microchip Number
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: MicroChipInputWidget(controller: controllers[3]),
+      ),
+      // Safe Area Padding
+      Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: height * 0.08,
+        ),
+      ),
     ];
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // App Bar
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-                vertical: height * SharedConstants.paddingGenerall,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // App Bar
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * SharedConstants.paddingGenerall,
+                  vertical: height * SharedConstants.paddingGenerall,
+                ),
+                child: const AppBarWidget(),
               ),
-              child: const AppBarWidget(),
-            ),
-            // Pet Categories
-            Padding(
-              padding: EdgeInsets.only(
-                left: width * SharedConstants.paddingGenerall,
-                bottom: height * SharedConstants.paddingSmall,
-              ),
-              child: Text(
-                "${context.tr("selectPetCategory")} :",
-              ),
-            ),
-            PetCategoriesWidget(petCateoiesList: petCateoiesList),
-            // Color Input
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-                vertical: height * SharedConstants.paddingSmall,
-              ),
-              child: ColorSelectWidget(controller: controllers[0]),
-            ),
-            // Selected sex
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-              ),
-              child: const SelectedSexWidget(),
-            ),
-            // Date of birth with date picker
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-                vertical: height * SharedConstants.paddingSmall,
-              ),
-              child: DateofBirthWidtget(controllers: controllers[1]),
-            ),
-            // Weight Input with unit
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-              ),
-              child: const WeightInputWidget(),
-            ),
-            // Food type
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: height * SharedConstants.paddingGenerall,
-              ),
-              child: const FoodTypeSelectWidget(),
-            ),
-            // Microchip Number
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Mikroçip Numarası",
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: height * SharedConstants.paddingSmall,
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: height * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
+              SizedBox(
+                height: height * 0.95,
+                width: width,
+                child: ListView.builder(
+                  itemCount: listWidget.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: height * SharedConstants.paddingSmall,
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          height * SharedConstants.paddingGenerall,
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Mikroçip numarası giriniz",
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                      child: listWidget[index],
+                    );
+                  },
+                ),
               ),
-            ),
-            // Save Button
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: height * SharedConstants.paddingGenerall,
-                horizontal: width * SharedConstants.paddingGenerall,
-              ),
-              child: const GeneralButtonWidget(
-                text: "Kaydet",
-                backgroundColor: Colors.amber,
-                textColor: Colors.white,
-              ),
-            ),
-          ],
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: height * SharedConstants.paddingGenerall,
+          horizontal: width * SharedConstants.paddingGenerall,
+        ),
+        child: GeneralButtonWidget(
+          text: context.tr("save"),
+          backgroundColor: SharedConstants.orangeColor,
+          textColor: Colors.white,
         ),
       ),
     );
   }
 }
-
