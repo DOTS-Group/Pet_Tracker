@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../models/scroolcard_model.dart';
 import '../../../shared/constants_shared.dart';
 import '../../../shared/list_shared.dart';
-import '../../other/petcategories_widget.dart';
+import '../../other/scroolcard_widget.dart';
 
 class ActivitySelectedWidget extends StatelessWidget {
   final String selectedPet;
@@ -12,9 +12,7 @@ class ActivitySelectedWidget extends StatelessWidget {
   const ActivitySelectedWidget({
     required this.selectedPet,
     super.key,
-
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +45,11 @@ class ActivitySelectedWidget extends StatelessWidget {
         ),
     ];
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:  EdgeInsets.only(left: width * SharedConstants.paddingGenerall),
+          padding:
+              EdgeInsets.only(left: width * SharedConstants.paddingGenerall),
           child: Text(
             "$selectedPet ${context.tr(
               "whatisitdoing",
@@ -57,6 +57,45 @@ class ActivitySelectedWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
+        // Search Bar
+        Container(
+          height: Theme.of(context).textTheme.bodyMedium!.fontSize! * 2 +
+              (height * SharedConstants.paddingSmall * 2),
+          width: width * 0.7,
+          decoration: BoxDecoration(
+            color: SharedConstants.whiteColor,
+            borderRadius: BorderRadius.circular(
+              height * SharedConstants.paddingGenerall,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: width * SharedConstants.paddingGenerall,
+                vertical: height * SharedConstants.paddingSmall),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: context.tr("fastSearch"),
+                hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .color!
+                          .withOpacity(0.5),
+                    ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .color!
+                      .withOpacity(0.5),
+                ),
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ),
+
         ScroolCardWidget(
           scroollList: petCategoriesList,
         ),

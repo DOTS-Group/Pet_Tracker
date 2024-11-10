@@ -53,6 +53,8 @@ flutter:
     - assets/images/intropage/
     - assets/images/home/
     - assets/images/home/homepage/
+    - assets/images/home/activity/
+
     - assets/images/other/pets/
     - assets/icons/
     - assets/icons/home/homepage/
