@@ -21,7 +21,6 @@ class PetSelectedDropdownButtonWidget extends StatelessWidget {
       ),
     ];
     return Container(
-      // width: width * 0.4,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(
@@ -30,8 +29,8 @@ class PetSelectedDropdownButtonWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: height * SharedConstants.paddingSmall / 2,
-          horizontal: width * SharedConstants.paddingGenerall,
+          vertical: height * SharedConstants.paddingSmall / 8,
+          horizontal: width * SharedConstants.paddingSmall,
         ),
         child: DropdownButton(
           padding: EdgeInsets.zero,
@@ -61,8 +60,8 @@ class PetSelectedRowWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          height: height * 0.05,
-          width: height * 0.05,
+          height: height * 0.04,
+          width: height * 0.04,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(
               height * SharedConstants.paddingLarge,

@@ -61,6 +61,7 @@ class HomePage extends StatelessWidget {
             children: [
               // Header
               const HomePageAppBarWidget(),
+              // Body
               Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,

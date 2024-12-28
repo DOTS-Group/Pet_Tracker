@@ -37,7 +37,7 @@ class HomePageStroriesWidget extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: height * 0.225,
+      height: height * 0.21,
       width: width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -61,8 +61,9 @@ class HomePageStroriesWidget extends StatelessWidget {
                     ),
                     child: Image.asset(
                       storiesList[index].imageRoute,
+                      fit: BoxFit.cover,
                       height: height * 0.15,
-                      width: width * 0.3,
+                      width: width * 0.25,
                     ),
                   ),
                   // Title
@@ -71,10 +72,10 @@ class HomePageStroriesWidget extends StatelessWidget {
                       top: height * SharedConstants.paddingSmall,
                     ),
                     child: SizedBox(
-                      width: width * 0.3,
+                      width: width * 0.25,
                       child: Text(
                         storiesList[index].title,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
                     ),

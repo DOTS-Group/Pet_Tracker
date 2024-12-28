@@ -8,7 +8,6 @@ class HomePageAppBarWidget extends StatelessWidget {
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
