@@ -1,5 +1,5 @@
-import '../../api/pet_model.dart';
-import '../../api/token_model.dart';
+import '../../models/api/pet_model.dart';
+import '../../models/api/token_model.dart';
 
 class PetApi {
   // ? ----------------------------------------------------------------------------------------------------------

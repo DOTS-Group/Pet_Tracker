@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/services.dart';
 
 import 'package:pet_tracker/pages/home/calendar_page.dart';
 import 'package:pet_tracker/pages/home/map_page.dart';
@@ -36,6 +37,13 @@ import 'shared/theme_shared.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  // Ekran yönünü kilitle
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -69,7 +77,7 @@ class MyApp extends StatelessWidget {
       theme: SharedTheme.lightTheme,
       darkTheme: SharedTheme.lightTheme,
       themeMode: ThemeMode.system,
-      home: const PatternPage(),
+      home: const SplashPage(),
       routes: {
         // Intro Pages
         '/splash': (context) => const SplashPage(),

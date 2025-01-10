@@ -42,8 +42,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^4.0.0
+
 
 flutter:
   uses-material-design: true
@@ -62,7 +62,6 @@ flutter:
     - assets/translations/
     - assets/agreements/en/
     - assets/agreements/tr/
-
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -5,25 +5,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 import '../../widgets/intro/loaderbar_widget.dart';
+import '../../controllers/home/splashpage_controller.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
-  Future<void> _navigateAfterDelay(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 3));
-    if (context.mounted) {
-      Navigator.pushNamed(context, "/intro");
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final controller = SplashPageController();
 
-    // Yönlendirmeyi başlat
+    // Navigation pages
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _navigateAfterDelay(context);
+      controller.handleNavigation(context);
     });
     List<String> textList = [
       context.tr('splashPageTitle'),
