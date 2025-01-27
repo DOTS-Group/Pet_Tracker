@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -14,10 +17,275 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  LatLng? _currentPosition;
+  final List<String> categories = [
+    "veterinaryClinic",
+    "petHotel",
+    "petShop",
+    "petPark",
+    "petGrooming",
+    "petCafe",
+  ];
+  bool _showMarkerDetails = false;
+  final Set<Marker> _markers = {};
+  String? _selectedMarkerId;
+
+  // Konya merkez koordinatları
+  static const LatLng KONYA_CENTER = LatLng(37.8719, 32.4843);
+
+  Map<String, MarkerData> markerDetails = {
+    "clinic1": MarkerData(
+      title: "Kılıçarslan Veteriner Kliniği",
+      type: "Veteriner Kliniği",
+      address: "Hacı Fettah Mahallesi No:46/E, 42200 Meram",
+      rating: 4.5,
+      staffCount: 2,
+      imageUrl:
+          "https://fastly.picsum.photos/id/91/200/200.jpg?hmac=y-8iGl9dOkbHqADPlWuS-rWBHNBWWXlzKcsTDu2WeQo",
+    ),
+    "hotel1": MarkerData(
+      title: "Pet Hotel Premium",
+      type: "Pet Otel",
+      address: "Yaka Mahallesi No:12, 42090 Meram",
+      rating: 4.8,
+      staffCount: 5,
+      imageUrl:
+          "https://fastly.picsum.photos/id/33/200/200.jpg?hmac=Byvb9ZEKV47fLdwaE2BGClGsgcm5fyuDH6sWb9pvWbI",
+    ),
+    "shop1": MarkerData(
+      // Pet Shop detaylarını ekle
+      title: "Happy Pets Shop",
+      type: "Pet Shop",
+      address: "Feritpaşa Mahallesi, Kerkük Caddesi No:45, Selçuklu",
+      rating: 4.3,
+      staffCount: 3,
+      imageUrl:
+          "https://fastly.picsum.photos/id/219/200/200.jpg?hmac=VWq983HZl5HxH1tK2F_23X8CkG3HLdRHXzcGZi7vuXs",
+    ),
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+    _addMockMarkers();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    LocationPermission permission;
+
+    // Konum servisi açık mı kontrol et
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.tr("enableLocationServices"))),
+        );
+      }
+      return;
+    }
+
+    // İzin kontrolü
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.tr("locationPermissionDenied"))),
+          );
+        }
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(context.tr("locationPermissionPermanentlyDenied")),
+            action: SnackBarAction(
+              label: context.tr("openSettings"),
+              onPressed: () => openAppSettings(),
+            ),
+          ),
+        );
+      }
+      return;
+    }
+
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      setState(() {
+        _currentPosition = LatLng(position.latitude, position.longitude);
+      });
+
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: _currentPosition!,
+            zoom: 14.4746,
+          ),
+        ),
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.tr("locationError"))),
+        );
+      }
+    }
+  }
+
+  Future<void> _addMockMarkers() async {
+    final BitmapDescriptor veterinaryIcon = await BitmapDescriptor.asset(
+      const ImageConfiguration(size: Size(32, 32)),
+      SharedConstants.veterinaryMarker,
+    ).then((value) => value);
+
+    final BitmapDescriptor hotelIcon = await BitmapDescriptor.asset(
+      const ImageConfiguration(size: Size(32, 32)),
+      SharedConstants.hotelMarker,
+    ).then((value) => value);
+
+    final BitmapDescriptor shopIcon = await BitmapDescriptor.asset(
+      const ImageConfiguration(size: Size(32, 32)),
+      SharedConstants.shopMarker,
+    ).then((value) => value);
+
+    if (mounted) {
+      setState(() {
+        _markers.add(
+          Marker(
+            markerId: const MarkerId("clinic1"),
+            position: LatLng(
+              _currentPosition?.latitude ?? KONYA_CENTER.latitude + 0.005,
+              _currentPosition?.longitude ?? KONYA_CENTER.longitude + 0.005,
+            ),
+            icon: veterinaryIcon,
+            onTap: () {
+              setState(() {
+                _showMarkerDetails = true;
+                _selectedMarkerId = "clinic1";
+              });
+            },
+          ),
+        );
+
+        _markers.add(
+          Marker(
+            markerId: const MarkerId("hotel1"),
+            position: LatLng(
+              _currentPosition?.latitude ?? KONYA_CENTER.latitude - 0.005,
+              _currentPosition?.longitude ?? KONYA_CENTER.longitude - 0.005,
+            ),
+            icon: hotelIcon,
+            onTap: () {
+              setState(() {
+                _showMarkerDetails = true;
+                _selectedMarkerId = "hotel1";
+              });
+            },
+          ),
+        );
+
+        _markers.add(
+          Marker(
+            markerId: const MarkerId("shop1"),
+            position: LatLng(
+              _currentPosition?.latitude ?? KONYA_CENTER.latitude + 0.01,
+              _currentPosition?.longitude ?? KONYA_CENTER.longitude - 0.01,
+            ),
+            icon: shopIcon,
+            onTap: () {
+              setState(() {
+                _showMarkerDetails = true;
+                _selectedMarkerId = "shop1";
+              });
+            },
+          ),
+        );
+      });
+    }
+  }
+
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(context.tr("filters")),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Filter by Distance
+            ListTile(
+              title: Text(context.tr("distance")),
+              trailing: DropdownButton<String>(
+                value: "5km",
+                items: [
+                  "1km",
+                  "5km",
+                  "10km",
+                  "20km",
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  // Apply Distance Filter
+                },
+              ),
+            ),
+            // Rating Filter
+            ListTile(
+              title: Text(context.tr("rating")),
+              trailing: DropdownButton<String>(
+                value: "4+",
+                items: [
+                  "3+",
+                  "4+",
+                  "4.5+",
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  // Apply Rating Filter
+                },
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              context.tr("cancel"),
+              style: const TextStyle(color: SharedConstants.redColor),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: SharedConstants.orangeColor,
+            ),
+            onPressed: () {
+              // Apply Filters
+              Navigator.pop(context);
+            },
+            child: Text(context.tr("apply")),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +295,21 @@ class _MapPageState extends State<MapPage> {
       children: [
         // Google Map
         GoogleMap(
-          initialCameraPosition: _kGooglePlex,
+          initialCameraPosition: _currentPosition != null
+              ? CameraPosition(target: _currentPosition!, zoom: 14.4746)
+              : const CameraPosition(
+                  target: KONYA_CENTER, // İstanbul yerine Konya
+                  zoom: 14.4746,
+                ),
           onMapCreated: (GoogleMapController controller) {
             if (!_controller.isCompleted) {
-              _controller
-                  .complete(controller); // Future sadece bir kez tamamlanır.
+              _controller.complete(controller);
             }
           },
+          myLocationEnabled: true,
+          myLocationButtonEnabled: true,
           zoomControlsEnabled: false,
+          markers: _markers,
         ),
         // Header
         Positioned(
@@ -53,7 +328,6 @@ class _MapPageState extends State<MapPage> {
                     children: [
                       Expanded(
                         child: Container(
-                          // height: height * 0.06,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(
@@ -67,27 +341,12 @@ class _MapPageState extends State<MapPage> {
                               vertical:
                                   height * SharedConstants.paddingSmall / 2,
                             ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: "Search",
-                                      border: InputBorder.none,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left:
-                                        width * SharedConstants.paddingGenerall,
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Icon(Icons.search),
-                                  ),
-                                ),
-                              ],
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: context.tr("search"),
+                                border: InputBorder.none,
+                                suffixIcon: const Icon(Icons.search),
+                              ),
                             ),
                           ),
                         ),
@@ -96,19 +355,21 @@ class _MapPageState extends State<MapPage> {
                         padding: EdgeInsets.only(
                           left: width * SharedConstants.paddingGenerall,
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(
-                              height * SharedConstants.paddingGenerall,
+                        child: GestureDetector(
+                          onTap: _showFilterDialog,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(
+                                height * SharedConstants.paddingGenerall,
+                              ),
                             ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(
-                              height * SharedConstants.paddingGenerall,
-                            ),
-                            child: Icon(
-                              Icons.align_vertical_top_rounded,
+                            child: Padding(
+                              padding: EdgeInsets.all(
+                                height * SharedConstants.paddingGenerall,
+                              ),
+                              child:
+                                  const Icon(Icons.align_vertical_top_rounded),
                             ),
                           ),
                         ),
@@ -125,7 +386,7 @@ class _MapPageState extends State<MapPage> {
                     width: width,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10,
+                      itemCount: categories.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(
@@ -144,7 +405,7 @@ class _MapPageState extends State<MapPage> {
                                 horizontal:
                                     width * SharedConstants.paddingGenerall,
                               ),
-                              child: Text("data $index"),
+                              child: Text(context.tr(categories[index])),
                             ),
                           ),
                         );
@@ -156,64 +417,222 @@ class _MapPageState extends State<MapPage> {
             ),
           ),
         ),
-        Positioned(
-          bottom: height * SharedConstants.paddingGenerall,
-          child: Container(
-            width: width - (width * SharedConstants.paddingGenerall * 2),
-            height: height * 0.2,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(
-                height * SharedConstants.paddingGenerall,
+        // Map Marker Details
+        if (_showMarkerDetails &&
+            _selectedMarkerId != null &&
+            markerDetails[_selectedMarkerId] != null)
+          Positioned(
+            bottom: height * SharedConstants.paddingGenerall,
+            left: width * SharedConstants.paddingGenerall,
+            right: width * SharedConstants.paddingGenerall,
+            child: Container(
+              constraints: BoxConstraints(
+                maxHeight: height * 0.3,
+                maxWidth: width * 0.9,
               ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-                vertical: height * SharedConstants.paddingSmall,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Stack(
                     children: [
-                      // Veterinarian Clinic Logo or Image
-                      Placeholder(
-                        fallbackHeight: height * 0.08,
-                        fallbackWidth: height * 0.08,
+                      Positioned(
+                        right: 8,
+                        top: 8,
+                        child: IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () {
+                            setState(() {
+                              _showMarkerDetails = false;
+                              _selectedMarkerId = null;
+                            });
+                          },
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: width * SharedConstants.paddingGenerall,
-                        ),
-                        child: Column(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
                           children: [
-                            Text(
-                              "Veterinarian Clinic Name",
-                              style: Theme.of(context).textTheme.bodyLarge,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                markerDetails[_selectedMarkerId]!.imageUrl,
+                                width: height * 0.1,
+                                height: height * 0.1,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    width: 50,
+                                    height: 50,
+                                    color: Colors.grey[300],
+                                    child: const Icon(Icons.error),
+                                  );
+                                },
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Clinic",
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: width * SharedConstants.paddingGenerall,
+                              ),
+                              child: Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Marker Title
+                                    SizedBox(
+                                      width: width * 0.55,
+                                      child: Text(
+                                        markerDetails[_selectedMarkerId]!.title,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    // Marker Type
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: height *
+                                            SharedConstants.paddingSmall,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            markerDetails[_selectedMarkerId]!
+                                                .type,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                  color: Colors.grey[600],
+                                                ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              left: width *
+                                                  SharedConstants
+                                                      .paddingGenerall,
+                                            ),
+                                            child: const Icon(
+                                              Icons.star,
+                                              color:
+                                                  SharedConstants.orangeColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            " ${markerDetails[_selectedMarkerId]!.rating}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Marker Address
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on,
+                                          color: SharedConstants.orangeColor,
+                                        ),
+                                        SizedBox(
+                                          height: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall!
+                                                  .fontSize! *
+                                              3,
+                                          width: width * 0.5,
+                                          child: Text(
+                                            markerDetails[_selectedMarkerId]!
+                                                .address,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                            overflow: TextOverflow.ellipsis,
+                                            softWrap: true,
+                                            maxLines: 2,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "4.5",
-                                ),
-                              ],
-                            )
+                              ),
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(
+                        height * SharedConstants.paddingGenerall),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.directions),
+                            label: const Text("Yol Tarifi"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                            onPressed: () {
+                              // Yol tarifi işlemleri
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: width * SharedConstants.paddingGenerall,
+                        ),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: SharedConstants.orangeColor,
+                            ),
+                            onPressed: () {
+                              // Randevu alma işlemleri
+                            },
+                            child: const Text("Randevu Al"),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-        ),
       ],
     );
   }
+}
+
+// Marker verilerini tutmak için model
+class MarkerData {
+  final String title;
+  final String type;
+  final String address;
+  final double rating;
+  final int staffCount;
+  final String imageUrl;
+
+  MarkerData({
+    required this.title,
+    required this.type,
+    required this.address,
+    required this.rating,
+    required this.staffCount,
+    required this.imageUrl,
+  });
 }

@@ -52,5 +52,11 @@
 	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Yakınınızdaki veteriner klinikleri ve diğer pet hizmetlerini gösterebilmek için konumunuza ihtiyacımız var.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Yakınınızdaki veteriner klinikleri ve diğer pet hizmetlerini gösterebilmek için konumunuza ihtiyacımız var.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Yakınınızdaki veteriner klinikleri ve diğer pet hizmetlerini gösterebilmek için konumunuza ihtiyacımız var.</string>
 </dict>
 </plist>

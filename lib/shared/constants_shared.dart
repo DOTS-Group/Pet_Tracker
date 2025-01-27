@@ -62,4 +62,14 @@ class SharedConstants {
   static const String petAddImage = 'assets/images/home/petadd_image.png';
   // -> Icons
   static const String qrCodeFrameIcon = 'assets/icons/qrcodeframe_icon.png';
+
+  // Image Route
+  static const String veterinaryMarker =
+      'assets/icons/home/map/veterinary_marker.png';
+  static const String hotelMarker = 'assets/icons/home/map/hotel_marker.png';
+  static const String shopMarker = 'assets/icons/home/map/shop_marker.png';
+  static const String parkMarker = 'assets/icons/home/map/park_marker.png';
+  static const String groomingMarker =
+      'assets/icons/home/map/grooming_marker.png';
+  static const String cafeMarker = 'assets/icons/home/map/cafe_marker.png';
 }

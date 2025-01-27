@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/user_api.dart';
-import '../../models/api/token_model.dart';
 
 class SplashPageController {
   final UserApi _userApi = UserApi();

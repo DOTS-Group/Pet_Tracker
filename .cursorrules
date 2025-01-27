@@ -1,0 +1,14 @@
+## Kod uygulama kuralları
+- UI kısmında boşluk yapılarında daima padding yapısını kullan.
+- Bir sayfa yönlendirmesini pushnamed ile yapılarında
+- Hatasız, eksiksi ve çalışabilir kod yazılımı yapısı kullan.
+- Riverpod kullanımını kullan.
+- UI ve Servis kısımlarını ayır. Yani MVC yapısını kullanılacak. Bunun için model klasörü modelleri içeririr.
+Service klasörü ise servisleri içerir. Geri kalan kısımlar ise widget klasörü ve page klasörü içerisinde yer alır.
+Yani ui kısmı ile servis kısmını ayırmış oluruz. Model kısmı gerekli isede bunu model klasörü içerisinde yer almış olur.
+
+## Api kısımları
+- Api için http isteklerini kullan.
+
+## Performans
+- Daimi olarak Performans için listview builder yapısı ile kendisi build etmesini sağla.

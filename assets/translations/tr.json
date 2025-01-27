@@ -149,5 +149,12 @@
   "cage": "Kafes",
   "accessories": "Aksesuarlar",
   "foodSupplement": "Mama Takviyesi",
-  "health": "Sağlık"
+  "health": "Sağlık",
+  "categories": "Kategoriler",
+  "veterinaryClinic": "Veteriner Kliniği",
+  "petHotel": "Pet Oteli",
+  "petShop": "Pet Shop",
+  "petPark": "Pet Parkı",
+  "petGrooming": "Pet Kuaförü",
+  "petCafe": "Pet Kafe"
 }

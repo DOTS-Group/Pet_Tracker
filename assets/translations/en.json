@@ -129,7 +129,6 @@
   "microchipNumber": "Microchip Number",
   "save": "Save",
 
-
   "marketPage": "Market",
   "petCategories": "Categories",
   "all": "All",
@@ -144,11 +143,18 @@
   "food": "Food",
   "toy": "Toy",
   "training": "Training",
-  "toiletandCleaning" : "Toilet and Cleaning",
+  "toiletandCleaning": "Toilet and Cleaning",
   "clothes": "Clothes",
   "bed": "Bed",
   "cage": "Cage",
   "accessories": "Accessories",
   "foodSupplement": "Food Supplement",
-  "health": "Health"
+  "health": "Health",
+  "categories": "Categories",
+  "veterinaryClinic": "Veterinary Clinic",
+  "petHotel": "Pet Hotel",
+  "petShop": "Pet Shop",
+  "petPark": "Pet Park",
+  "petGrooming": "Pet Grooming",
+  "petCafe": "Pet Cafe"
 }

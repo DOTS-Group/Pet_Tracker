@@ -20,7 +20,7 @@ class PatternpageController {
       case 1:
         return const MapPage();
       case 2:
-        return const ActicityAddPage();
+        return const ActivityAddPage();
       case 3:
         return const CalendarPage();
       case 4:

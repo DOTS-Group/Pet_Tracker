@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_tracker/main.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 class NotificationPage extends StatelessWidget {

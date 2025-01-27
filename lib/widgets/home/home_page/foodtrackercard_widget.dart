@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_tracker/main.dart';
 
 import '../../../shared/constants_shared.dart';
 import '../../progessbar_widget.dart';

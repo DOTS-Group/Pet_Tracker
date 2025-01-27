@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
         '/map': (context) => const MapPage(),
         '/calendar': (context) => const CalendarPage(),
         '/profile': (context) => const ProfilePage(),
-        "/activityadd": (context) => const ActicityAddPage(),
+        "/activityadd": (context) => const ActivityAddPage(),
 
         // Other Pages
         '/petadd': (context) => const PetaddPage(),

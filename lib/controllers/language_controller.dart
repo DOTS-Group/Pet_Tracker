@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/intro/intro_page.dart';
 
 class LanguageController {
   void changeLanguage(String languageCode, BuildContext context, Widget lastPage) async {
