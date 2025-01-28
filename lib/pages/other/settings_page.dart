@@ -23,7 +23,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle1'),
           leadingIconColor: SharedConstants.orangeColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/account_settings");
+            Navigator.pushNamed(context, "/accountsettings");
           },
         ),
         SettingspageModel(
@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle2'),
           leadingIconColor: SharedConstants.blueColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/notifications");
+            Navigator.pushNamed(context, "/sharedsettings");
           },
         ),
         SettingspageModel(
@@ -39,7 +39,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle3'),
           leadingIconColor: SharedConstants.greenColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/security_settings");
+            Navigator.pushNamed(context, "/securitysettings");
           },
         ),
         SettingspageModel(
@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle4'),
           leadingIconColor: SharedConstants.purpleColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/language_settings");
+            Navigator.pushNamed(context, "/notificationsettings");
           },
         ),
         SettingspageModel(
@@ -55,7 +55,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle5'),
           leadingIconColor: SharedConstants.redColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/about_settings");
+            Navigator.pushNamed(context, "/support");
           },
         ),
       ],
@@ -66,7 +66,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle6'),
           leadingIconColor: SharedConstants.orangeColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/account_settings");
+            Navigator.pushNamed(context, "/languagesettings");
           },
         ),
         SettingspageModel(
@@ -74,7 +74,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle7'),
           leadingIconColor: SharedConstants.blueColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/notifications");
+            Navigator.pushNamed(context, "/themesettings");
           },
         ),
         SettingspageModel(
@@ -82,7 +82,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle8'),
           leadingIconColor: SharedConstants.greenColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/security_settings");
+            Navigator.pushNamed(context, "/privacysettings");
           },
         ),
         SettingspageModel(
@@ -90,7 +90,7 @@ class SettingsPage extends StatelessWidget {
           title: context.tr('settingsPageSubtitle9'),
           leadingIconColor: SharedConstants.purpleColor,
           trailingIconPressed: () {
-            Navigator.pushNamed(context, "/language_settings");
+            Navigator.pushNamed(context, "/aboutsettings");
           },
         ),
       ],

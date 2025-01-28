@@ -72,4 +72,8 @@ class SharedConstants {
   static const String groomingMarker =
       'assets/icons/home/map/grooming_marker.png';
   static const String cafeMarker = 'assets/icons/home/map/cafe_marker.png';
+
+  // Gemini API Key
+  static const String geminiApiKey =
+      'AIzaSyBk_YOFZQ8w-kQdYpImffvDT4ukrfHV6Fw';
 }

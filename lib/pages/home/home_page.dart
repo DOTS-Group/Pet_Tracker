@@ -143,7 +143,7 @@ class HomePage extends StatelessWidget {
                                                   ? buttonText[1][1]
                                                   : buttonText[1][0],
                                           isDatePicker: j == 0 ? false : true,
-                                          route: j == 0 ? "/petdetails" : null,
+                                          route: j == 0 ? "/vaccinedetails" : null,
                                           onPressed: j == 0
                                               ? null
                                               : () {

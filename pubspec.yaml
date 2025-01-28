@@ -22,6 +22,7 @@ dependencies:
   calendar_date_picker2: ^1.1.7
   google_fonts: ^6.2.1
   fl_chart: ^0.70.0
+  flutter_slidable: ^4.0.0
 
   # -----------------------------------------------------
   # Backend
@@ -34,6 +35,7 @@ dependencies:
   hooks_riverpod: ^2.5.2
   # -> Api
   http: ^1.2.2
+  url_launcher: ^6.3.1
   # Language
   easy_localization: ^3.0.7
   # -> Qr Code Generator
