@@ -34,6 +34,15 @@ import 'pages/other/vaccinedetails_page.dart';
 import 'pages/other/walkingassistants_page.dart';
 import 'pages/other/wallet_page.dart';
 import 'shared/theme_shared.dart';
+import 'pages/other/settings/accountsettings_page.dart';
+import 'pages/other/settings/notificationsettings_page.dart';
+import 'pages/other/settings/securitysettings_page.dart';
+import 'pages/other/settings/sharedsettings_page.dart';
+import 'pages/other/settings/languagesettings_page.dart';
+import 'pages/other/settings/themesettings_page.dart';
+import 'pages/other/settings/privacysettings_page.dart';
+import 'pages/other/settings/support_page.dart';
+import 'pages/other/settings/aboutsettings_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,6 +122,15 @@ class MyApp extends StatelessWidget {
             const SocializationAssistantsPage(),
         "/pettrackingPremium": (context) => const PetTrackingPremiumPage(),
         "/categoiresDetail": (context) => const CategoriesDetailPage(),
+        '/accountsettings': (context) => const AccountSettingsPage(),
+        '/notificationsettings': (context) => const NotificationSettingsPage(),
+        '/securitysettings': (context) => const SecuritySettingsPage(),
+        '/sharedsettings': (context) => const SharedSettingsPage(),
+        '/languagesettings': (context) => const LanguageSettingsPage(),
+        '/themesettings': (context) => const ThemeSettingsPage(),
+        '/privacysettings': (context) => const PrivacySettingsPage(),
+        '/support': (context) => const SupportPage(),
+        '/aboutsettings': (context) => const AboutSettingsPage(),
       },
     );
   }

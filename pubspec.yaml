@@ -42,6 +42,7 @@ dependencies:
   pretty_qr_code: ^3.3.0
   permission_handler: ^11.3.0
   geolocator: ^11.0.0
+  share_plus: ^10.1.4
 
 dev_dependencies:
   flutter_test:

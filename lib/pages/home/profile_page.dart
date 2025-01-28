@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 import 'package:pet_tracker/widgets/generalbutton_widget.dart';
@@ -12,178 +13,318 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  late int tabbarIndex;
-  final List<String> tabbarList = ["Hayvanlarım", "Aşı Takip", "Mama Stok"];
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
   @override
   void initState() {
-    tabbarIndex = 0;
     super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final String userName = "İsmail Can Korucu";
-    final String userIdName = "@ismailcankorucu";
-    final int petCounter = 1;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: width * SharedConstants.paddingGenerall,
+    return Scaffold(
+      backgroundColor: Colors.grey[50],
+      body: SafeArea(
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      _buildProfileHeader(context),
+                      const SizedBox(height: 24),
+                      _buildTabBar(),
+                    ],
+                  ),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildPetsTab(),
+              _buildVaccinesTab(),
+              _buildFoodStockTab(),
+            ],
+          ),
+        ),
       ),
-      child: Column(
-        children: [
-          // Appbar
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(
-                height * SharedConstants.paddingGenerall,
+      floatingActionButton: _buildFloatingActionButton(context),
+    );
+  }
+
+  Widget _buildProfileHeader(BuildContext context) {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 40,
+              backgroundColor: SharedConstants.orangeColor.withOpacity(0.1),
+              child: Icon(
+                Icons.person,
+                size: 40,
+                color: SharedConstants.orangeColor,
               ),
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * SharedConstants.paddingGenerall,
-                vertical: height * SharedConstants.paddingGenerall,
-              ),
-              child: Row(
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    radius: height * 0.06,
-                    backgroundColor: SharedConstants.orangeColor,
+                  Text(
+                    'İsmail Can Korucu',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
-                  Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: width * SharedConstants.paddingGenerall,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          for (int i = 0; i < 3; i++)
-                            Text(
-                              i == 0
-                                  ? userName
-                                  : i == 1
-                                      ? userIdName
-                                      : "Dostlar: $petCounter",
-                              style: i == 0
-                                  ? Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      )
-                                  : i == 1
-                                      ? Theme.of(context).textTheme.bodyMedium
-                                      : Theme.of(context).textTheme.bodySmall,
-                              maxLines: 2,
-                            ),
-                        ],
-                      ),
-                    ),
+                  Text(
+                    '@ismailcankorucu',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                        ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: width * SharedConstants.paddingMedium,
-                    ),
-                    child: Row(
-                      children: [
-                        for (int i = 0; i < 2; i++)
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: width * SharedConstants.paddingGenerall,
-                            ),
-                            child: GestureDetector(
-                              onTap: i == 0
-                                  ? () =>
-                                      Navigator.pushNamed(context, '/qrcode')
-                                  : () =>
-                                      Navigator.pushNamed(context, '/settings'),
-                              child: Icon(
-                                i == 0
-                                    ? Icons.qr_code_rounded
-                                    : Icons.drive_file_rename_outline_sharp,
-                                color: SharedConstants.orangeColor,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  )
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.pets,
+                          size: 16, color: SharedConstants.orangeColor),
+                      const SizedBox(width: 4),
+                      Text(
+                        context.tr('pets', args: ['1']),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
-          ),
-          // Tabbar
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: height * SharedConstants.paddingSmall,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                for (int i = 0; i < tabbarList.length; i++)
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        tabbarIndex = i;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Text(
-                          tabbarList[i],
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: height * SharedConstants.paddingSmall / 2,
-                          ),
-                          child: tabbarIndex == i
-                              ? Container(
-                                  height: 4,
-                                  width: width * 0.08,
-                                  color: SharedConstants.orangeColor,
-                                )
-                              : SizedBox(
-                                  height: 4,
-                                ),
-                        ),
-                      ],
-                    ),
-                  )
+                IconButton(
+                  onPressed: () => Navigator.pushNamed(context, '/qrcode'),
+                  icon: Icon(Icons.qr_code, color: SharedConstants.orangeColor),
+                ),
+                IconButton(
+                  onPressed: () => Navigator.pushNamed(context, '/settings'),
+                  icon:
+                      Icon(Icons.settings, color: SharedConstants.orangeColor),
+                ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabBar() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        labelColor: SharedConstants.orangeColor,
+        unselectedLabelColor: Colors.grey,
+        indicatorColor: SharedConstants.orangeColor,
+        indicatorSize: TabBarIndicatorSize.label,
+        tabs: [
+          Tab(text: context.tr('myPets')),
+          Tab(text: context.tr('vaccines')),
+          Tab(text: context.tr('foodStock')),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPetsTab() {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: 1,
+      itemBuilder: (context, index) {
+        return _buildPetCard();
+      },
+    );
+  }
+
+  Widget _buildPetCard() {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          Container(
+            height: 200,
+            decoration: BoxDecoration(
+              color: SharedConstants.blueColor,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.pets,
+                size: 64,
+                color: Colors.white.withOpacity(0.5),
+              ),
+            ),
           ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(
-                  height * SharedConstants.paddingGenerall,
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Poyraz',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: SharedConstants.orangeColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        '67 Kg',
+                        style: TextStyle(
+                          color: SharedConstants.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: width * SharedConstants.paddingGenerall,
+                const SizedBox(height: 8),
+                Text(
+                  'Rottweiler',
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                child: tabbarIndex == 0
-                    ? MyPetsWidget()
-                    : tabbarIndex == 1
-                        ? PetVaccineWidget()
-                        : FoodTrackingWidget(),
-              ),
+              ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildVaccinesTab() {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: 3, // Örnek veri
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(16),
+            leading: CircleAvatar(
+              backgroundColor: SharedConstants.orangeColor.withOpacity(0.1),
+              child: Icon(Icons.medical_services,
+                  color: SharedConstants.orangeColor),
+            ),
+            title: Text('Kuduz Aşısı ${index + 1}'),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 4),
+                Text(
+                    'Son Aşı: ${DateTime.now().subtract(Duration(days: index * 30)).toString().split(' ')[0]}'),
+                Text(
+                    'Sonraki Aşı: ${DateTime.now().add(Duration(days: 30 - index * 10)).toString().split(' ')[0]}'),
+              ],
+            ),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: SharedConstants.orangeColor),
+            onTap: () => Navigator.pushNamed(context, '/vaccinedetails'),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFoodStockTab() {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: 2, // Örnek veri
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(16),
+            leading: CircleAvatar(
+              backgroundColor: SharedConstants.blueColor.withOpacity(0.1),
+              child: Icon(Icons.food_bank, color: SharedConstants.blueColor),
+            ),
+            title: Text('Royal Canin ${index + 1}'),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 4),
+                Text('Stok: ${(index + 1) * 5} kg'),
+                Text(
+                    'Son Alım: ${DateTime.now().subtract(Duration(days: index * 15)).toString().split(' ')[0]}'),
+              ],
+            ),
+            trailing:
+                Icon(Icons.arrow_forward_ios, color: SharedConstants.blueColor),
+            onTap: () => Navigator.pushNamed(context, '/foodTracking'),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFloatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: SharedConstants.orangeColor,
+      onPressed: () {
+        switch (_tabController.index) {
+          case 0:
+            Navigator.pushNamed(context, '/petadd');
+            break;
+          case 1:
+            Navigator.pushNamed(context, '/vaccinedetails');
+            break;
+          case 2:
+            Navigator.pushNamed(context, '/foodTracking');
+            break;
+        }
+      },
+      child: const Icon(Icons.add),
     );
   }
 }
@@ -206,7 +347,6 @@ class FoodTrackingWidget extends StatelessWidget {
             title: "Mama Markası",
             subtitle: "Mama detay bilgisi",
             informationdata: "id: 123456789",
-            
             isShowShoppingButton: true,
           ),
         ),
@@ -368,7 +508,7 @@ class ListtileCardWidget extends StatelessWidget {
                             : GestureDetector(
                                 onTap: () =>
                                     Navigator.pushNamed(context, '/market'),
-                              child: Container(
+                                child: Container(
                                   decoration: BoxDecoration(
                                     color: SharedConstants.whiteColor,
                                     borderRadius: BorderRadius.circular(
@@ -389,7 +529,7 @@ class ListtileCardWidget extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                            )
+                              )
                         : Text(
                             i == 0 ? informationdata : "24.10.2025 - 12:30",
                             style:
