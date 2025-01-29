@@ -87,7 +87,7 @@ class SharedList {
     {
       'icon': Icons.phone,
       'color': Colors.green,
-      'isActive': false,
+      'isActive': true,
     },
     {
       'icon': FontAwesome.google_brand,

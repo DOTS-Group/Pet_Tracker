@@ -112,14 +112,17 @@ class LoginPage extends ConsumerWidget {
                                     isActive: button['isActive'],
                                     onTap: button['isActive']
                                         ? () {
-                                            ref
-                                                    .read(anonymousUserProvider
-                                                        .notifier)
-                                                    .state =
-                                                true; // TODO: Geçici olarak false yapıyoruz.
-                                            debugPrint(ref
-                                                .read(anonymousUserProvider)
-                                                .toString());
+                                            if (button['icon'] == Icons.phone) {
+                                              ref
+                                                  .read(anonymousUserProvider
+                                                      .notifier)
+                                                  .state = false;
+                                            } else {
+                                              ref
+                                                  .read(anonymousUserProvider
+                                                      .notifier)
+                                                  .state = true;
+                                            }
                                             Navigator.pushNamedAndRemoveUntil(
                                               context,
                                               '/pattern',
