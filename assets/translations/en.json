@@ -156,5 +156,11 @@
   "petShop": "Pet Shop",
   "petPark": "Pet Park",
   "petGrooming": "Pet Grooming",
-  "petCafe": "Pet Cafe"
+  "petCafe": "Pet Cafe",
+  "exitApp": "Exit Application?",
+  "exitAppConfirm": "Are you sure you want to exit?",
+  "exit": "Exit",
+  "cancel": "Cancel",
+  "loginRequired": "You need to login to view this page",
+  "orQuickLogin": "Or quick login"
 }

@@ -26,3 +26,4 @@ final petFoodTypeIndexProvider = StateProvider<int>((ref) => 0); // Pet food typ
 
 // Other
 final scroolCardWidgetSelectedItem = StateProvider<int>((ref) => 0); // Pet Add Page Provider
+final anonymousUserProvider = StateProvider<bool>((ref) => false); // Anonymous User Provider

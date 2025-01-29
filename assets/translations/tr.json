@@ -156,5 +156,11 @@
   "petShop": "Pet Shop",
   "petPark": "Pet Parkı",
   "petGrooming": "Pet Kuaförü",
-  "petCafe": "Pet Kafe"
+  "petCafe": "Pet Kafe",
+  "exitApp": "Uygulamadan Çıkılsın mı?",
+  "exitAppConfirm": "Çıkmak istediğinizden emin misiniz?",
+  "exit": "Çık",
+  "cancel": "İptal",
+  "loginRequired": "Bu sayfayı görüntülemek için giriş yapmalısınız",
+  "orQuickLogin": "Veya hızlı giriş yap"
 }

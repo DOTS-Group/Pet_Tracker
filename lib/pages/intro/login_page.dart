@@ -7,163 +7,251 @@ import 'package:pet_tracker/shared/list_shared.dart';
 
 import '../../widgets/generalbutton_widget.dart';
 import '../../widgets/intro/login/faqgdprbuttons_widget.dart';
-import '../../widgets/intro/login/loginormethodbutton_widget.dart';
 import '../../widgets/intro/login/rememberandforgetpassword_widget.dart';
 import '../../widgets/intro/login/textform_widget.dart';
 import '../../widgets/intro/login/welcomemessage_widget.dart';
+import '../../controllers/intro/loginpage_controller.dart';
+import '../../shared/provider_shared.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends ConsumerWidget {
+  LoginPage({super.key});
+  final LoginPageController _controller = LoginPageController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  Future<bool> _onWillPop(BuildContext context) async {
+    return await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(context.tr('exitApp')),
+            content: Text(context.tr('exitAppConfirm')),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(context.tr('cancel')),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text(context.tr('exit')),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    List<LoginFormModel> modelList = [
-      LoginFormModel(
-        leadingIcon: SharedList.loginPageTextFormIconList[0],
-        hintText: context.tr('emailExample'),
-        isPasswordForm: false,
-        controller: TextEditingController(),
-      ),
-      LoginFormModel(
-        leadingIcon: SharedList.loginPageTextFormIconList[1],
-        hintText: context.tr('passwordExample'),
-        isPasswordForm: true,
-        controller: TextEditingController(),
-      ),
-    ];
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: width * SharedConstants.paddingGenerall,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // Header Image
-              Image.asset(
-                SharedConstants.logoImageRoute,
-                height: height * 0.2,
+    return WillPopScope(
+      onWillPop: () => _onWillPop(context),
+      child: Scaffold(
+        body: SafeArea(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: width * SharedConstants.paddingGenerall,
               ),
-              // Welcome Messages
-              const LoginPageWelcomeMessageWidget(),
-              // Other Login Buttons
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: height * SharedConstants.paddingGenerall,
-                ),
-                child: Row(
-                  children: [
-                    for (int i = 0; i < 3; i++)
-                      i == 1
-                          ? SizedBox(
-                              width: width * SharedConstants.paddingGenerall,
-                            )
-                          : Expanded(
-                              child: LoginorMethodButtonWidget(
-                                backgroundColor: i == 0
-                                    ? SharedList.loginOtherLoginButtonList[0]
-                                        .backgroundColor
-                                    : SharedList.loginOtherLoginButtonList[1]
-                                        .backgroundColor,
-                                icon: i == 0
-                                    ? SharedList
-                                        .loginOtherLoginButtonList[0].icon
-                                    : SharedList
-                                        .loginOtherLoginButtonList[1].icon,
-                                iconColor: i == 0
-                                    ? SharedList
-                                        .loginOtherLoginButtonList[0].iconColor
-                                    : SharedList
-                                        .loginOtherLoginButtonList[1].iconColor,
-                                text: i == 0
-                                    ? SharedList
-                                        .loginOtherLoginButtonList[0].text
-                                    : SharedList
-                                        .loginOtherLoginButtonList[1].text,
-                                textColor: i == 0
-                                    ? SharedList
-                                        .loginOtherLoginButtonList[0].textColor
-                                    : SharedList
-                                        .loginOtherLoginButtonList[1].textColor,
+              child: Column(
+                children: [
+                  // Üst kısım - scrollable alan
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // Header
+                        Column(
+                          children: [
+                            // Header Image
+                            Padding(
+                              padding: EdgeInsets.only(top: height * 0.05),
+                              child: Image.asset(
+                                SharedConstants.logoImageRoute,
+                                height: height * 0.15,
                               ),
                             ),
-                  ],
-                ),
-              ),
-              // Or Text
-              Text(
-                context.tr('orMailLoginMethod'),
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              // Email and Password
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: height * SharedConstants.paddingGenerall,
-                  horizontal: width * SharedConstants.paddingGenerall,
-                ),
-                child: Column(
-                  children: [
-                    for (int i = 0; i < 2; i++)
+                            // Welcome Messages
+                            const LoginPageWelcomeMessageWidget(),
+                          ],
+                        ),
+                        // Or Login Method
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: height * SharedConstants.paddingGenerall,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              for (var button
+                                  in SharedList.socialLoginButtonList)
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: width * 0.02,
+                                  ),
+                                  child: _buildSocialButton(
+                                    context: context,
+                                    icon: button['icon'],
+                                    color: button['color'],
+                                    isActive: button['isActive'],
+                                    onTap: button['isActive']
+                                        ? () {
+                                            ref
+                                                .read(anonymousUserProvider
+                                                    .notifier)
+                                                .state = true;
+                                            Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              '/pattern',
+                                              (route) => false,
+                                            );
+                                          }
+                                        : null,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          context.tr('orQuickLogin'),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: SharedConstants.orangeColor.withValues(
+                                  alpha: 0.7,
+                                ),
+                              ),
+                        ),
+                        // Email and Password
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: height * SharedConstants.paddingSmall,
+                          ),
+                          child: Column(
+                            children: [
+                              for (var model in SharedList.formModelList)
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    top: model == SharedList.formModelList.first
+                                        ? 0
+                                        : height * SharedConstants.paddingSmall,
+                                  ),
+                                  child: TextFormWidget(
+                                    model: LoginFormModel(
+                                      leadingIcon: model['leadingIcon'],
+                                      hintText: context.tr(model['hintText']),
+                                      isPasswordForm: model['isPasswordForm'],
+                                      controller: model['isPasswordForm']
+                                          ? _passwordController
+                                          : _emailController,
+                                      validator: (value) => _controller
+                                              .validators[model['validator']]!(
+                                          value),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                        // Remember and Forget Password
+                        const RememberandForgetPasswordWidget(),
+                      ],
+                    ),
+                  ),
+                  // Alt kısım - sabit alan
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Login Button
                       Padding(
                         padding: EdgeInsets.only(
-                          top: i == 0
-                              ? 0
-                              : height * SharedConstants.paddingGenerall,
+                          top: height * SharedConstants.paddingSmall,
                         ),
-                        child: TextFormWidget(
-                          model: modelList[i],
+                        child: GeneralButtonWidget(
+                          text: context.tr('loginButton'),
+                          textColor: Colors.white,
+                          backgroundColor: SharedConstants.orangeColor,
+                          voidCallback: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              _controller.handleLogin(
+                                context,
+                                _emailController.text,
+                                _passwordController.text,
+                              );
+                            }
+                          },
                         ),
                       ),
-                  ],
-                ),
-              ),
-
-              const RememberandForgetPasswordWidget(),
-              // Login Button
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: height * SharedConstants.paddingGenerall,
-                ),
-                child: GeneralButtonWidget(
-                  text: context.tr('loginButton'),
-                  textColor: Colors.white,
-                  backgroundColor: SharedConstants.orangeColor,
-                  route: "/pattern",
-                ),
-              ),
-              // Register
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "/register");
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: context.tr('dontHaveAccount'),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    children: [
-                      TextSpan(
-                        text: " ${context.tr('register')}",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: SharedConstants.orangeColor,
+                      // Register
+                      Padding(
+                        padding: EdgeInsets.only(top: height * 0.02),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/register");
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              text: context.tr('dontHaveAccount'),
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              children: [
+                                TextSpan(
+                                  text: " ${context.tr('register')}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        color: SharedConstants.orangeColor,
+                                      ),
+                                ),
+                              ],
                             ),
+                          ),
+                        ),
+                      ),
+                      // Privacy Policy
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: height * SharedConstants.paddingSmall,
+                        ),
+                        child: const LoginPageFaqGdprWidget(),
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
-              // Privacy Policy
-              Padding(
-                padding: EdgeInsets.only(
-                  top: height * SharedConstants.paddingGenerall,
-                ),
-                child: const LoginPageFaqGdprWidget(),
-              )
-            ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSocialButton({
+    required BuildContext context,
+    required IconData icon,
+    required Color color,
+    bool isActive = false,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: isActive ? color : color.withOpacity(0.2),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 30,
         ),
       ),
     );

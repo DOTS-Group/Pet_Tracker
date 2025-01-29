@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:pet_tracker/models/splash%20intro%20login/loginotherbutton_model.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
 
 class SharedList {
@@ -23,22 +22,6 @@ class SharedList {
   ];
 
   // Login Page
-  static List<LoginOtherLoginButton> loginOtherLoginButtonList = [
-    LoginOtherLoginButton(
-      text: "Google",
-      icon: FontAwesome.google_brand,
-      backgroundColor: SharedConstants.whiteColor,
-      iconColor: SharedConstants.blackColor,
-      textColor: Colors.black,
-    ),
-    LoginOtherLoginButton(
-      text: "Instagram",
-      icon: FontAwesome.instagram_brand,
-      backgroundColor: SharedConstants.orangeColor,
-      iconColor: Colors.white,
-      textColor: Colors.white,
-    ),
-  ];
   static List<IconData> loginPageTextFormIconList = [
     Icons.email,
     Icons.lock,
@@ -98,7 +81,38 @@ class SharedList {
     "assets/images/other/pets/hamster.png",
     "assets/images/other/pets/rabbit.png",
     "assets/images/other/pets/turtle.png",
-
   ];
 
+  static const List<Map<String, dynamic>> socialLoginButtonList = [
+    {
+      'icon': Icons.phone,
+      'color': Colors.green,
+      'isActive': false,
+    },
+    {
+      'icon': FontAwesome.google_brand,
+      'color': Colors.red,
+      'isActive': false,
+    },
+    {
+      'icon': Icons.person_off,
+      'color': Colors.blue,
+      'isActive': true,
+    },
+  ];
+
+  static const List<Map<String, dynamic>> formModelList = [
+    {
+      'leadingIcon': Icons.email,
+      'hintText': 'emailExample',
+      'isPasswordForm': false,
+      'validator': 'validateEmail',
+    },
+    {
+      'leadingIcon': Icons.lock,
+      'hintText': 'passwordExample',
+      'isPasswordForm': true,
+      'validator': 'validatePassword',
+    },
+  ];
 }

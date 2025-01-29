@@ -14,63 +14,85 @@ class TextFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Row(
-      children: [
-        Icon(
-          model.leadingIcon,
-          color: SharedConstants.orangeColor,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          height * SharedConstants.paddingGenerall,
         ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: width * SharedConstants.paddingMedium,
-              right: width * SharedConstants.paddingMedium,
+        border: Border.all(color: SharedConstants.orangeColor),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * SharedConstants.paddingMedium,
+          vertical: width * SharedConstants.paddingGenerall,
+        ),
+        child: Row(
+          children: [
+            Icon(
+              model.leadingIcon,
+              color: SharedConstants.orangeColor,
             ),
-            child: Consumer(builder: (context, ref, child) {
-              final bool isPasswordVisible = ref.watch(isPasswordVisibile);
-              return TextField(
-                cursorColor: SharedConstants.orangeColor,
-                obscureText: model.isPasswordForm == true ? isPasswordVisible : false,
-                decoration: InputDecoration(
-                  hintText: model.hintText,
-                  hintStyle: Theme.of(context).textTheme.bodyMedium,
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.black), // Odaklandığında siyah alt çizgi
-                  ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * SharedConstants.paddingMedium,
                 ),
-              );
-            }),
-          ),
-        ),
-        model.isPasswordForm == false
-            ? SizedBox(
-                width: Theme.of(context).iconTheme.size,
-              )
-            : Consumer(
-                builder: (context, ref, child) {
+                child: Consumer(builder: (context, ref, child) {
                   final bool isPasswordVisible = ref.watch(isPasswordVisibile);
-                  return GestureDetector(
-                    onTap: () {
-                      ref
-                          .read(isPasswordVisibile.notifier)
-                          .update((variable) => !isPasswordVisible);
-                    },
-                    child: Icon(
-                      isPasswordVisible
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: SharedConstants.orangeColor,
+                  return TextFormField(
+                    controller: model.controller,
+                    cursorColor: SharedConstants.orangeColor,
+                    obscureText:
+                        model.isPasswordForm ? isPasswordVisible : false,
+                    validator: model.validator,
+                    decoration: InputDecoration(
+                      hintText: model.hintText,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      errorBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
                     ),
                   );
-                },
+                }),
               ),
-      ],
+            ),
+            model.isPasswordForm == false
+                ? SizedBox(
+                    width: Theme.of(context).iconTheme.size,
+                  )
+                : Consumer(
+                    builder: (context, ref, child) {
+                      final bool isPasswordVisible =
+                          ref.watch(isPasswordVisibile);
+                      return GestureDetector(
+                        onTap: () {
+                          ref
+                              .read(isPasswordVisibile.notifier)
+                              .update((variable) => !isPasswordVisible);
+                        },
+                        child: Icon(
+                          isPasswordVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: SharedConstants.orangeColor,
+                        ),
+                      );
+                    },
+                  ),
+          ],
+        ),
+      ),
     );
   }
 }

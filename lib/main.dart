@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
         // Intro Pages
         '/splash': (context) => const SplashPage(),
         '/intro': (context) => const IntroPage(),
-        '/login': (context) => const LoginPage(),
+        '/login': (context) => LoginPage(),
         "/register": (context) => const RegisterPage(),
         "/renewpassword": (context) => const RenewPassword(),
 
