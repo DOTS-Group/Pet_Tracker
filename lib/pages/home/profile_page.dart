@@ -5,6 +5,9 @@ import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 import 'package:pet_tracker/widgets/other/petselected_widget.dart';
 
 import '../../widgets/generaladdbutton_widget.dart';
+import '../../controllers/home/profilepage_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../widgets/general/auth_required_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -31,37 +34,46 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[50],
-      body: SafeArea(
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      _buildProfileHeader(context),
-                      const SizedBox(height: 24),
-                      _buildTabBar(),
-                    ],
-                  ),
+    return Consumer(
+      builder: (context, ref, _) {
+        try {
+          ProfilepageController().checkAuth(ref);
+          return Scaffold(
+            backgroundColor: Colors.grey[50],
+            body: SafeArea(
+              child: NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            _buildProfileHeader(context),
+                            const SizedBox(height: 24),
+                            _buildTabBar(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ];
+                },
+                body: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _buildPetsTab(),
+                    _buildVaccinesTab(),
+                    _buildFoodStockTab(),
+                  ],
                 ),
               ),
-            ];
-          },
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              _buildPetsTab(),
-              _buildVaccinesTab(),
-              _buildFoodStockTab(),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: _buildFloatingActionButton(context),
+            ),
+            floatingActionButton: _buildFloatingActionButton(context),
+          );
+        } catch (e) {
+          return const AuthRequiredWidget();
+        }
+      },
     );
   }
 

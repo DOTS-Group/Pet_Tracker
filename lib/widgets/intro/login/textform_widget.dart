@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 
 import '../../../models/splash intro login/form_model.dart';
 import '../../../shared/constants_shared.dart';
@@ -18,16 +19,15 @@ class TextFormWidget extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          height * SharedConstants.paddingGenerall,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: SharedConstants.orangeColor,
+          width: 1.5,
         ),
-        border: Border.all(color: SharedConstants.orangeColor),
       ),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: width * SharedConstants.paddingMedium,
-          vertical: width * SharedConstants.paddingGenerall,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         child: Row(
           children: [
             Icon(
@@ -63,6 +63,10 @@ class TextFormWidget extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
+                    inputFormatters: [
+                      if (model.isPasswordForm)
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                   );
                 }),
               ),

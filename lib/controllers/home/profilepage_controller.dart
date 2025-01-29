@@ -35,4 +35,10 @@ class ProfilepageController {
         return const Text("Pet List");
     }
   }
+
+  void checkAuth(WidgetRef ref) {
+    if (ref.read(anonymousUserProvider)) {
+      throw Exception('login_required');
+    }
+  }
 }

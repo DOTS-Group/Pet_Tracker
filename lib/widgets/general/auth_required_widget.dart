@@ -1,34 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_tracker/widgets/other/petselected_widget.dart';
-import '../../shared/constants_shared.dart';
-import '../../widgets/generalbutton_widget.dart';
-import '../../widgets/home/activity/activityselected_widget.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../controllers/home/activityaddpage_controller.dart';
+import 'package:pet_tracker/shared/constants_shared.dart';
+import 'package:pet_tracker/widgets/generalbutton_widget.dart';
 
-class ActivityAddPage extends ConsumerWidget {
-  const ActivityAddPage({super.key});
+class AuthRequiredWidget extends StatelessWidget {
+  const AuthRequiredWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    try {
-      ActivityaddpageController().checkAuth(ref);
-      String selectedPet = "Poyraz";
-      return Column(
-        children: [
-          const PetSelectedDropdownButtonWidget(),
-          ActivitySelectedWidget(selectedPet: selectedPet)
-        ],
-      );
-    } catch (e) {
-      return _buildAuthRequiredView(context);
-    }
-  }
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
-  Widget _buildAuthRequiredView(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Center(
         child: Padding(
@@ -41,6 +23,7 @@ class ActivityAddPage extends ConsumerWidget {
               Text(
                 context.tr('loginRequiredMessage'),
                 style: Theme.of(context).textTheme.displayMedium,
+                textAlign: TextAlign.center,
               ),
               Padding(
                 padding: EdgeInsets.only(

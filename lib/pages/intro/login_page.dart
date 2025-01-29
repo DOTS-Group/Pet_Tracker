@@ -30,11 +30,21 @@ class LoginPage extends ConsumerWidget {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: Text(context.tr('cancel')),
+                child: Text(
+                  context.tr('cancel'),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: SharedConstants.orangeColor,
+                      ),
+                ),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: Text(context.tr('exit')),
+                child: Text(
+                  context.tr('exit'),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: SharedConstants.redColor,
+                      ),
+                ),
               ),
             ],
           ),
@@ -48,7 +58,9 @@ class LoginPage extends ConsumerWidget {
     double width = MediaQuery.of(context).size.width;
 
     return WillPopScope(
-      onWillPop: () => _onWillPop(context),
+      onWillPop: () async {
+        return await _onWillPop(context);
+      },
       child: Scaffold(
         body: SafeArea(
           child: Form(
@@ -101,9 +113,13 @@ class LoginPage extends ConsumerWidget {
                                     onTap: button['isActive']
                                         ? () {
                                             ref
-                                                .read(anonymousUserProvider
-                                                    .notifier)
-                                                .state = true;
+                                                    .read(anonymousUserProvider
+                                                        .notifier)
+                                                    .state =
+                                                true; // TODO: Geçici olarak false yapıyoruz.
+                                            debugPrint(ref
+                                                .read(anonymousUserProvider)
+                                                .toString());
                                             Navigator.pushNamedAndRemoveUntil(
                                               context,
                                               '/pattern',

@@ -1,27 +1,65 @@
-## Kod uygulama kuralları
-- UI kısmında boşluk yapılarında daima padding yapısını kullan.
-- Bir sayfa yönlendirmesini pushnamed ile yapılarında
-- Hatasız, eksiksi ve çalışabilir kod yazılımı yapısı kullan.
-- Riverpod kullanımını kullan.
-- UI ve Servis kısımlarını ayır. Yani MVC yapısını kullanılacak. Bunun için model klasörü modelleri içeririr.
-Service klasörü ise servisleri içerir. Geri kalan kısımlar ise widget klasörü ve page klasörü içerisinde yer alır.
-Yani ui kısmı ile servis kısmını ayırmış oluruz. Model kısmı gerekli isede bunu model klasörü içerisinde yer almış olur.
-- Anlaşılır kod yazımı yap. Performans önemlidir bunun için olabildiğince builder yapılarını kullan.
-- Sayfa yönlendirmesini main.dart içinde bulunan routes içerisinden alarak veya ekleyerek yap.
+Flutter Kodlama Standartları ve Yapılandırma Kuralları
+
+## 1. Kod Yapısı ve UI Kuralları
+
+- UI'de boşluklar padding yapısı ile tanımlanmalıdır. SizedBox yerine Padding kullanın.
+- Sayfa yönlendirmeleri pushNamed yöntemi ile yapılmalıdır. Navigator.pushNamed(context, routeName); olarak
+kullan normal navigator diyerek widget çağırma.
+- Hatasız, eksiksiz ve çalışabilir kod yazımına özen gösterin.
+- Riverpod durum yönetimi için kullanılmalıdır.
+- MVC yapısı benimsenmelidir:
+    * model/: Veri modellerini içerir.
+    * service/: API ve servis işlemlerini içerir.
+    * widget/: UI bileşenleri için ortak kullanılacak widget'lar burada yer alır.
+    * page/: Sayfa bazlı UI yapıları burada tanımlanır.
+    * controller/: Sayfa bazlı controller işlemlerini içerir.
+- Bir şeyler ekleyince kütüphanesi eksik ise kütüphane eklenmeli. Kütüphanesini eklemeden kodu tamamlamayın.
 
 
-## Api kısımları
-- Api için http isteklerini kullan.
+## 2. Kodun Anlaşılabilirliği ve Optimizasyonu
+- Kodun anlaşılır ve okunaklı olması sağlanmalıdır.
+- Performans kritik olduğu için builder yapıları mümkün olduğunca kullanılmalıdır (örn. ListView.builder).
+- Sayfa yönlendirmeleri main.dart içindeki routes üzerinden yapılmalıdır.
+- Sabit değerler, listeler ve provider'lar shared/ klasörü içinde tutulmalıdır:
+    * shared_constants.dart → Sabit değişkenler.
+    * shared_lists.dart → Sabit listeler.
+    * shared_providers.dart → Riverpod provider değerleri.
+- Kod tekrarından kaçınılmalı, tekrar eden öğeler döngü (for, map, builder) ile oluşturulmalıdır.
 
-## Performans
-- Daimi olarak Performans için listview builder yapısı ile kendisi build etmesini sağla.
+## 3. Dil Desteği ve Çeviri Yönetimi
+- Dil desteği assets/translations/ içinde yer alan dosyalarla sağlanmaktadır.
+- Türkçe için tr.json, İngilizce için en.json kullanılmaktadır.
+- Çeviri değerlerine context.tr ile erişilmektedir.
+- Değişken isimlendirmeleri belirli bir yapıya uygun olmalıdır:
+    * Eğer bir sayfa ile ilişkiliyse, çeviri anahtarı sayfa adının altına eklenmelidir.
+    * Örneğin, "splashPage": "Splash Page" tanımlaması yapılırsa, altındaki değişkenler Splash Page için oluşturulur.
+    * Boşluk kullanılmadan, camelCase formatında yazılmalıdır. (Örnek: "nextButton")
 
-## UI&UX
-- Daima uida boşlukları padding yapısı ile yapılır.
-- Sayfaların içinde widgetlar ayrı ayrı yapılır. Fakat bu yapıların isimlendirilmesi için düzgün bir şekilde
-yapılması önemlidir. Bunu yaparken başka sayfalarda da kullanılabilir olması gerektiğini unutma. Başka sayfalarda da
-kullanmayı ihmal etme.
-- Textler genelde farklı dilleride desteklediği için context.tr yapısı ile kullan.
-- BorderRadius.circular(height*SharedConstants.paddingGenerall) yapısı ile yapılır.
-- Opacity vereceksen .withValues(alpha: ) yapısı ile yap.
-- Textfiled cursorünü turuncu olarak yap.
+## 4. API Kullanımı
+- API çağrıları için http paketi kullanılmalıdır.
+- Servis işlemleri service/ klasörü içinde tanımlanmalıdır.
+- async/await yapıları kullanılarak kod senkronizasyonu sağlanmalıdır.
+
+## 5. Medya Yönetimi (İkonlar & Görseller)
+- İkonlar assets/icons/ klasörü içinde saklanmalıdır.
+- Eğer çok fazla ikon varsa, uygun alt klasörler oluşturulmalıdır.
+- Görseller assets/images/ klasörü içinde saklanmalıdır.
+- Yeni bir görsel eklenecekse, yolu shared/constants_shared.dart içinde tanımlanmalı ve oradan çekilmelidir.
+
+## 6. Performans Optimizasyonu
+- Performansı artırmak için ListView.builder ve GridView.builder kullanılmalıdır.
+- StatefulWidget mümkün olduğunca az kullanılmalı, zorunlu hallerde alt widget'lara bölünerek optimize edilmelidir.
+setState çağrıları gereksiz yere yapılmamalıdır. Hatta hiçbir zaman yapma.
+
+## 7. UI & UX Standartları
+- Padding kullanılmalı, SizedBox sadece özel durumlarda tercih edilmelidir.
+- Widget'lar ayrı dosyalara bölünmeli ve tekrar kullanılabilir yapıda olmalıdır.
+- Dil desteği için metinler context.tr ile çağrılmalıdır.
+- Kenar yuvarlatmalar: BorderRadius.circular(height * SharedConstants.paddingGenerall) standardına uygun olmalıdır.
+- Opacity ayarlamaları .withOpacity(value) veya .withValues(alpha: ) ile yapılmalıdır.
+- TextField cursor rengi: Turuncu olmalıdır.
+- Metin Stilleri:
+    * Başlıklar için Theme.of(context).textTheme.displayMedium kullanılmalıdır.
+    * Çok büyük başlıklar için displayLarge kullanılabilir.
+    * Gövde metinleri için bodyMedium, küçük metinler için bodyLarge kullanılmalıdır.
+    * Tüm metin stilleri shared/theme_shared.dart içinde tanımlanmalıdır.

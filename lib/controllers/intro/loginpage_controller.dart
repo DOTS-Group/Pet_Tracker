@@ -10,7 +10,9 @@ class LoginPageController {
     if (value == null || value.isEmpty) {
       return context.tr('emailEmpty');
     }
-    if (!value.contains('@') || !value.contains('.')) {
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(value)) {
       return context.tr('emailInvalid');
     }
     return null;

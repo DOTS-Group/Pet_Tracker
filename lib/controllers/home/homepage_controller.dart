@@ -1,10 +1,21 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../shared/provider_shared.dart';
 
 class HomepageController {
+  void checkAuth(WidgetRef ref) {
+    final isAnonymous = ref.read(anonymousUserProvider);
+    debugPrint("Auth durumu: $isAnonymous"); // Debug için
+    if (isAnonymous == true) {
+      // Burada kesin kontrol yapalım
+      throw Exception('login_required');
+    }
+  }
+
   double progressCalculator(dynamic value) {
     // Walking Time Progress Calculation (45 min = %100, 0 min = %0)
     if (value is int) {
@@ -34,10 +45,9 @@ class HomepageController {
     }
   }
 
-  void getPetDetails(){
+  void getPetDetails() {
     // Get pet details from the database
   }
-
 }
 
 // A StateNotifier to handle the timer logic
@@ -53,7 +63,8 @@ class TimerNotifier extends StateNotifier<String> {
         _elapsedSeconds++;
         int minutes = _elapsedSeconds ~/ 60;
         int seconds = _elapsedSeconds % 60;
-        state = '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+        state =
+            '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
       });
     }
   }
@@ -78,4 +89,3 @@ class TimerNotifier extends StateNotifier<String> {
 final timerProvider = StateNotifierProvider<TimerNotifier, String>((ref) {
   return TimerNotifier();
 });
-

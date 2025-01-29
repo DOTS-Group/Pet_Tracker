@@ -162,5 +162,10 @@
   "exit": "Exit",
   "cancel": "Cancel",
   "loginRequired": "You need to login to view this page",
-  "orQuickLogin": "Or quick login"
+  "orQuickLogin": "Or quick login",
+  "emailEmpty": "Email cannot be empty",
+  "emailInvalid": "Invalid email format",
+  "passwordEmpty": "Password cannot be empty",
+  "passwordMinLength": "Password must be at least 6 characters",
+  "loginRequiredMessage": "You need to login to view this page"
 }

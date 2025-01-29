@@ -162,5 +162,10 @@
   "exit": "Çık",
   "cancel": "İptal",
   "loginRequired": "Bu sayfayı görüntülemek için giriş yapmalısınız",
-  "orQuickLogin": "Veya hızlı giriş yap"
+  "orQuickLogin": "Veya hızlı giriş yap",
+  "emailEmpty": "E-posta adresi boş olamaz",
+  "emailInvalid": "Geçersiz e-posta formatı",
+  "passwordEmpty": "Şifre boş olamaz",
+  "passwordMinLength": "Şifre en az 6 karakter olmalı",
+  "loginRequiredMessage": "Bu sayfayı görüntülemek için giriş yapmalısınız"
 }
