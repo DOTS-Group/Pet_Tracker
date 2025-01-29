@@ -25,6 +25,24 @@ class ChatBottomSheet extends StatefulWidget {
 class _ChatBottomSheetState extends State<ChatBottomSheet> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToBottom();
+      _focusNode.requestFocus();
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant ChatBottomSheet oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.messages.length != oldWidget.messages.length) {
+      _scrollToBottom();
+    }
+  }
 
   void _handleSend() {
     final message = _controller.text.trim();
@@ -51,6 +69,7 @@ class _ChatBottomSheetState extends State<ChatBottomSheet> {
   void dispose() {
     _controller.dispose();
     _scrollController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -95,20 +114,25 @@ class _ChatBottomSheetState extends State<ChatBottomSheet> {
 
           // Messages
           Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(16),
-              itemCount: widget.messages.length + (widget.isLoading ? 1 : 0),
-              itemBuilder: (context, index) {
-                if (index == widget.messages.length && widget.isLoading) {
-                  return _buildTypingIndicator();
-                }
-
-                final message = widget.messages[index];
-                final isUser = message["role"] == "user";
-
-                return _buildMessageBubble(message, isUser);
+            child: GestureDetector(
+              onTap: () {
+                _focusNode.requestFocus();
               },
+              child: ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(16),
+                itemCount: widget.messages.length + (widget.isLoading ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index == widget.messages.length && widget.isLoading) {
+                    return _buildTypingIndicator();
+                  }
+
+                  final message = widget.messages[index];
+                  final isUser = message["role"] == "user";
+
+                  return _buildMessageBubble(message, isUser);
+                },
+              ),
             ),
           ),
 
@@ -135,6 +159,7 @@ class _ChatBottomSheetState extends State<ChatBottomSheet> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
+                    focusNode: _focusNode,
                     decoration: InputDecoration(
                       hintText: widget.hintText,
                       hintStyle: TextStyle(color: Colors.grey[400]),

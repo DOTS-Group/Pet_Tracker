@@ -18,7 +18,7 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
   final PageController _controller = PageController(); // PageView controller
-  IntroPageController introPageController = IntroPageController();
+  final IntroPageController introPageController = IntroPageController();
   int currentPage = 0; // Track the current page
 
   @override
@@ -31,6 +31,15 @@ class _IntroPageState extends State<IntroPage> {
         currentPage = _controller.page!.round();
       });
     });
+    _checkIntroStatus();
+  }
+
+  Future<void> _checkIntroStatus() async {
+    if (await introPageController.isIntroShown()) {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, "/login");
+      }
+    }
   }
 
   @override

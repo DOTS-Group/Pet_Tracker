@@ -1,14 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
+import '../../models/home/homepage/notification_model.dart';
 
 class NotificationDetailsPage extends StatelessWidget {
   const NotificationDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    final notification =
+        ModalRoute.of(context)!.settings.arguments as NotificationModel;
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -20,7 +23,7 @@ class NotificationDetailsPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          "Bildirim Detayı",
+          context.tr("notificationdetails"),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         centerTitle: true,
@@ -33,10 +36,15 @@ class NotificationDetailsPage extends StatelessWidget {
             children: [
               // Bildirim Başlığı ve İkonu
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.symmetric(
+                  vertical: height * SharedConstants.paddingGenerall,
+                  horizontal: width * SharedConstants.paddingGenerall,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(
+                    height * SharedConstants.paddingGenerall,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.05),
@@ -50,12 +58,12 @@ class NotificationDetailsPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: SharedConstants.blueColor.withOpacity(0.1),
+                        color: notification.type.color.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(
-                        Icons.vaccines,
-                        color: SharedConstants.blueColor,
+                      child: Icon(
+                        notification.type.icon,
+                        color: notification.type.color,
                         size: 24,
                       ),
                     ),
@@ -65,7 +73,7 @@ class NotificationDetailsPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Max'in Aşı Zamanı",
+                            notification.title,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -75,7 +83,7 @@ class NotificationDetailsPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            "2 saat önce",
+                            notification.timeAgo,
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: Colors.grey[400],

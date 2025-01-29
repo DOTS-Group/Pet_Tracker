@@ -6,9 +6,22 @@
 - UI ve Servis kısımlarını ayır. Yani MVC yapısını kullanılacak. Bunun için model klasörü modelleri içeririr.
 Service klasörü ise servisleri içerir. Geri kalan kısımlar ise widget klasörü ve page klasörü içerisinde yer alır.
 Yani ui kısmı ile servis kısmını ayırmış oluruz. Model kısmı gerekli isede bunu model klasörü içerisinde yer almış olur.
+- Anlaşılır kod yazımı yap. Performans önemlidir bunun için olabildiğince builder yapılarını kullan.
+- Sayfa yönlendirmesini main.dart içinde bulunan routes içerisinden alarak veya ekleyerek yap.
+
 
 ## Api kısımları
 - Api için http isteklerini kullan.
 
 ## Performans
 - Daimi olarak Performans için listview builder yapısı ile kendisi build etmesini sağla.
+
+## UI&UX
+- Daima uida boşlukları padding yapısı ile yapılır.
+- Sayfaların içinde widgetlar ayrı ayrı yapılır. Fakat bu yapıların isimlendirilmesi için düzgün bir şekilde
+yapılması önemlidir. Bunu yaparken başka sayfalarda da kullanılabilir olması gerektiğini unutma. Başka sayfalarda da
+kullanmayı ihmal etme.
+- Textler genelde farklı dilleride desteklediği için context.tr yapısı ile kullan.
+- BorderRadius.circular(height*SharedConstants.paddingGenerall) yapısı ile yapılır.
+- Opacity vereceksen .withValues(alpha: ) yapısı ile yap.
+- Textfiled cursorünü turuncu olarak yap.

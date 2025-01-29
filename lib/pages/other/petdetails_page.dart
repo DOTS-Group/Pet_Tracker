@@ -146,7 +146,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                         ),
                       ],
                     ),
-                    child: Column(
+        child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -197,7 +197,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                         // İstatistik özeti
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
+          children: [
                             _buildStatItem(
                               context,
                               context.tr("startWeight"),

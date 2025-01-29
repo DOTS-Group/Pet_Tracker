@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/user_api.dart';
+import '../../controllers/intro/intropage_controller.dart';
 
 class SplashPageController {
   final UserApi _userApi = UserApi();
@@ -38,8 +39,9 @@ class SplashPageController {
     await Future.delayed(const Duration(seconds: 3));
     if (!context.mounted) return;
     try {
-      // Check first time launch
-      if (await isFirstTime()) {
+      // Check if intro has been shown
+      final introController = IntroPageController();
+      if (!await introController.isIntroShown()) {
         if (!context.mounted) return;
         Navigator.pushReplacementNamed(context, "/intro");
         return;

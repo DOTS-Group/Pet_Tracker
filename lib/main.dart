@@ -22,6 +22,7 @@ import 'pages/intro/renewpassword_page.dart';
 import 'pages/other/activityadd_page.dart';
 import 'pages/other/categoriesdetail_page.dart';
 import 'pages/other/foodadd_page.dart';
+
 import 'pages/other/market_page.dart';
 import 'pages/other/notification_page.dart';
 import 'pages/other/petdetails_page.dart';
@@ -113,6 +114,7 @@ class MyApp extends StatelessWidget {
         '/reminder': (context) => const ReminderPage(),
         "/vaccinedetails": (context) => const VaccineDetailsPage(),
         "/market": (context) => const MarketPage(),
+
         "/foodTracking": (context) => const FoodTrackingPage(),
         "/petdetails": (context) => const PetDetailsPage(),
         "/wallet": (context) => const WalletPage(),

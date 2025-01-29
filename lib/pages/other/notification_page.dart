@@ -2,36 +2,56 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pet_tracker/shared/constants_shared.dart';
+import '../../models/home/homepage/notification_model.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
 
   @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
+  final List<NotificationModel> notifications = [
+    NotificationModel(
+      notificationId: '1',
+      title: "Max'in Aşı Zamanı",
+      description: "Kuduz aşısı için randevu zamanı yaklaşıyor",
+      time: DateTime.now().subtract(const Duration(hours: 2)),
+      type: NotificationType.vaccine,
+    ),
+    NotificationModel(
+      notificationId: '2',
+      title: "Tedavi Hatırlatması",
+      description: "Luna'nın ilaç saati geldi",
+      time: DateTime.now().subtract(const Duration(hours: 5)),
+      type: NotificationType.medicine,
+    ),
+    NotificationModel(
+      notificationId: '3',
+      title: "Özel Kampanya",
+      description: "Pet Shop'ta mama ürünlerinde %20 indirim!",
+      time: DateTime.now().subtract(const Duration(days: 1)),
+      type: NotificationType.campaign,
+      redirectPath: "/market",
+      clinicId: "12345",
+    ),
+  ];
+
+  void _deleteNotification(int index) {
+    setState(() {
+      notifications.removeAt(index);
+    });
+  }
+
+  void _deleteAllNotifications() {
+    setState(() {
+      notifications.clear();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
-    List<NotificationItem> notifications = [
-      NotificationItem(
-        title: "Max'in Aşı Zamanı",
-        description: "Kuduz aşısı için randevu zamanı yaklaşıyor",
-        time: "2 saat önce",
-        type: NotificationType.vaccine,
-      ),
-      NotificationItem(
-        title: "Tedavi Hatırlatması",
-        description: "Luna'nın ilaç saati geldi",
-        time: "5 saat önce",
-        type: NotificationType.medicine,
-      ),
-      NotificationItem(
-        title: "Özel Kampanya",
-        description: "Pet Shop'ta mama ürünlerinde %20 indirim!",
-        time: "1 gün önce",
-        type: NotificationType.campaign,
-      ),
-    ];
-
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -39,175 +59,161 @@ class NotificationPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushReplacementNamed(context, "/pattern"),
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              // Tüm bildirimleri silme işlemi
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(context.tr("deleteAll")),
-                  content: const Text(
-                      "Tüm bildirimleri silmek istediğinize emin misiniz?"),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text(
-                        context.tr("cancel"),
-                        style: const TextStyle(color: SharedConstants.redColor),
+          if (notifications.isNotEmpty)
+            TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text(context.tr("deleteAll")),
+                    content: Text(context.tr("deleteAllConfirm")),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(
+                          context.tr("cancel"),
+                          style:
+                              const TextStyle(color: SharedConstants.redColor),
+                        ),
                       ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: SharedConstants.orangeColor,
-                      ),
-                      onPressed: () {
-                        // Silme işlemi
-                        Navigator.pop(context);
-                      },
-                      child: Text(context.tr("delete")),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: Text(
-              context.tr("deleteAll"),
-              style: TextStyle(color: SharedConstants.redColor),
-            ),
-          ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: notifications.length,
-        itemBuilder: (context, index) {
-          final notification = notifications[index];
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: width * SharedConstants.paddingGenerall,
-              vertical: height * SharedConstants.paddingSmall,
-            ),
-            child: Slidable(
-              endActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: (context) {
-                      // Silme işlemi
-                    },
-                    backgroundColor: SharedConstants.redColor,
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete,
-                    label: 'Sil',
-                  ),
-                ],
-              ),
-              child: GestureDetector(
-                onTap: () =>
-                    Navigator.pushNamed(context, "/notificationdetails"),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 5),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: SharedConstants.orangeColor,
+                        ),
+                        onPressed: () {
+                          _deleteAllNotifications();
+                          Navigator.pop(context);
+                        },
+                        child: Text(context.tr("delete")),
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
+                );
+              },
+              child: Text(
+                context.tr("deleteAll"),
+                style: const TextStyle(color: SharedConstants.redColor),
+              ),
+            ),
+        ],
+      ),
+      body: notifications.isEmpty
+          ? Center(
+              child: Text(
+                context.tr("noNotifications"),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            )
+          : ListView.builder(
+              padding: EdgeInsets.all(
+                MediaQuery.of(context).size.height *
+                    SharedConstants.paddingGenerall,
+              ),
+              itemCount: notifications.length,
+              itemBuilder: (context, index) {
+                final notification = notifications[index];
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height *
+                        SharedConstants.paddingGenerall,
+                  ),
+                  child: Slidable(
+                    endActionPane: ActionPane(
+                      motion: const ScrollMotion(),
                       children: [
-                        // İkon
-                        Container(
-                          padding: const EdgeInsets.all(12),
+                        SlidableAction(
+                          onPressed: (_) => _deleteNotification(index),
+                          backgroundColor: SharedConstants.redColor,
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: context.tr("delete"),
+                        ),
+                      ],
+                    ),
+                    child: Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          MediaQuery.of(context).size.height *
+                              SharedConstants.paddingGenerall,
+                        ),
+                      ),
+                      child: ListTile(
+                        contentPadding: EdgeInsets.all(
+                          MediaQuery.of(context).size.height *
+                              SharedConstants.paddingGenerall,
+                        ),
+                        onTap: () {
+                          if (notification.redirectPath != null) {
+                            Navigator.pushNamed(
+                              context,
+                              notification.redirectPath!,
+                              arguments: notification.clinicId,
+                            );
+                          } else {
+                            Navigator.pushNamed(
+                              context,
+                              "/notificationdetails",
+                              arguments: notification,
+                            );
+                          }
+                        },
+                        leading: Container(
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height *
+                                SharedConstants.paddingGenerall,
+                          ),
                           decoration: BoxDecoration(
-                            color: notification.type.color.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
+                            color:
+                                notification.type.color.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.height *
+                                  SharedConstants.paddingGenerall,
+                            ),
                           ),
                           child: Icon(
                             notification.type.icon,
                             color: notification.type.color,
-                            size: 24,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        // İçerik
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                notification.title,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        title: Text(
+                          notification.title,
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height *
+                                    SharedConstants.paddingSmall,
                               ),
-                              const SizedBox(height: 4),
-                              Text(
+                              child: Text(
                                 notification.description,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      color: Colors.grey[600],
-                                    ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                notification.time,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                      color: Colors.grey[400],
-                                    ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height *
+                                    SharedConstants.paddingSmall,
                               ),
-                            ],
-                          ),
+                              child: Text(
+                                notification.timeAgo,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
-}
-
-class NotificationItem {
-  final String title;
-  final String description;
-  final String time;
-  final NotificationType type;
-
-  NotificationItem({
-    required this.title,
-    required this.description,
-    required this.time,
-    required this.type,
-  });
-}
-
-enum NotificationType {
-  vaccine(Icons.vaccines, SharedConstants.blueColor),
-  medicine(Icons.medication, SharedConstants.orangeColor),
-  campaign(Icons.local_offer, SharedConstants.greenColor);
-
-  final IconData icon;
-  final Color color;
-
-  const NotificationType(this.icon, this.color);
 }
