@@ -1,31 +1,32 @@
 import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../shared/apiroute_shared.dart';
 
 class LoginPageController {
-  String? validateEmail(String? value) {
+  String? validateEmail(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'E-posta adresinizi giriniz';
+      return context.tr('emailEmpty');
     }
     if (!value.contains('@') || !value.contains('.')) {
-      return 'Geçerli bir e-posta adresi giriniz';
+      return context.tr('emailInvalid');
     }
     return null;
   }
 
-  String? validatePassword(String? value) {
+  String? validatePassword(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Şifrenizi giriniz';
+      return context.tr('passwordEmpty');
     }
     if (value.length < 6) {
-      return 'Şifre en az 6 karakter olmalıdır';
+      return context.tr('passwordMinLength');
     }
     return null;
   }
 
-  Map<String, String? Function(String?)> get validators => {
+  Map<String, String? Function(String?, BuildContext)> get validators => {
         'validateEmail': validateEmail,
         'validatePassword': validatePassword,
       };
@@ -33,7 +34,7 @@ class LoginPageController {
   Future<void> handleLogin(
       BuildContext context, String email, String password) async {
     // Email validasyonu
-    final emailError = validateEmail(email);
+    final emailError = validateEmail(email, context);
     if (emailError != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -45,7 +46,7 @@ class LoginPageController {
     }
 
     // Şifre validasyonu
-    final passwordError = validatePassword(password);
+    final passwordError = validatePassword(password, context);
     if (passwordError != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

@@ -151,8 +151,10 @@ class LoginPage extends ConsumerWidget {
                                           ? _passwordController
                                           : _emailController,
                                       validator: (value) => _controller
-                                              .validators[model['validator']]!(
-                                          value),
+                                          .validators[model['validator']]!(
+                                        value,
+                                        context,
+                                      ),
                                     ),
                                   ),
                                 ),
